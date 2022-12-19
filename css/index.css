@@ -1,0 +1,16 @@
+html, body, #magic
+{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#canvas {
+    margin: auto;
+    display: block;
+    width: 720px;
+    height: 540px;
+    background: url('../img/background.png');
+    background-size:  100% auto;
+}
