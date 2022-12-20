@@ -7,6 +7,8 @@ let pacmanX = 1;
 let pacmanY = 1;
 let ghostX = 26;
 let ghostY = 12;
+// Yellow Pill counter:
+let yPillCount = 0;
 
 const IMAGES = ['./img/PacManB1s.png', './img/BluePill.png', './img/YellowPill.png', './img/Ghost1.png'].map((src) => {
     const IMG = new Image();
@@ -54,30 +56,6 @@ function drawGrid() {
     })
 }
 // Pacman controls:
-/*
-document.onkeydown = ((e) => {
-    console.log(e.code);
-    if (e.code === 'KeyS' || e.code === 'KeyW') {
-        if (['1', '2', '3'].indexOf(rows[pacmanY + (e.code ===  'KeyW' ? -1 : 1)][pacmanX]) !== -1) {
-            rows[pacmanY] = setCharAt(rows[pacmanY], pacmanX, '3');
-            rows[pacmanY + (e.code === 'KeyW' ? -1 : 1)] = setCharAt(rows[pacmanY + (e.code === 'KeyW' ? -1 : 1)], pacmanX, '5');
-            pacmanY = pacmanY + (e.code === 'KeyW' ? -1 : +1);
-            CTX.clearRect(0, 0, 720, 540);
-            drawGrid();
-        }
-    }
-    if (e.code === 'KeyA' || e.code === 'KeyD') {
-        if (['1', '2', '3'].indexOf(rows[pacmanY][pacmanX + (e.code === 'KeyA' ? -1 : 1)]) !== -1) {
-            rows[pacmanY] = setCharAt(rows[pacmanY], pacmanX, '3');
-            rows[pacmanY] = setCharAt(rows[pacmanY], pacmanX + (e.code === 'KeyA' ? -1 : 1), '5');
-            pacmanX = pacmanX + (e.code === 'KeyA' ? -1 : +1);
-            CTX.clearRect(0, 0, 720, 540);
-            drawGrid();
-        }
-    }
-});
-*/
-// Pacman controls:
 document.onkeydown = ((e) => {
     let movePac;
     switch(e.code) {
@@ -96,7 +74,6 @@ document.onkeydown = ((e) => {
         //default:
         //
     }
-    console.log(movePac);
     movement(movePac, 'pacman');
 });
 // Ghost movement:
@@ -104,12 +81,10 @@ function moveGhost() {
     const MOVE = ['left', 'down', 'up', 'right'];
     const RANDOM = Math.floor(Math.random() * MOVE.length);
     let moveGhost = MOVE[RANDOM];
-    //console.log(moveGhost);
     movement(moveGhost, 'ghost');
 }
 // Game object movement:
-let newNrField;
-let countMove = 0;
+let newNrField = '3';
 function movement(e,x) {
     console.log(e);
     let posY;
@@ -130,18 +105,16 @@ function movement(e,x) {
     }
     if (e === 'down' || e === 'up') {
         if (['1', '2', '3'].indexOf(rows[posY + (e ===  'up' ? -1 : 1)][posX]) !== -1) {
-            if (countMove === 0) {
-                countMove++;
-                newNrField = rows[posY + (e ===  'up' ? -1 : 1)][posX];
-            } else {
-                rows[posY] = setCharAt(rows[posY], posX, newNrField);
-                countMove--;
-            }
+            let eats = rows[posY + (e ===  'up' ? -1 : 1)][posX];
+            whatHappens(eats);
             if (x === 'pacman') {
                 pacmanY = posY + (e === 'up' ? -1 : +1);
+                newNrField = '3';
             }else if (x === 'ghost') {
                 ghostY = posY + (e === 'up' ? -1 : +1);
             }
+            rows[posY] = setCharAt(rows[posY], posX, newNrField);
+            newNrField = rows[posY + (e ===  'up' ? -1 : 1)][posX];
             rows[posY + (e === 'up' ? -1 : 1)] = setCharAt(rows[posY + (e === 'up' ? -1 : 1)], posX, newNrObj);
             CTX.clearRect(0, 0, 720, 540);
             drawGrid();
@@ -151,18 +124,17 @@ function movement(e,x) {
         if (['1', '2', '3'].indexOf(rows[posY][posX + (e === 'left' ? -1 : 1)]) !== -1) {
             if (x === 'pacman') {
                 pacmanX = posX + (e === 'left' ? -1 : +1);
-                newNrField = rows[posY][posX + (e === 'left' ? -1 : 1)];
+                newNrField = '3';
             }else if (x === 'ghost') {
                 ghostX = posX + (e === 'left' ? -1 : +1);
-                newNrField = rows[posY][posX + (e === 'left' ? -1 : 1)];
             }
-            rows[posY] = setCharAt(rows[posY], posX + (e === 'left' ? -1 : 1), newNrObj);
             rows[posY] = setCharAt(rows[posY], posX, newNrField);
+            newNrField = rows[posY][posX + (e === 'left' ? -1 : 1)];
+            rows[posY] = setCharAt(rows[posY], posX + (e === 'left' ? -1 : 1), newNrObj);
             CTX.clearRect(0, 0, 720, 540);
             drawGrid();
         }
     }
-    console.log(newNrField);
     if (x === 'ghost') {
         setTimeout(moveGhost, 100);
     }
@@ -171,6 +143,24 @@ function movement(e,x) {
 function setCharAt(str,index,chr) {
     if(index > str.length-1) return str;
     return str.substring(0,index) + chr + str.substring(index+1);
+}
+function whatHappens(x) {
+    switch(x) {
+        case '1':
+            yPillCount++;
+            break;
+        case '2':
+            // Blue pill event
+            break;
+        case '3':
+            movePac = 'up';
+            break;
+        case 'KeyD':
+            movePac = 'right';
+            break;
+        //default:
+        //
+    }
 }
 
 
