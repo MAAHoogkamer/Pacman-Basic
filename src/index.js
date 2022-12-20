@@ -79,12 +79,19 @@ document.onkeydown = ((e) => {
     movement(movePac, 'pacman');
 });
 // Ghost movement:
+let previousMove = null;
+
 function moveGhost() {
     const MOVE = ['left', 'down', 'up', 'right'];
-    const RANDOM = Math.floor(Math.random() * MOVE.length);
-    let moveGhost = MOVE[RANDOM];
+    let moveGhost = null;
+    while (moveGhost === previousMove) {
+        const RANDOM = Math.floor(Math.random() * MOVE.length);
+        moveGhost = MOVE[RANDOM];
+    }
+    previousMove = moveGhost;
     movement(moveGhost, 'ghost');
 }
+
 // Movement function:
 let newFieldNumber = '3';
 function movement(direction, character) {
