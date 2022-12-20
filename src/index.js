@@ -1,3 +1,10 @@
+// Draw the grid:
+const OFFSET_X = 11;
+const OFFSET_Y = 15;
+const PILL_WIDTH = 13.5;
+// Current positions of moving elements:
+let pacmanX = 1;
+let pacmanY = 1;
 
 const IMAGES = ['./img/PacManB1s.png', './img/BluePill.png', './img/YellowPill.png'].map((src) => {
     const IMG = new Image();
@@ -9,9 +16,9 @@ const CANVAS = document.getElementById("canvas");
 const CTX = CANVAS.getContext("2d");
 
 window.setTimeout(() => {
-    CTX.drawImage(IMAGES[0],100,100);
-    CTX.drawImage(IMAGES[1],200,200,24,24);
-    CTX.drawImage(IMAGES[2],300,300,24,24);
+    //CTX.drawImage(IMAGES[0],100,100);
+    //CTX.drawImage(IMAGES[1],200,200,24,24);
+    //CTX.drawImage(IMAGES[2],300,300,24,24);
     drawGrid();
 }, 50);
 
@@ -28,14 +35,9 @@ FILE.onreadystatechange = function ()
 }
 FILE.send(null);
 
-// Draw the grid:
-const OFFSET_X = 11;
-const OFFSET_Y = 15;
-const PILL_WIDTH = 13.5;
 function drawGrid() {
     rows.forEach((row, index) => {
         for (let i = 0; i < row.length; i++) {
-            console.log(index);
             if (row[i] === '1') {
                 CTX.drawImage(IMAGES[2],i * PILL_WIDTH + OFFSET_X,(index * PILL_WIDTH) + OFFSET_Y,6,6);
             }else if (row[i] === '5') {
@@ -46,6 +48,33 @@ function drawGrid() {
 
         }
     })
+}
+// Pacman controls:
+document.onkeydown = ((e) => {
+    console.log(e.code);
+    if (e.code === 'KeyS' || e.code === 'KeyW') {
+        if (['1', '2', '3'].indexOf(rows[pacmanY + (e.code ===  'KeyW' ? -1 : 1)][pacmanX]) !== -1) {
+            rows[pacmanY] = setCharAt(rows[pacmanY], pacmanX, '3');
+            rows[pacmanY + (e.code === 'KeyW' ? -1 : 1)] = setCharAt(rows[pacmanY + (e.code === 'KeyW' ? -1 : 1)], pacmanX, '5');
+            pacmanY = pacmanY + (e.code === 'KeyW' ? -1 : +1);
+            CTX.clearRect(0, 0, 720, 540);
+            drawGrid();
+        }
+    }
+    if (e.code === 'KeyA' || e.code === 'KeyD') {
+        if (['1', '2', '3'].indexOf(rows[pacmanY][pacmanX + (e.code === 'KeyA' ? -1 : 1)]) !== -1) {
+            rows[pacmanY] = setCharAt(rows[pacmanY], pacmanX, '3');
+            rows[pacmanY] = setCharAt(rows[pacmanY], pacmanX + (e.code === 'KeyA' ? -1 : 1), '5');
+            pacmanX = pacmanX + (e.code === 'KeyA' ? -1 : +1);
+            CTX.clearRect(0, 0, 720, 540);
+            drawGrid();
+        }
+    }
+});
+
+function setCharAt(str,index,chr) {
+    if(index > str.length-1) return str;
+    return str.substring(0,index) + chr + str.substring(index+1);
 }
 
 /**
