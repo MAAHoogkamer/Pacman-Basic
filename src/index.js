@@ -5,6 +5,8 @@ const PILL_WIDTH = 13.5;
 // Current positions of moving elements:
 let pacmanX = 1;
 let pacmanY = 1;
+let ghostX = 26;
+let ghostY = 13;
 
 const IMAGES = ['./img/PacManB1s.png', './img/BluePill.png', './img/YellowPill.png'].map((src) => {
     const IMG = new Image();
@@ -50,6 +52,7 @@ function drawGrid() {
     })
 }
 // Pacman controls:
+/*
 document.onkeydown = ((e) => {
     console.log(e.code);
     if (e.code === 'KeyS' || e.code === 'KeyW') {
@@ -71,11 +74,68 @@ document.onkeydown = ((e) => {
         }
     }
 });
+*/
+// New controls:
+document.onkeydown = ((e) => {
+    let movePac;
+    switch(e.code) {
+        case 'KeyA':
+            movePac = 'left';
+            break;
+        case 'KeyS':
+            movePac = 'down';
+            break;
+        case 'KeyW':
+            movePac = 'up';
+            break;
+        case 'KeyD':
+            movePac = 'right';
+            break;
+        //default:
+        //
+    }
+    console.log(movePac);
+    movement(movePac, 'pacman');
+});
+function movement(e,x) {
+    console.log(x);
+    let posY;
+    let posX;
+    switch(x) {
+        case 'pacman':
+            posY = pacmanY;
+            posX = pacmanX;
+            break;
+        case 'ghost':
+            posY = ghostY;
+            posX = ghostX;
+            break;
+    }
+    if (e === 'down' || e === 'up') {
+        if (['1', '2', '3'].indexOf(rows[posY + (e ===  'up' ? -1 : 1)][posX]) !== -1) {
+            rows[posY] = setCharAt(rows[posY], posX, '3');
+            rows[posY + (e === 'up' ? -1 : 1)] = setCharAt(rows[posY + (e === 'up' ? -1 : 1)], posX, '5');
+            pacmanY = posY + (e === 'up' ? -1 : +1);
+            CTX.clearRect(0, 0, 720, 540);
+            drawGrid();
+        }
+    }
+    if (e === 'left' || e === 'right') {
+        if (['1', '2', '3'].indexOf(rows[pacmanY][pacmanX + (e === 'left' ? -1 : 1)]) !== -1) {
+            rows[pacmanY] = setCharAt(rows[pacmanY], pacmanX, '3');
+            rows[pacmanY] = setCharAt(rows[pacmanY], pacmanX + (e === 'left' ? -1 : 1), '5');
+            pacmanX = pacmanX + (e === 'left' ? -1 : +1);
+            CTX.clearRect(0, 0, 720, 540);
+            drawGrid();
+        }
+    }
+}
 
 function setCharAt(str,index,chr) {
     if(index > str.length-1) return str;
     return str.substring(0,index) + chr + str.substring(index+1);
 }
+
 
 /**
  * Map elements to grid
