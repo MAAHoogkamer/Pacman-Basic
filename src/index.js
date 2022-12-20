@@ -8,7 +8,7 @@ let pacmanY = 1;
 let ghostX = 26;
 let ghostY = 13;
 
-const IMAGES = ['./img/PacManB1s.png', './img/BluePill.png', './img/YellowPill.png'].map((src) => {
+const IMAGES = ['./img/PacManB1s.png', './img/BluePill.png', './img/YellowPill.png', './img/Ghost1.png'].map((src) => {
     const IMG = new Image();
     IMG.src = src;
     return IMG;
@@ -22,6 +22,7 @@ window.setTimeout(() => {
     //CTX.drawImage(IMAGES[1],200,200,24,24);
     //CTX.drawImage(IMAGES[2],300,300,24,24);
     drawGrid();
+    //setTimeout(moveGhost, 100);
 }, 50);
 
 // Load the GridDef.txt file:
@@ -46,8 +47,9 @@ function drawGrid() {
                 CTX.drawImage(IMAGES[0],i * PILL_WIDTH + OFFSET_X - 4.5,(index * PILL_WIDTH) + OFFSET_Y - 4.5,15,15);
             }else if (row[i] === '2') {
                 CTX.drawImage(IMAGES[1],i * PILL_WIDTH + OFFSET_X,(index * PILL_WIDTH) + OFFSET_Y,6,6);
-            }
-
+            }else if (row[i] === '6') {
+            CTX.drawImage(IMAGES[3],i * PILL_WIDTH + OFFSET_X - 4.5,(index * PILL_WIDTH) - 4.5+ OFFSET_Y,18,18);
+        }
         }
     })
 }
@@ -75,7 +77,7 @@ document.onkeydown = ((e) => {
     }
 });
 */
-// New controls:
+// Pacman controls:
 document.onkeydown = ((e) => {
     let movePac;
     switch(e.code) {
@@ -97,37 +99,60 @@ document.onkeydown = ((e) => {
     console.log(movePac);
     movement(movePac, 'pacman');
 });
+// Ghost movement:
+function moveGhost() {
+    const MOVE = ['left', 'down', 'up', 'right'];
+    const RANDOM = Math.floor(Math.random() * MOVE.length);
+    let moveGhost = MOVE[RANDOM];
+    //console.log(moveGhost);
+    movement(moveGhost, 'ghost');
+}
+// Game object movement:
 function movement(e,x) {
-    console.log(x);
+    console.log(e);
     let posY;
     let posX;
+    let newNr;
     switch(x) {
         case 'pacman':
             posY = pacmanY;
             posX = pacmanX;
+            newNr = '5';
             break;
         case 'ghost':
             posY = ghostY;
             posX = ghostX;
+            newNr = '6';
             break;
     }
     if (e === 'down' || e === 'up') {
         if (['1', '2', '3'].indexOf(rows[posY + (e ===  'up' ? -1 : 1)][posX]) !== -1) {
             rows[posY] = setCharAt(rows[posY], posX, '3');
-            rows[posY + (e === 'up' ? -1 : 1)] = setCharAt(rows[posY + (e === 'up' ? -1 : 1)], posX, '5');
-            pacmanY = posY + (e === 'up' ? -1 : +1);
+            rows[posY + (e === 'up' ? -1 : 1)] = setCharAt(rows[posY + (e === 'up' ? -1 : 1)], posX, newNr);
+            if (x === 'pacman') {
+                pacmanY = posY + (e === 'up' ? -1 : +1);
+            }else if (x === 'ghost') {
+                ghostY = posY + (e === 'up' ? -1 : +1);
+            }
             CTX.clearRect(0, 0, 720, 540);
             drawGrid();
         }
     }
     if (e === 'left' || e === 'right') {
-        if (['1', '2', '3'].indexOf(rows[pacmanY][pacmanX + (e === 'left' ? -1 : 1)]) !== -1) {
-            rows[pacmanY] = setCharAt(rows[pacmanY], pacmanX, '3');
-            rows[pacmanY] = setCharAt(rows[pacmanY], pacmanX + (e === 'left' ? -1 : 1), '5');
-            pacmanX = pacmanX + (e === 'left' ? -1 : +1);
+        if (['1', '2', '3'].indexOf(rows[posY][posX + (e === 'left' ? -1 : 1)]) !== -1) {
+            rows[posY] = setCharAt(rows[posY], posX, '3');
+            rows[posY] = setCharAt(rows[posY], posX + (e === 'left' ? -1 : 1), newNr);
+            if (x === 'pacman') {
+                pacmanX = posX + (e === 'left' ? -1 : +1);
+            }else if (x === 'ghost') {
+                ghostX = posX + (e === 'left' ? -1 : +1);
+            }
             CTX.clearRect(0, 0, 720, 540);
             drawGrid();
         }
+    }
+    if (x === 'ghost') {
+        setTimeout(moveGhost, 100);
     }
 }
 
