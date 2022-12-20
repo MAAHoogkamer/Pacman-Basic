@@ -1,5 +1,5 @@
 
-const IMAGES = ['./img/PacManB1s.png', './img/Ghost1.png', './img/YellowPill.png'].map((src) => {
+const IMAGES = ['./img/PacManB1s.png', './img/BluePill.png', './img/YellowPill.png'].map((src) => {
     const IMG = new Image();
     IMG.src = src;
     return IMG;
@@ -38,8 +38,26 @@ function drawGrid() {
             console.log(index);
             if (row[i] === '1') {
                 CTX.drawImage(IMAGES[2],i * PILL_WIDTH + OFFSET_X,(index * PILL_WIDTH) + OFFSET_Y,6,6);
+            }else if (row[i] === '5') {
+                CTX.drawImage(IMAGES[0],i * PILL_WIDTH + OFFSET_X - 4.5,(index * PILL_WIDTH) + OFFSET_Y - 4.5,15,15);
+            }else if (row[i] === '2') {
+                CTX.drawImage(IMAGES[1],i * PILL_WIDTH + OFFSET_X,(index * PILL_WIDTH) + OFFSET_Y,6,6);
             }
 
         }
     })
 }
+
+/**
+ * Map elements to grid
+ *
+ * 0 border
+ * 1 yellow pills
+ * 2 blue pills
+ * 3 no pills
+ * 4 tunnel
+ * 5 pacman
+ * 6 colored ghosts
+ * 7 blue ghosts
+ *
+ */
