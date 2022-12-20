@@ -79,16 +79,15 @@ document.onkeydown = ((e) => {
     movement(movePac, 'pacman');
 });
 // Ghost movement:
-let previousMove = null;
-
+let lastMoveGhost;
 function moveGhost() {
     const MOVE = ['left', 'down', 'up', 'right'];
-    let moveGhost = null;
-    while (moveGhost === previousMove) {
-        const RANDOM = Math.floor(Math.random() * MOVE.length);
+    const RANDOM = Math.floor(Math.random() * MOVE.length);
+    let moveGhost = MOVE[RANDOM];
+    if (moveGhost === lastMoveGhost) {
         moveGhost = MOVE[RANDOM];
     }
-    previousMove = moveGhost;
+    lastMoveGhost = moveGhost;
     movement(moveGhost, 'ghost');
 }
 
