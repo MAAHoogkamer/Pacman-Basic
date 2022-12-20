@@ -7,8 +7,10 @@ let pacmanX = 1;
 let pacmanY = 1;
 let ghostX = 26;
 let ghostY = 12;
-// Yellow Pill counter:
+// Counters:
 let yPillCount = 0;
+let deathCount = 0;
+// deathCounter needs to be stored in super global
 
 const IMAGES = ['./img/PacManB1s.png', './img/BluePill.png', './img/YellowPill.png', './img/Ghost1.png'].map((src) => {
     const IMG = new Image();
@@ -104,7 +106,7 @@ function movement(e,x) {
             break;
     }
     if (e === 'down' || e === 'up') {
-        if (['1', '2', '3'].indexOf(rows[posY + (e ===  'up' ? -1 : 1)][posX]) !== -1) {
+        if (['1', '2', '3', '6', '7'].indexOf(rows[posY + (e ===  'up' ? -1 : 1)][posX]) !== -1) {
             let eats = rows[posY + (e ===  'up' ? -1 : 1)][posX];
             whatHappens(eats);
             if (x === 'pacman') {
@@ -121,7 +123,7 @@ function movement(e,x) {
         }
     }
     if (e === 'left' || e === 'right') {
-        if (['1', '2', '3'].indexOf(rows[posY][posX + (e === 'left' ? -1 : 1)]) !== -1) {
+        if (['1', '2', '3', '6', '7'].indexOf(rows[posY][posX + (e === 'left' ? -1 : 1)]) !== -1) {
             if (x === 'pacman') {
                 pacmanX = posX + (e === 'left' ? -1 : +1);
                 newNrField = '3';
@@ -152,11 +154,13 @@ function whatHappens(x) {
         case '2':
             // Blue pill event
             break;
-        case '3':
-            movePac = 'up';
+        case '6':
+            // Red ghost: pacman dies
+            location.reload();
+            deathCount++;
             break;
-        case 'KeyD':
-            movePac = 'right';
+        case '7':
+            // Blue pill event, eat blue ghosts
             break;
         //default:
         //
@@ -173,7 +177,7 @@ function whatHappens(x) {
  * 3 no pills
  * 4 tunnel
  * 5 pacman
- * 6 colored ghosts
+ * 6 red ghosts
  * 7 blue ghosts
  *
  */
