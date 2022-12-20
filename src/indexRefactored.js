@@ -6,7 +6,7 @@ const PILL_WIDTH = 13.5;
 let pacmanX = 1;
 let pacmanY = 1;
 let ghostX = 26;
-let ghostY = 12;
+let ghostY = 13;
 
 const IMAGES = ['./img/PacManB1s.png', './img/BluePill.png', './img/YellowPill.png', './img/Ghost1.png'].map((src) => {
     const IMG = new Image();
@@ -108,65 +108,63 @@ function moveGhost() {
     movement(moveGhost, 'ghost');
 }
 // Game object movement:
-let newNrField;
-let countMove = 0;
-function movement(e,x) {
-    console.log(e);
-    let posY;
-    let posX;
-    let newNrObj;
-    switch(x) {
-        case 'pacman':
-            posY = pacmanY;
-            posX = pacmanX;
-            newNrObj = '5';
-            //newNrField = '3';
-            break;
-        case 'ghost':
-            posY = ghostY;
-            posX = ghostX;
-            newNrObj = '6';
-            break;
+function movement(e, x) {
+    // Declare variables
+    let posY, posX, newNrObj, newNrField;
+
+    // Set variables based on the value of `x`
+    if (x === 'pacman') {
+        posY = pacmanY;
+        posX = pacmanX;
+        newNrObj = '5';
+        newNrField = '3';
+    } else if (x === 'ghost') {
+        posY = ghostY;
+        posX = ghostX;
+        newNrObj = '6';
+        newNrField = '3';
     }
-    if (e === 'down' || e === 'up') {
-        if (['1', '2', '3'].indexOf(rows[posY + (e ===  'up' ? -1 : 1)][posX]) !== -1) {
-            if (countMove === 0) {
-                countMove++;
-                newNrField = rows[posY + (e ===  'up' ? -1 : 1)][posX];
-            } else {
-                rows[posY] = setCharAt(rows[posY], posX, newNrField);
-                countMove--;
-            }
-            if (x === 'pacman') {
-                pacmanY = posY + (e === 'up' ? -1 : +1);
-            }else if (x === 'ghost') {
-                ghostY = posY + (e === 'up' ? -1 : +1);
-            }
-            rows[posY + (e === 'up' ? -1 : 1)] = setCharAt(rows[posY + (e === 'up' ? -1 : 1)], posX, newNrObj);
-            CTX.clearRect(0, 0, 720, 540);
-            drawGrid();
+
+    // Determine the new position based on the direction
+    let newPosY, newPosX;
+    if (e === 'down') {
+        newPosY = posY + 1;
+        newPosX = posX;
+    } else if (e === 'up') {
+        newPosY = posY - 1;
+        newPosX = posX;
+    } else if (e === 'left') {
+        newPosY = posY;
+        newPosX = posX - 1;
+    } else if (e === 'right') {
+        newPosY = posY;
+        newPosX = posX + 1;
+    }
+
+    // Check if the new position is valid
+    if (['1', '2', '3'].indexOf(rows[newPosY][newPosX]) !== -1) {
+        // Update the grid and the object's position
+        rows[posY] = setCharAt(rows[posY], posX, newNrField);
+        rows[newPosY] = setCharAt(rows[newPosY], newPosX, newNrObj);
+        if (x === 'pacman') {
+            pacmanY = newPosY;
+            pacmanX = newPosX;
+        } else if (x === 'ghost') {
+            ghostY = newPosY;
+            ghostX = newPosX;
         }
+
+        // Clear and redraw the grid
+        CTX.clearRect(0, 0, 720, 540);
+        drawGrid();
     }
-    if (e === 'left' || e === 'right') {
-        if (['1', '2', '3'].indexOf(rows[posY][posX + (e === 'left' ? -1 : 1)]) !== -1) {
-            if (x === 'pacman') {
-                pacmanX = posX + (e === 'left' ? -1 : +1);
-                newNrField = rows[posY][posX + (e === 'left' ? -1 : 1)];
-            }else if (x === 'ghost') {
-                ghostX = posX + (e === 'left' ? -1 : +1);
-                newNrField = rows[posY][posX + (e === 'left' ? -1 : 1)];
-            }
-            rows[posY] = setCharAt(rows[posY], posX + (e === 'left' ? -1 : 1), newNrObj);
-            rows[posY] = setCharAt(rows[posY], posX, newNrField);
-            CTX.clearRect(0, 0, 720, 540);
-            drawGrid();
-        }
-    }
-    console.log(newNrField);
+
+    // If the object is a ghost, call the function again
     if (x === 'ghost') {
         setTimeout(moveGhost, 100);
     }
 }
+
 
 function setCharAt(str,index,chr) {
     if(index > str.length-1) return str;
