@@ -108,6 +108,7 @@ function moveGhost() {
     movement(moveGhost, 'ghost');
 }
 // Game object movement:
+let newNrField = '3';
 function movement(e, x) {
     // Declare variables
     let posY, posX, newNrObj, newNrField;
@@ -117,12 +118,10 @@ function movement(e, x) {
         posY = pacmanY;
         posX = pacmanX;
         newNrObj = '5';
-        newNrField = '3';
     } else if (x === 'ghost') {
         posY = ghostY;
         posX = ghostX;
         newNrObj = '6';
-        newNrField = '3';
     }
 
     // Determine the new position based on the direction
@@ -144,8 +143,6 @@ function movement(e, x) {
     // Check if the new position is valid
     if (['1', '2', '3'].indexOf(rows[newPosY][newPosX]) !== -1) {
         // Update the grid and the object's position
-        rows[posY] = setCharAt(rows[posY], posX, newNrField);
-        rows[newPosY] = setCharAt(rows[newPosY], newPosX, newNrObj);
         if (x === 'pacman') {
             pacmanY = newPosY;
             pacmanX = newPosX;
@@ -153,6 +150,8 @@ function movement(e, x) {
             ghostY = newPosY;
             ghostX = newPosX;
         }
+        rows[posY] = setCharAt(rows[posY], posX, newNrField);
+        rows[newPosY] = setCharAt(rows[newPosY], newPosX, newNrObj);
 
         // Clear and redraw the grid
         CTX.clearRect(0, 0, 720, 540);
