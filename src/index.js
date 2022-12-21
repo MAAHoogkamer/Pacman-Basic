@@ -84,15 +84,16 @@ document.onkeydown = ((e) => {
     }
     movement(movePac, pacman);
 });
-/*
+
 // Ghost movement:
-const GHOSTS = ['ghost', 'ghost1', 'ghost2'];
-*/
 let ghost = new Character(12,26,3,null, 6);
+let ghost1 = new Character(13,26,3,null, 6);
+let ghost2 = new Character(14,26,3,null, 6);
+const GHOSTS = [ghost, ghost1, ghost2];
 unleashGhosts();
 function unleashGhosts() {
-    //GHOSTS.forEach(moveGhost);
-    moveGhost(ghost);
+    GHOSTS.forEach(moveGhost);
+    //moveGhost(ghost);
     setTimeout(unleashGhosts, 100);
 }
 
