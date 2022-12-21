@@ -1,8 +1,5 @@
-/*
 import Character from './character.class.js';
-import Pacman from './pacman.class.js';
-import Ghost from './ghost.class.js';
-*/
+//import Ghost from './ghost.class.js'
 // Draw the grid:
 const OFFSET_X = 11;
 const OFFSET_Y = 15;
@@ -23,6 +20,7 @@ let deathCount = 0;
 // deathCounter needs to be stored in super global
 */
 
+// Load the images:
 const IMAGES = ['./img/PacManB1s.png', './img/PacManB2s.png', './img/PacManL1s.png', './img/PacManL2s.png', './img/PacManR1s.png', './img/PacManR2s.png', './img/PacManT1s.png', './img/PacManT2s.png','./img/Ghost1.png', './img/Ghost2.png', './img/Ghost3.png', './img/Ghost4.png','./img/BluePill.png', './img/YellowPill.png'].map((src) => {
     const IMG = new Image();
     IMG.src = src;
@@ -46,8 +44,7 @@ FILE.onreadystatechange = function ()
 }
 FILE.send(null);
 
-console.log(IMAGES[0][0]);
-
+// Draw the grid:
 function drawGrid() {
     CTX.clearRect(0, 0, 720, 540);
     rows.forEach((row, index) => {
@@ -64,6 +61,8 @@ function drawGrid() {
         }
     })
 }
+// Create the characters:
+let pacman = new Character(1,1,3,null, 5);
 // Pacman controls:
 document.onkeydown = ((e) => {
     let movePac;
@@ -83,120 +82,88 @@ document.onkeydown = ((e) => {
         //default:
         //
     }
-    movement(movePac, 'pacman');
+    movement(movePac, pacman);
 });
+/*
 // Ghost movement:
 const GHOSTS = ['ghost', 'ghost1', 'ghost2'];
+*/
+let ghost = new Character(12,26,3,null, 6);
+unleashGhosts();
 function unleashGhosts() {
-    GHOSTS.forEach(moveGhost);
-    //moveGhost('ghost');
+    //GHOSTS.forEach(moveGhost);
+    moveGhost(ghost);
     setTimeout(unleashGhosts, 100);
 }
 
-let lastMoveGhost = {ghost:null, ghost1:null, ghost2:null};
 function moveGhost(whichGhost) {
     const MOVE = ['left', 'down', 'up', 'right'];
     const RANDOM = Math.floor(Math.random() * MOVE.length);
     let moveGhost = MOVE[RANDOM];
-    if (moveGhost === lastMoveGhost.whichGhost) {
-        moveGhost = MOVE[RANDOM];
-    }
-    lastMoveGhost.whichGhost = moveGhost;
+    //if (moveGhost === lastMoveGhost.whichGhost) {
+      //  moveGhost = MOVE[RANDOM];
+    //}
+    //lastMoveGhost.whichGhost = moveGhost;
     movement(moveGhost, whichGhost);
 }
 
+console.log(pacman.currentPositionX);
 // Movement function:
-let newFieldNumber = {pacman:null, ghost:null, ghost1:'6', ghost2:'6'};
 function movement(direction, character) {
-    let newObjectNumber;
-    let currentPositionY;
-    let currentPositionX;
-
-    if (character === 'pacman') {
-        currentPositionY = pacmanY;
-        currentPositionX = pacmanX;
-        newObjectNumber = '5';
-    } else if (character === 'ghost') {
-        currentPositionY = ghostY;
-        currentPositionX = ghostX;
-        newObjectNumber = '6';
-    } else if (character === 'ghost1') {
-        currentPositionY = ghost1Y;
-        currentPositionX = ghost1X;
-        newObjectNumber = '6';
-    } else if (character === 'ghost2') {
-        currentPositionY = ghost2Y;
-        currentPositionX = ghost2X;
-        newObjectNumber = '6';
-    }
-
-    let newPositionY = currentPositionY;
-    let newPositionX = currentPositionX;
+    let newPositionY = character.currentPositionY;
+    let newPositionX = character.currentPositionX;
     if (direction === 'down') {
-        newPositionY = currentPositionY + 1;
+        newPositionY = character.currentPositionY + 1;
     } else if (direction === 'up') {
-        newPositionY = currentPositionY - 1;
+        newPositionY = character.currentPositionY - 1;
     } else if (direction === 'left') {
-        newPositionX = currentPositionX - 1;
+        newPositionX = character.currentPositionX - 1;
     } else if (direction === 'right') {
-        newPositionX = currentPositionX + 1;
+        newPositionX = character.currentPositionX + 1;
     }
+    console.log(character.currentPositionX);
 
     if (['1', '2', '3', '6', '7'].includes(rows[newPositionY][newPositionX])) {
         const eats = rows[newPositionY][newPositionX];
         whatHappens(eats);
-        if (character === 'pacman') {
-            pacmanY = newPositionY;
-            pacmanX = newPositionX;
-            newFieldNumber.pacman = '3';
-        } else if (character === 'ghost') {
-            ghostY = newPositionY;
-            ghostX = newPositionX;
-        } else if (character === 'ghost1') {
-            ghost1Y = newPositionY;
-            ghost1X = newPositionX;
-        } else if (character === 'ghost2') {
-            ghost2Y = newPositionY;
-            ghost2X = newPositionX;
+        rows[character.currentPositionY] = setCharAt(rows[character.currentPositionY], character.currentPositionX, character.newField);
+        if (character !== pacman){
+            character.newField = rows[newPositionY][newPositionX];
         }
-        rows[currentPositionY] = setCharAt(rows[currentPositionY], currentPositionX, newFieldNumber.[character]);
-        newFieldNumber.[character] = rows[newPositionY][newPositionX];
-        //console.log(newFieldNumber);
+        character.currentPositionY = newPositionY;
+        character.currentPositionX = newPositionX;
+        console.log(character.newField);
         //console.log(character);
-        rows[newPositionY] = setCharAt(rows[newPositionY], newPositionX, newObjectNumber);
-    }
-/*
-    if (GHOSTS.includes(character)) {
-        setTimeout(unleashGhosts, 300);
-    }*/
-}
-
-
-function setCharAt(str,index,chr) {
-    if(index > str.length-1) return str;
-    return str.substring(0,index) + chr + str.substring(index+1);
-}
-function whatHappens(x) {
-    switch(x) {
-        case '1':
-            // yPillCount++;
-            break;
-        case '2':
-            // Blue pill event
-            break;
-        case '6':
-            // Red ghost: pacman dies
-            //location.reload();
-            //deathCount++;
-            break;
-        case '7':
-            // Blue pill event, eat blue ghosts
-            break;
-        //default:
-        //
+        rows[newPositionY] = setCharAt(rows[newPositionY], newPositionX, character.characterNr);
     }
 }
+console.log(pacman.currentPositionX);
 
+    function setCharAt(str, index, chr) {
+        if (index > str.length - 1) return str;
+        return str.substring(0, index) + chr + str.substring(index + 1);
+    }
+
+    function whatHappens(x) {
+        switch (x) {
+            case '1':
+                // yPillCount++;
+                break;
+            case '2':
+                // Blue pill event
+                break;
+            case '6':
+                // Red ghost: pacman dies
+                //location.reload();
+                //deathCount++;
+                break;
+            case '7':
+                // Blue pill event, eat blue ghosts
+                break;
+            //default:
+            //
+        }
+    }
 
 window.setInterval(() => {
     drawGrid();
