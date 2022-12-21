@@ -1,3 +1,4 @@
+const Pacman = import '/pacman.class.js';
 // Draw the grid:
 const OFFSET_X = 11;
 const OFFSET_Y = 15;
