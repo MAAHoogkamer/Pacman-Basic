@@ -7,6 +7,10 @@ let pacmanX = 1;
 let pacmanY = 1;
 let ghostX = 26;
 let ghostY = 12;
+let ghost1X = 26;
+let ghost1Y = 13;
+let ghost2X = 26;
+let ghost2Y = 14;
 // Counters:
 let yPillCount = 0;
 let deathCount = 0;
@@ -21,13 +25,6 @@ const IMAGES = ['./img/PacManB1s.png', './img/BluePill.png', './img/YellowPill.p
 const CANVAS = document.getElementById("canvas");
 const CTX = CANVAS.getContext("2d");
 
-window.setTimeout(() => {
-    //CTX.drawImage(IMAGES[0],100,100);
-    //CTX.drawImage(IMAGES[1],200,200,24,24);
-    //CTX.drawImage(IMAGES[2],300,300,24,24);
-    drawGrid();
-    //setTimeout(moveGhost, 100);
-}, 50);
 
 // Load the GridDef.txt file:
 let rows;
@@ -43,6 +40,7 @@ FILE.onreadystatechange = function ()
 FILE.send(null);
 
 function drawGrid() {
+    CTX.clearRect(0, 0, 720, 540);
     rows.forEach((row, index) => {
         for (let i = 0; i < row.length; i++) {
             if (row[i] === '1') {
@@ -52,8 +50,8 @@ function drawGrid() {
             }else if (row[i] === '2') {
                 CTX.drawImage(IMAGES[1],i * PILL_WIDTH + OFFSET_X,(index * PILL_WIDTH) + OFFSET_Y,6,6);
             }else if (row[i] === '6') {
-            CTX.drawImage(IMAGES[3],i * PILL_WIDTH + OFFSET_X - 4.5,(index * PILL_WIDTH) - 4.5+ OFFSET_Y,18,18);
-        }
+                CTX.drawImage(IMAGES[3],i * PILL_WIDTH + OFFSET_X - 4.5,(index * PILL_WIDTH) - 4.5+ OFFSET_Y,18,18);
+            }
         }
     })
 }
@@ -79,20 +77,27 @@ document.onkeydown = ((e) => {
     movement(movePac, 'pacman');
 });
 // Ghost movement:
-let lastMoveGhost;
-function moveGhost() {
+const GHOSTS = ['ghost', 'ghost1', 'ghost2'];
+function unleashGhosts() {
+    GHOSTS.forEach(moveGhost);
+    //moveGhost('ghost');
+    setTimeout(unleashGhosts, 100);
+}
+
+let lastMoveGhost = {ghost:null, ghost1:null, ghost2:null};
+function moveGhost(whichGhost) {
     const MOVE = ['left', 'down', 'up', 'right'];
     const RANDOM = Math.floor(Math.random() * MOVE.length);
     let moveGhost = MOVE[RANDOM];
-    if (moveGhost === lastMoveGhost) {
+    if (moveGhost === lastMoveGhost.whichGhost) {
         moveGhost = MOVE[RANDOM];
     }
-    lastMoveGhost = moveGhost;
-    movement(moveGhost, 'ghost');
+    lastMoveGhost.whichGhost = moveGhost;
+    movement(moveGhost, whichGhost);
 }
 
 // Movement function:
-let newFieldNumber = '3';
+let newFieldNumber = {pacman:null, ghost:null, ghost1:'6', ghost2:'6'};
 function movement(direction, character) {
     let newObjectNumber;
     let currentPositionY;
@@ -105,6 +110,14 @@ function movement(direction, character) {
     } else if (character === 'ghost') {
         currentPositionY = ghostY;
         currentPositionX = ghostX;
+        newObjectNumber = '6';
+    } else if (character === 'ghost1') {
+        currentPositionY = ghost1Y;
+        currentPositionX = ghost1X;
+        newObjectNumber = '6';
+    } else if (character === 'ghost2') {
+        currentPositionY = ghost2Y;
+        currentPositionX = ghost2X;
         newObjectNumber = '6';
     }
 
@@ -126,21 +139,27 @@ function movement(direction, character) {
         if (character === 'pacman') {
             pacmanY = newPositionY;
             pacmanX = newPositionX;
-            newFieldNumber = '3';
+            newFieldNumber.pacman = '3';
         } else if (character === 'ghost') {
             ghostY = newPositionY;
             ghostX = newPositionX;
+        } else if (character === 'ghost1') {
+            ghost1Y = newPositionY;
+            ghost1X = newPositionX;
+        } else if (character === 'ghost2') {
+            ghost2Y = newPositionY;
+            ghost2X = newPositionX;
         }
-        rows[currentPositionY] = setCharAt(rows[currentPositionY], currentPositionX, newFieldNumber);
-        newFieldNumber = rows[newPositionY][newPositionX];
+        rows[currentPositionY] = setCharAt(rows[currentPositionY], currentPositionX, newFieldNumber.[character]);
+        newFieldNumber.[character] = rows[newPositionY][newPositionX];
+        //console.log(newFieldNumber);
+        //console.log(character);
         rows[newPositionY] = setCharAt(rows[newPositionY], newPositionX, newObjectNumber);
-        CTX.clearRect(0, 0, 720, 540);
-        drawGrid();
     }
-
-    if (character === 'ghost') {
-        setTimeout(moveGhost, 100);
-    }
+/*
+    if (GHOSTS.includes(character)) {
+        setTimeout(unleashGhosts, 300);
+    }*/
 }
 
 
@@ -151,15 +170,15 @@ function setCharAt(str,index,chr) {
 function whatHappens(x) {
     switch(x) {
         case '1':
-            yPillCount++;
+            // yPillCount++;
             break;
         case '2':
             // Blue pill event
             break;
         case '6':
             // Red ghost: pacman dies
-            location.reload();
-            deathCount++;
+            //location.reload();
+            //deathCount++;
             break;
         case '7':
             // Blue pill event, eat blue ghosts
@@ -170,6 +189,11 @@ function whatHappens(x) {
 }
 
 
+window.setInterval(() => {
+    drawGrid();
+}, 40);
+
+unleashGhosts();
 /**
  * Map elements to grid
  *
