@@ -1,9 +1,14 @@
-const Pacman = import '/pacman.class.js';
+/*
+import Character from './character.class.js';
+import Pacman from './pacman.class.js';
+import Ghost from './ghost.class.js';
+*/
 // Draw the grid:
 const OFFSET_X = 11;
 const OFFSET_Y = 15;
 const PILL_WIDTH = 13.5;
 // Current positions of moving elements:
+/*
 let pacmanX = 1;
 let pacmanY = 1;
 let ghostX = 26;
@@ -16,8 +21,9 @@ let ghost2Y = 14;
 let yPillCount = 0;
 let deathCount = 0;
 // deathCounter needs to be stored in super global
+*/
 
-const IMAGES = ['./img/PacManB1s.png', './img/BluePill.png', './img/YellowPill.png', './img/Ghost1.png'].map((src) => {
+const IMAGES = ['./img/PacManB1s.png', './img/PacManB2s.png', './img/PacManL1s.png', './img/PacManL2s.png', './img/PacManR1s.png', './img/PacManR2s.png', './img/PacManT1s.png', './img/PacManT2s.png','./img/Ghost1.png', './img/Ghost2.png', './img/Ghost3.png', './img/Ghost4.png','./img/BluePill.png', './img/YellowPill.png'].map((src) => {
     const IMG = new Image();
     IMG.src = src;
     return IMG;
@@ -30,7 +36,7 @@ const CTX = CANVAS.getContext("2d");
 // Load the GridDef.txt file:
 let rows;
 const FILE = new XMLHttpRequest();
-FILE.open('GET', '/src/GridDef.txt', false);
+FILE.open('GET', '/GridDef.txt', false);
 FILE.onreadystatechange = function ()
 {
     if(FILE.readyState === 4 && (FILE.status === 200 || FILE.status === 0))
@@ -40,18 +46,20 @@ FILE.onreadystatechange = function ()
 }
 FILE.send(null);
 
+console.log(IMAGES[0][0]);
+
 function drawGrid() {
     CTX.clearRect(0, 0, 720, 540);
     rows.forEach((row, index) => {
         for (let i = 0; i < row.length; i++) {
             if (row[i] === '1') {
-                CTX.drawImage(IMAGES[2],i * PILL_WIDTH + OFFSET_X,(index * PILL_WIDTH) + OFFSET_Y,6,6);
+                CTX.drawImage(IMAGES[13],i * PILL_WIDTH + OFFSET_X,(index * PILL_WIDTH) + OFFSET_Y,6,6);
             }else if (row[i] === '5') {
                 CTX.drawImage(IMAGES[0],i * PILL_WIDTH + OFFSET_X - 4.5,(index * PILL_WIDTH) + OFFSET_Y - 4.5,15,15);
             }else if (row[i] === '2') {
-                CTX.drawImage(IMAGES[1],i * PILL_WIDTH + OFFSET_X,(index * PILL_WIDTH) + OFFSET_Y,6,6);
+                CTX.drawImage(IMAGES[12],i * PILL_WIDTH + OFFSET_X,(index * PILL_WIDTH) + OFFSET_Y,6,6);
             }else if (row[i] === '6') {
-                CTX.drawImage(IMAGES[3],i * PILL_WIDTH + OFFSET_X - 4.5,(index * PILL_WIDTH) - 4.5+ OFFSET_Y,18,18);
+                CTX.drawImage(IMAGES[8],i * PILL_WIDTH + OFFSET_X - 4.5,(index * PILL_WIDTH) - 4.5+ OFFSET_Y,18,18);
             }
         }
     })
@@ -194,7 +202,7 @@ window.setInterval(() => {
     drawGrid();
 }, 40);
 
-unleashGhosts();
+//unleashGhosts();
 /**
  * Map elements to grid
  *

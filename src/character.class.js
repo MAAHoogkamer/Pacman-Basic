@@ -1,16 +1,9 @@
 export default class Character {
-    constructor(curPosY, curPosX, newField) {
+    constructor(curPosY, curPosX, newField, lastDir) {
         this.currentPositionY = curPosY;
         this.currentPositionX = curPosX;
         this.newField = newField;
+        this.lastDirection = lastDir;
     }
-
-}
-
-class Pacman extends Character {
-    constructor()
-}
-
-class Ghost extends Character {
 
 }

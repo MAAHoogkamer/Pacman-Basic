@@ -80,6 +80,7 @@ module.exports = {
                 { from: 'css', to: 'css' },
                 { from: 'img', to: 'img' },
                 { from: 'index.html', to: 'index.html' },
+                { from: 'GridDef.txt', to: 'GridDef.txt' },
             ]
         })
     ]
