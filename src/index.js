@@ -128,7 +128,7 @@ function movement(direction, character) {
         const eats = rows[newPositionY][newPositionX];
         whatHappens(eats);
         rows[character.currentPositionY] = setCharAt(rows[character.currentPositionY], character.currentPositionX, character.newField);
-        if (character !== pacman){
+        if (character !== pacman && rows[newPositionY][newPositionX] !== '6'){
             character.newField = rows[newPositionY][newPositionX];
         }
         character.currentPositionY = newPositionY;
