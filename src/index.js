@@ -12,9 +12,9 @@ const IMAGES = ['./img/PacManB1s.png', './img/PacManB2s.png', './img/PacManL1s.p
     return IMG;
 });
 
+// Get the canvas:
 const CANVAS = document.getElementById("canvas");
 const CTX = CANVAS.getContext("2d");
-
 
 // Load the GridDef.txt file:
 let rows;
@@ -73,7 +73,7 @@ document.onkeydown = ((e) => {
     }
     pacman.movement(movePac, rows);
 });
-/*
+
 // Ghost movement:
 let ghost = new Character(12,26,3,null, 6);
 let ghost1 = new Character(13,26,3,null, 6);
@@ -94,7 +94,7 @@ function moveGhost(whichGhost) {
       //  moveGhost = MOVE[RANDOM];
     //}
     //lastMoveGhost.whichGhost = moveGhost;
-    movement(moveGhost, whichGhost);
+    whichGhost.movement(moveGhost, rows);
 }
 
     function whatHappens(x) {
@@ -117,7 +117,7 @@ function moveGhost(whichGhost) {
             //
         }
     }
-*/
+
 window.setInterval(() => {
     drawGrid();
 }, 40);
