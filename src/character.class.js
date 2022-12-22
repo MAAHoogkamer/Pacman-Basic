@@ -41,7 +41,7 @@ export default class Character {
             this.currentPositionX = this.newPositionX;
             //console.log(this.newField);
             //console.log(this);
-            rows[newPositionY] = this.setCharAt(rows[newPositionY], newPositionX, this.characterNr);
+            this.rows[this.newPositionY] = this.setCharAt(this.rows[this.newPositionY], this.newPositionX, this.characterNr);
         }
     }
     setCharAt(str, index, chr) {

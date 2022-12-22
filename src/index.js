@@ -1,5 +1,7 @@
-import Character from './character.class.js';
-//import Ghost from './ghost.class.js'
+//import Character from './character.class.js';
+import Ghost from './ghost.class.js'
+import Pacman from './pacman.class.js'
+import {move1, move2, move3} from './moves.js'
 // Draw the grid:
 const OFFSET_X = 11;
 const OFFSET_Y = 15;
@@ -51,9 +53,9 @@ let pacman = new Pacman(1,1,3,null, 5, rows);
 
 
 // Ghost movement:
-let ghost = new Character(12,26,3,null, 6);
-let ghost1 = new Character(13,26,3,null, 6);
-let ghost2 = new Character(14,26,3,null, 6);
+let ghost = new Ghost(12,26,3,null, 6, rows, move1);
+let ghost1 = new Ghost(13,26,3,null, 6, rows, move2);
+let ghost2 = new Ghost(14,26,3,null, 6, rows, move3);
 const GHOSTS = [ghost, ghost1, ghost2];
 unleashGhosts();
 function unleashGhosts() {
@@ -67,7 +69,7 @@ function moveGhost(whichGhost) {
     const RANDOM = Math.floor(Math.random() * MOVE.length);
     let moveGhost = MOVE[RANDOM];
     //if (moveGhost === lastMoveGhost.whichGhost) {
-      //  moveGhost = MOVE[RANDOM];
+    //  moveGhost = MOVE[RANDOM];
     //}
     //lastMoveGhost.whichGhost = moveGhost;
     whichGhost.movement(moveGhost, rows);
