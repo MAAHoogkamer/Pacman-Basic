@@ -7,7 +7,6 @@ export default class Character {
         this.characterNr = charNr;
     }
     movement(direction, rows) {
-        console.log(rows);
         let newPositionY = this.currentPositionY;
         let newPositionX = this.currentPositionX;
         if (direction === 'down') {
@@ -19,13 +18,14 @@ export default class Character {
         } else if (direction === 'right') {
             newPositionX = this.currentPositionX + 1;
         }
-        console.log(this.currentPositionX);
 
         if (['1', '2', '3', '6', '7'].includes(rows[newPositionY][newPositionX])) {
             //const eats = rows[newPositionY][newPositionX];
             //whatHappens(eats);
+            console.log(this.newField);
             rows[this.currentPositionY] = this.setCharAt(rows[this.currentPositionY], this.currentPositionX, this.newField);
-            if (this.characterNr !== '5' && rows[newPositionY][newPositionX] !== '6'){
+            if (this.characterNr !== 5 && rows[newPositionY][newPositionX] !== 6){
+
                 this.newField = rows[newPositionY][newPositionX];
             }
             this.currentPositionY = newPositionY;

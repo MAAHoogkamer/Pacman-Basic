@@ -65,7 +65,6 @@ function drawGrid() {
 let pacman = new Character(1,1,3,null, 5);
 // Pacman controls:
 document.onkeydown = ((e) => {
-    console.log(e.code);
     let movePac;
     switch(e.code) {
         case 'ArrowLeft':
