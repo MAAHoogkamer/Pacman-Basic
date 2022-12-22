@@ -22,15 +22,14 @@ export default class Character {
         if (['1', '2', '3', '6', '7'].includes(rows[newPositionY][newPositionX])) {
             //const eats = rows[newPositionY][newPositionX];
             //whatHappens(eats);
-            console.log(this.newField);
+            //console.log(this.newField);
             rows[this.currentPositionY] = this.setCharAt(rows[this.currentPositionY], this.currentPositionX, this.newField);
-            if (this.characterNr !== 5 && rows[newPositionY][newPositionX] !== 6){
-
+            if (this.characterNr !== 5 && rows[newPositionY][newPositionX] !== '6') {
                 this.newField = rows[newPositionY][newPositionX];
             }
             this.currentPositionY = newPositionY;
             this.currentPositionX = newPositionX;
-            console.log(this.newField);
+            //console.log(this.newField);
             //console.log(this);
             rows[newPositionY] = this.setCharAt(rows[newPositionY], newPositionX, this.characterNr);
         }

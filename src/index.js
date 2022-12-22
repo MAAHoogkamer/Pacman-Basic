@@ -97,26 +97,26 @@ function moveGhost(whichGhost) {
     whichGhost.movement(moveGhost, rows);
 }
 
-    function whatHappens(x) {
-        switch (x) {
-            case '1':
-                // yPillCount++;
-                break;
-            case '2':
-                // Blue pill event
-                break;
-            case '6':
-                // Red ghost: pacman dies
-                //location.reload();
-                //deathCount++;
-                break;
-            case '7':
-                // Blue pill event, eat blue ghosts
-                break;
-            //default:
-            //
-        }
+function whatHappens(x) {
+    switch (x) {
+        case '1':
+            // yPillCount++;
+            break;
+        case '2':
+            // Blue pill event
+            break;
+        case '6':
+            // Red ghost: pacman dies
+            //location.reload();
+            //deathCount++;
+            break;
+        case '7':
+            // Blue pill event, eat blue ghosts
+            break;
+        //default:
+        //
     }
+}
 
 window.setInterval(() => {
     drawGrid();
