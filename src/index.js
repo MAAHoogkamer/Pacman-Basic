@@ -4,21 +4,6 @@ import Character from './character.class.js';
 const OFFSET_X = 11;
 const OFFSET_Y = 15;
 const PILL_WIDTH = 13.5;
-// Current positions of moving elements:
-/*
-let pacmanX = 1;
-let pacmanY = 1;
-let ghostX = 26;
-let ghostY = 12;
-let ghost1X = 26;
-let ghost1Y = 13;
-let ghost2X = 26;
-let ghost2Y = 14;
-// Counters:
-let yPillCount = 0;
-let deathCount = 0;
-// deathCounter needs to be stored in super global
-*/
 
 // Load the images:
 const IMAGES = ['./img/PacManB1s.png', './img/PacManB2s.png', './img/PacManL1s.png', './img/PacManL2s.png', './img/PacManR1s.png', './img/PacManR2s.png', './img/PacManT1s.png', './img/PacManT2s.png','./img/Ghost1.png', './img/Ghost2.png', './img/Ghost3.png', './img/Ghost4.png','./img/BluePill.png', './img/YellowPill.png'].map((src) => {
