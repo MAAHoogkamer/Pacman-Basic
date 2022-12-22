@@ -56,6 +56,11 @@ let pacman = new Pacman(1,1,3,null, 5, rows);
 let ghost = new Ghost(12,26,3,null, 6, rows, move1);
 let ghost1 = new Ghost(13,26,3,null, 6, rows, move2);
 let ghost2 = new Ghost(14,26,3,null, 6, rows, move3);
+setInterval(() => {
+    ghost.movement();
+    ghost1.movement();
+}, 100);
+/*
 const GHOSTS = [ghost, ghost1, ghost2];
 unleashGhosts();
 function unleashGhosts() {
@@ -63,7 +68,6 @@ function unleashGhosts() {
     //moveGhost(ghost);
     setTimeout(unleashGhosts, 100);
 }
-
 function moveGhost(whichGhost) {
     const MOVE = ['left', 'down', 'up', 'right'];
     const RANDOM = Math.floor(Math.random() * MOVE.length);
@@ -72,9 +76,9 @@ function moveGhost(whichGhost) {
     //  moveGhost = MOVE[RANDOM];
     //}
     //lastMoveGhost.whichGhost = moveGhost;
-    whichGhost.movement(moveGhost, rows);
+    whichGhost.movement(moveGhost);
 }
-
+*/
 function whatHappens(x) {
     switch (x) {
         case '1':
