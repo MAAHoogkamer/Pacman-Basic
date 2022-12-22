@@ -47,32 +47,8 @@ function drawGrid() {
     })
 }
 // Create the characters:
-let pacman = new Character(1,1,3,null, 5);
-// Pacman controls:
-document.onkeydown = ((e) => {
-    let movePac;
-    switch(e.code) {
-        case 'ArrowLeft':
-        case 'KeyA':
-            movePac = 'left';
-            break;
-        case 'ArrowDown':
-        case 'KeyS':
-            movePac = 'down';
-            break;
-        case 'ArrowUp':
-        case 'KeyW':
-            movePac = 'up';
-            break;
-        case 'ArrowRight':
-        case 'KeyD':
-            movePac = 'right';
-            break;
-        //default:
-        //
-    }
-    pacman.movement(movePac, rows);
-});
+let pacman = new Pacman(1,1,3,null, 5, rows);
+
 
 // Ghost movement:
 let ghost = new Character(12,26,3,null, 6);

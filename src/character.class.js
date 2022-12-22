@@ -1,34 +1,44 @@
 export default class Character {
-    constructor(curPosY, curPosX, newField, lastDir, charNr) {
+    constructor(curPosY, curPosX, newField, lastDir, charNr, rows, moveFunc) {
         this.currentPositionY = curPosY;
         this.currentPositionX = curPosX;
         this.newField = newField;
         this.lastDirection = lastDir;
         this.characterNr = charNr;
-    }
-    movement(direction, rows) {
-        let newPositionY = this.currentPositionY;
-        let newPositionX = this.currentPositionX;
-        if (direction === 'down') {
-            newPositionY = this.currentPositionY + 1;
-        } else if (direction === 'up') {
-            newPositionY = this.currentPositionY - 1;
-        } else if (direction === 'left') {
-            newPositionX = this.currentPositionX - 1;
-        } else if (direction === 'right') {
-            newPositionX = this.currentPositionX + 1;
-        }
+        this.rows = rows;
 
-        if (['1', '2', '3', '6', '7'].includes(rows[newPositionY][newPositionX])) {
-            //const eats = rows[newPositionY][newPositionX];
+        if (moveFunc) {
+            this.movement = moveFunc.bind(this);
+        }
+    }
+
+    calculateNewPosition(direction) {
+        this.newPositionY = this.currentPositionY;
+        this.newPositionX = this.currentPositionX;
+        if (direction === 'down') {
+            this.newPositionY = this.currentPositionY + 1;
+        } else if (direction === 'up') {
+            this.newPositionY = this.currentPositionY - 1;
+        } else if (direction === 'left') {
+            this.newPositionX = this.currentPositionX - 1;
+        } else if (direction === 'right') {
+            this.newPositionX = this.currentPositionX + 1;
+        }
+    }
+
+    movement(direction) {
+        this.calculateNewPosition(direction);
+
+        if (['1', '2', '3', '6', '7'].includes(this.rows[this.newPositionY][this.newPositionX])) {
+            //const eats = this.rows[newPositionY][newPositionX];
             //whatHappens(eats);
             //console.log(this.newField);
-            rows[this.currentPositionY] = this.setCharAt(rows[this.currentPositionY], this.currentPositionX, this.newField);
-            if (this.characterNr !== 5 && rows[newPositionY][newPositionX] !== '6') {
-                this.newField = rows[newPositionY][newPositionX];
+            this.rows[this.currentPositionY] = this.setCharAt(this.rows[this.currentPositionY], this.currentPositionX, this.newField);
+            if (this.characterNr !== 5 && this.rows[this.newPositionY][this.newPositionX] !== '6') {
+                this.newField = this.rows[this.newPositionY][this.newPositionX];
             }
-            this.currentPositionY = newPositionY;
-            this.currentPositionX = newPositionX;
+            this.currentPositionY = this.newPositionY;
+            this.currentPositionX = this.newPositionX;
             //console.log(this.newField);
             //console.log(this);
             rows[newPositionY] = this.setCharAt(rows[newPositionY], newPositionX, this.characterNr);
