@@ -8,7 +8,7 @@ const OFFSET_Y = 15;
 const PILL_WIDTH = 13.5;
 
 // Load the images:
-const IMAGES = ['./img/PacManB1s.png', './img/PacManB2s.png', './img/PacManL1s.png', './img/PacManL2s.png', './img/PacManR1s.png', './img/PacManR2s.png', './img/PacManT1s.png', './img/PacManT2s.png','./img/Ghost1.png', './img/Ghost2.png', './img/Ghost3.png', './img/Ghost4.png','./img/BluePill.png', './img/YellowPill.png'].map((src) => {
+const IMAGES = ['./img/PacManB1s.png', './img/PacManB2s.png', './img/PacManL1s.png', './img/PacManL2s.png', './img/PacManR1s.png', './img/PacManR2s.png', './img/PacManT1s.png', './img/PacManT2s.png','./img/Ghost1.png', './img/Ghost2.png', './img/Ghost3.png', './img/Ghost4.png','./img/NewBluePill.png', './img/YellowPill.png'].map((src) => {
     const IMG = new Image();
     IMG.src = src;
     return IMG;
@@ -41,7 +41,7 @@ function drawGrid() {
             }else if (row[i] === '5') {
                 CTX.drawImage(IMAGES[0],i * PILL_WIDTH + OFFSET_X - 4.5,(index * PILL_WIDTH) + OFFSET_Y - 4.5,15,15);
             }else if (row[i] === '2') {
-                CTX.drawImage(IMAGES[12],i * PILL_WIDTH + OFFSET_X,(index * PILL_WIDTH) + OFFSET_Y,6,6);
+                CTX.drawImage(IMAGES[12],i * PILL_WIDTH + OFFSET_X - 4.5,(index * PILL_WIDTH) + OFFSET_Y - 4.5,14,14);
             }else if (row[i] === '6') {
                 CTX.drawImage(IMAGES[8],i * PILL_WIDTH + OFFSET_X - 4.5,(index * PILL_WIDTH) - 4.5+ OFFSET_Y,18,18);
             }
