@@ -65,26 +65,31 @@ function drawGrid() {
 let pacman = new Character(1,1,3,null, 5);
 // Pacman controls:
 document.onkeydown = ((e) => {
+    console.log(e.code);
     let movePac;
     switch(e.code) {
+        case 'ArrowLeft':
         case 'KeyA':
             movePac = 'left';
             break;
+        case 'ArrowDown':
         case 'KeyS':
             movePac = 'down';
             break;
+        case 'ArrowUp':
         case 'KeyW':
             movePac = 'up';
             break;
+        case 'ArrowRight':
         case 'KeyD':
             movePac = 'right';
             break;
         //default:
         //
     }
-    movement(movePac, pacman);
+    pacman.movement(movePac, rows);
 });
-
+/*
 // Ghost movement:
 let ghost = new Character(12,26,3,null, 6);
 let ghost1 = new Character(13,26,3,null, 6);
@@ -108,43 +113,6 @@ function moveGhost(whichGhost) {
     movement(moveGhost, whichGhost);
 }
 
-console.log(pacman.currentPositionX);
-// Movement function:
-function movement(direction, character) {
-    let newPositionY = character.currentPositionY;
-    let newPositionX = character.currentPositionX;
-    if (direction === 'down') {
-        newPositionY = character.currentPositionY + 1;
-    } else if (direction === 'up') {
-        newPositionY = character.currentPositionY - 1;
-    } else if (direction === 'left') {
-        newPositionX = character.currentPositionX - 1;
-    } else if (direction === 'right') {
-        newPositionX = character.currentPositionX + 1;
-    }
-    console.log(character.currentPositionX);
-
-    if (['1', '2', '3', '6', '7'].includes(rows[newPositionY][newPositionX])) {
-        const eats = rows[newPositionY][newPositionX];
-        whatHappens(eats);
-        rows[character.currentPositionY] = setCharAt(rows[character.currentPositionY], character.currentPositionX, character.newField);
-        if (character !== pacman && rows[newPositionY][newPositionX] !== '6'){
-            character.newField = rows[newPositionY][newPositionX];
-        }
-        character.currentPositionY = newPositionY;
-        character.currentPositionX = newPositionX;
-        console.log(character.newField);
-        //console.log(character);
-        rows[newPositionY] = setCharAt(rows[newPositionY], newPositionX, character.characterNr);
-    }
-}
-console.log(pacman.currentPositionX);
-
-    function setCharAt(str, index, chr) {
-        if (index > str.length - 1) return str;
-        return str.substring(0, index) + chr + str.substring(index + 1);
-    }
-
     function whatHappens(x) {
         switch (x) {
             case '1':
@@ -165,7 +133,7 @@ console.log(pacman.currentPositionX);
             //
         }
     }
-
+*/
 window.setInterval(() => {
     drawGrid();
 }, 40);
