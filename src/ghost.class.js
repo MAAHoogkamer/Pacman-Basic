@@ -3,8 +3,8 @@ import Character from "./character.class";
 export default class Ghost extends Character {
     constructor(curPosY, curPosX, newField, lastDir, charNr, rows, moveFunc) {
         super(curPosY, curPosX, newField, lastDir, charNr, rows, moveFunc);
-        //let lastDirection;
-        let countLastDirection;
+        this.lastDirection;
+        this.countLastDirection;
     }
 
     moveGhost() {
@@ -18,7 +18,7 @@ export default class Ghost extends Character {
             if (this.characterNr !== 5 && this.rows[this.newPositionY][this.newPositionX] !== '6') {
                 this.newField = this.rows[this.newPositionY][this.newPositionX];
             }
-            console.log(this.newPositionY + this.newPositionX);
+            //console.log(this.newPositionY + this.newPositionX);
             this.currentPositionY = this.newPositionY;
             this.currentPositionX = this.newPositionX;
             this.rows[this.newPositionY] = this.setCharAt(this.rows[this.newPositionY], this.newPositionX, this.characterNr);
@@ -28,9 +28,8 @@ export default class Ghost extends Character {
     moveGhostRandom(whichGhost) {
         const MOVE = ['left', 'down', 'up', 'right'];
         const RANDOM = Math.floor(Math.random() * MOVE.length);
-        const MOVEAGAIN = Math.random();
         let direction = MOVE[RANDOM];
-        if (whichGhost === 2 && MOVEAGAIN < 0.8) {
+        if (whichGhost === 2 && Math.random() < 0.8) {
             direction = this.lastDirection;
         }
         this.lastDirection = direction;
