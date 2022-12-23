@@ -1,13 +1,12 @@
 export default class Character {
-    constructor(counters, curPosY, curPosX, lastDir, charNr, rows, moveFunc) {
-        this.counters = counters;
+    constructor(gameStatus, curPosY, curPosX, lastDir, charNr, rows, moveFunc) {
+        this.gameStatus = gameStatus;
         this.currentPositionY = curPosY;
         this.currentPositionX = curPosX;
         this.newField = '3';
         this.lastDirection = lastDir;
         this.characterNr = charNr;
         this.rows = rows;
-
 
         if (moveFunc) {
             this.movement = moveFunc.bind(this);
@@ -30,18 +29,20 @@ export default class Character {
     movement(direction) {
         this.calculateNewPosition(direction);
         if (this.rows[this.newPositionY][this.newPositionX] === '1') {
-            this.counters.yellowPillCounter++;
-            console.log(this.counters.yellowPillCounter);
+            this.gameStatus.yellowPillCounter++;
+            console.log(this.gameStatus.yellowPillCounter);
         } else if (this.rows[this.newPositionY][this.newPositionX] === '2') {
-            console.log('Blue Pill');
-            console.log(this.rows);
+            this.gameStatus.ghostStatus = 7;
+            setTimeout(() => {this.gameStatus.ghostStatus = 6}, 5000);
         }
 
         if (['1', '2', '3', '4'].includes(this.rows[this.newPositionY][this.newPositionX])) {
-            if (this.currentPositionX === 50) {
-                this.newField = '4';
-            } else {
-                this.newField = '3';
+            if (this.currentPositionY === 14) {
+                if (this.currentPositionX === 50 || this.currentPositionX === 1) {
+                    this.newField = '4';
+                } else {
+                    this.newField = '3';
+                }
             }
 
             if (this.rows[this.newPositionY][this.newPositionX] === '4') {

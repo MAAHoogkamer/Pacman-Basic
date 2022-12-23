@@ -6,10 +6,11 @@ import {move1, move2, move3} from './moves.js'
 const OFFSET_X = 11;
 const OFFSET_Y = 15;
 const PILL_WIDTH = 13.5;
-// Game counters:
-const counters = {
+// Game status:
+const gameStatus = {
     deathCount: 0,
     yellowPillCounter: 0, // 575 is total
+    ghostStatus: 6, // 6: red, 7: blue
 };
 
 // Load the images:
@@ -49,43 +50,24 @@ function drawGrid() {
                 CTX.drawImage(IMAGES[12],i * PILL_WIDTH + OFFSET_X - 4.5,(index * PILL_WIDTH) + OFFSET_Y - 4.5,14,14);
             }else if (row[i] === '6') {
                 CTX.drawImage(IMAGES[8],i * PILL_WIDTH + OFFSET_X - 4.5,(index * PILL_WIDTH) - 4.5+ OFFSET_Y,18,18);
+            }else if (row[i] === '7') {
+                CTX.drawImage(IMAGES[9],i * PILL_WIDTH + OFFSET_X - 4.5,(index * PILL_WIDTH) - 4.5+ OFFSET_Y,18,18);
             }
         }
     })
 }
 // Create the characters:
-let pacman = new Pacman(counters, 1,1,null, 5, rows);
+let pacman = new Pacman(gameStatus, 1,1,null, 5, rows, null);
 
 // Ghost movement:
-const GHOST1 = new Ghost(counters, 12,26,null, 6, rows, move1);
-const GHOST2 = new Ghost(counters, 13,26,null, 6, rows, move2);
-const GHOST3 = new Ghost(counters, 14,26,null, 6, rows, move3);
+const GHOST1 = new Ghost(gameStatus, 12,26,null, 6, rows, move1);
+const GHOST2 = new Ghost(gameStatus, 13,26,null, 6, rows, move2);
+const GHOST3 = new Ghost(gameStatus, 14,26,null, 6, rows, move3);
 
 let ghosts = [GHOST1, GHOST2, GHOST3];
 setInterval(() => {
     ghosts.forEach((ghost) => ghost.movement());
 }, 100);
-
-function whatHappens(x) {
-    switch (x) {
-        case '1':
-            // yPillCount++;
-            break;
-        case '2':
-            // Blue pill event
-            break;
-        case '6':
-            // Red ghost: pacman dies
-            //location.reload();
-            //deathCount++;
-            break;
-        case '7':
-            // Blue pill event, eat blue ghosts
-            break;
-        //default:
-        //
-    }
-}
 
 window.setInterval(() => {
     drawGrid();

@@ -1,17 +1,18 @@
 import Character from "./character.class";
 
 export default class Ghost extends Character {
-    constructor(counters, curPosY, curPosX, lastDir, charNr, rows, moveFunc) {
-        super(counters, curPosY, curPosX, lastDir, charNr, rows, moveFunc);
+    constructor(gameStatus, curPosY, curPosX, lastDir, charNr, rows, moveFunc) {
+        super(gameStatus, curPosY, curPosX, lastDir, charNr, rows, moveFunc);
         this.lastDirection;
     }
 
     moveGhost() {
+        this.characterNr = this.gameStatus.ghostStatus;
         if (this.rows[this.newPositionY][this.newPositionX] === '0') {
             this.movement();
         } else if (this.rows[this.newPositionY][this.newPositionX] === '5') {
-            this.counters.deathCount++;
-            console.log(this.counters.deathCount);
+            this.gameStatus.deathCount++;
+            console.log(this.gameStatus.deathCount);
         }
         if (['1', '2', '3'].includes(this.rows[this.newPositionY][this.newPositionX])) {
             this.rows[this.currentPositionY] = this.setCharAt(this.rows[this.currentPositionY], this.currentPositionX, this.newField);
