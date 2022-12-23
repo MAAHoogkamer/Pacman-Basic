@@ -2,7 +2,7 @@ import Character from "./character.class";
 
 export default class Ghost extends Character {
     moveGhost() {
-        if (['1', '2', '3', '6', '7'].includes(this.rows[this.newPositionY][this.newPositionX])) {
+        if (['1', '2', '3'].includes(this.rows[this.newPositionY][this.newPositionX])) {
             //const eats = this.rows[newPositionY][newPositionX];
             //whatHappens(eats);
             this.rows[this.currentPositionY] = this.setCharAt(this.rows[this.currentPositionY], this.currentPositionX, this.newField);
