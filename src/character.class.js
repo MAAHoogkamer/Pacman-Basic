@@ -1,4 +1,5 @@
 export default class Character {
+    //private yellowPillCounter: Number;
     constructor(curPosY, curPosX, newField, lastDir, charNr, rows, moveFunc) {
         this.currentPositionY = curPosY;
         this.currentPositionX = curPosX;
@@ -6,6 +7,8 @@ export default class Character {
         this.lastDirection = lastDir;
         this.characterNr = charNr;
         this.rows = rows;
+        this.yellowPillCounter = 0;
+
 
         if (moveFunc) {
             this.movement = moveFunc.bind(this);
@@ -28,8 +31,12 @@ export default class Character {
 
     movement(direction) {
         this.calculateNewPosition(direction);
+        if (this.rows[this.newPositionY][this.newPositionX] === '1') {
+            this.yellowPillCounter++;
+            console.log(this.yellowPillCounter);
+        }
 
-        if (['1', '2', '3', '6', '7'].includes(this.rows[this.newPositionY][this.newPositionX])) {
+        if (['1', '2', '3'].includes(this.rows[this.newPositionY][this.newPositionX])) {
             //const eats = this.rows[newPositionY][newPositionX];
             //whatHappens(eats);
             //console.log(this.newField);

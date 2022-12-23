@@ -27,13 +27,22 @@ export default class Ghost extends Character {
 
     moveGhostRandom(whichGhost) {
         const MOVE = ['left', 'down', 'up', 'right'];
-        const RANDOM = Math.floor(Math.random() * MOVE.length);
-        let direction = MOVE[RANDOM];
-        if (whichGhost === 2 && Math.random() < 0.8) {
+        let direction;
+
+        if (whichGhost === 1 && Math.random() < 0.2) {
             direction = this.lastDirection;
+        } else if (whichGhost === 2 && Math.random() < 0.5) {
+            direction = this.lastDirection;
+        } else if (whichGhost === 3 && Math.random() < 0.9) {
+            direction = this.lastDirection;
+        } else {
+            const RANDOM = Math.floor(Math.random() * MOVE.length);
+            direction = MOVE[RANDOM];
         }
+
         this.lastDirection = direction;
         this.calculateNewPosition(direction);
-        this.moveGhost();
+        this.moveGhost(whichGhost);
     }
+
 }

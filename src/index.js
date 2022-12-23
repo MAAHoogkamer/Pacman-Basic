@@ -51,15 +51,14 @@ function drawGrid() {
 // Create the characters:
 let pacman = new Pacman(1,1,3,null, 5, rows);
 
-
 // Ghost movement:
 let ghost1 = new Ghost(12,26,3,null, 6, rows, move1);
 let ghost2 = new Ghost(13,26,3,null, 6, rows, move2);
 let ghost3 = new Ghost(14,26,3,null, 6, rows, move3);
+
+let ghosts = [ghost1, ghost2, ghost3];
 setInterval(() => {
-    ghost1.movement();
-    ghost2.movement();
-    ghost3.movement();
+    ghosts.forEach((ghost) => ghost.movement());
 }, 100);
 /*
 const GHOSTS = [ghost, ghost1, ghost2];

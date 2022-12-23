@@ -6,7 +6,6 @@ export function move1() {
 
 export function move2() {
     this.moveGhostRandom(2);
-    console.log(this.lastDirection);
 }
 
 export function move3() {
