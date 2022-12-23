@@ -15,4 +15,12 @@ export default class Ghost extends Character {
             this.rows[this.newPositionY] = this.setCharAt(this.rows[this.newPositionY], this.newPositionX, this.characterNr);
         }
     }
+
+    moveGhostRandom() {
+        const MOVE = ['left', 'down', 'up', 'right'];
+        const RANDOM = Math.floor(Math.random() * MOVE.length);
+        let direction = MOVE[RANDOM];
+        this.calculateNewPosition(direction);
+        this.moveGhost();
+    }
 }
