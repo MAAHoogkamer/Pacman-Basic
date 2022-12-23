@@ -53,12 +53,13 @@ let pacman = new Pacman(1,1,3,null, 5, rows);
 
 
 // Ghost movement:
-let ghost = new Ghost(12,26,3,null, 6, rows, move1);
-let ghost1 = new Ghost(13,26,3,null, 6, rows, move2);
-let ghost2 = new Ghost(14,26,3,null, 6, rows, move3);
+let ghost1 = new Ghost(12,26,3,null, 6, rows, move1);
+let ghost2 = new Ghost(13,26,3,null, 6, rows, move2);
+let ghost3 = new Ghost(14,26,3,null, 6, rows, move3);
 setInterval(() => {
-    ghost.movement();
     ghost1.movement();
+    ghost2.movement();
+    ghost3.movement();
 }, 100);
 /*
 const GHOSTS = [ghost, ghost1, ghost2];
