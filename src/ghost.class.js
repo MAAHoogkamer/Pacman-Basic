@@ -13,7 +13,7 @@ export default class Ghost extends Character {
         }
         if (['1', '2', '3'].includes(this.rows[this.newPositionY][this.newPositionX])) {
             this.rows[this.currentPositionY] = this.setCharAt(this.rows[this.currentPositionY], this.currentPositionX, this.newField);
-            if (this.characterNr !== 5 && this.rows[this.newPositionY][this.newPositionX] !== '6') {
+            if (this.rows[this.newPositionY][this.newPositionX] !== '6') {
                 this.newField = this.rows[this.newPositionY][this.newPositionX];
             }
             this.currentPositionY = this.newPositionY;
