@@ -27,7 +27,6 @@ export default class Character {
             this.newPositionX = this.currentPositionX + 1;
         }
     }
-
     movement(direction) {
         this.calculateNewPosition(direction);
         if (this.rows[this.newPositionY][this.newPositionX] === '1') {
@@ -44,33 +43,25 @@ export default class Character {
             } else {
                 this.newField = '3';
             }
+
             if (this.rows[this.newPositionY][this.newPositionX] === '4') {
+                let newPositionX;
                 if (this.newPositionX === 1) {
-                    this.rows[this.currentPositionY] = this.setCharAt(this.rows[this.currentPositionY], this.currentPositionX, this.newField);
-                    this.currentPositionY = 14;
-                    this.currentPositionX = 50;
-                    this.rows[14] = this.setCharAt(this.rows[14], 50, '5');
-                    this.rows[14] = this.setCharAt(this.rows[14], 1, '4');
-                    return;
+                    newPositionX = 50;
                 } else {
-                    this.rows[this.currentPositionY] = this.setCharAt(this.rows[this.currentPositionY], this.currentPositionX, this.newField);
-                    this.currentPositionY = 14;
-                    this.currentPositionX = 1;
-                    this.rows[14] = this.setCharAt(this.rows[14], 1, '5');
-                    this.rows[14] = this.setCharAt(this.rows[14], 50, '4');
-                    return;
+                    newPositionX = 1;
                 }
-                //console.log(this.newPositionX); // Y = 14, X = 1 & 50
-                //console.log(this.rows);
-                //this.newField = 4;
+                this.rows[this.currentPositionY] = this.setCharAt(this.rows[this.currentPositionY], this.currentPositionX, this.newField);
+                this.currentPositionY = 14;
+                this.currentPositionX = newPositionX;
+                this.rows[14] = this.setCharAt(this.rows[14], newPositionX, '5');
+                this.rows[14] = this.setCharAt(this.rows[14], newPositionX === 1 ? 50 : 1, '4');
+            } else {
+                this.rows[this.currentPositionY] = this.setCharAt(this.rows[this.currentPositionY], this.currentPositionX, this.newField);
+                this.currentPositionY = this.newPositionY;
+                this.currentPositionX = this.newPositionX;
+                this.rows[this.newPositionY] = this.setCharAt(this.rows[this.newPositionY], this.newPositionX, this.characterNr);
             }
-            this.rows[this.currentPositionY] = this.setCharAt(this.rows[this.currentPositionY], this.currentPositionX, this.newField);
-            /*if (this.characterNr !== 5 && this.rows[this.newPositionY][this.newPositionX] !== '6') {
-                this.newField = this.rows[this.newPositionY][this.newPositionX];
-            }*/
-            this.currentPositionY = this.newPositionY;
-            this.currentPositionX = this.newPositionX;
-            this.rows[this.newPositionY] = this.setCharAt(this.rows[this.newPositionY], this.newPositionX, this.characterNr);
         }
     }
     setCharAt(str, index, chr) {
