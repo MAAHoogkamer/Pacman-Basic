@@ -60,25 +60,7 @@ let ghosts = [ghost1, ghost2, ghost3];
 setInterval(() => {
     ghosts.forEach((ghost) => ghost.movement());
 }, 100);
-/*
-const GHOSTS = [ghost, ghost1, ghost2];
-unleashGhosts();
-function unleashGhosts() {
-    GHOSTS.forEach(moveGhost);
-    //moveGhost(ghost);
-    setTimeout(unleashGhosts, 100);
-}
-function moveGhost(whichGhost) {
-    const MOVE = ['left', 'down', 'up', 'right'];
-    const RANDOM = Math.floor(Math.random() * MOVE.length);
-    let moveGhost = MOVE[RANDOM];
-    //if (moveGhost === lastMoveGhost.whichGhost) {
-    //  moveGhost = MOVE[RANDOM];
-    //}
-    //lastMoveGhost.whichGhost = moveGhost;
-    whichGhost.movement(moveGhost);
-}
-*/
+
 function whatHappens(x) {
     switch (x) {
         case '1':
@@ -104,7 +86,6 @@ window.setInterval(() => {
     drawGrid();
 }, 40);
 
-//unleashGhosts();
 /**
  * Map elements to grid
  *

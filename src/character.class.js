@@ -1,5 +1,4 @@
 export default class Character {
-    //private yellowPillCounter: Number;
     constructor(curPosY, curPosX, newField, lastDir, charNr, rows, moveFunc) {
         this.currentPositionY = curPosY;
         this.currentPositionX = curPosX;
