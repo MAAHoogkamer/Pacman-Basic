@@ -9,7 +9,7 @@ const PILL_WIDTH = 13.5;
 // Game counters:
 const counters = {
     deathCount: 0,
-    yellowPillCounter: 0,
+    yellowPillCounter: 0, // 575 is total
 };
 
 // Load the images:
@@ -54,12 +54,12 @@ function drawGrid() {
     })
 }
 // Create the characters:
-let pacman = new Pacman(counters, 1,1,3,null, 5, rows);
+let pacman = new Pacman(counters, 1,1,null, 5, rows);
 
 // Ghost movement:
-const GHOST1 = new Ghost(counters, 12,26,3,null, 6, rows, move1);
-const GHOST2 = new Ghost(counters, 13,26,3,null, 6, rows, move2);
-const GHOST3 = new Ghost(counters, 14,26,3,null, 6, rows, move3);
+const GHOST1 = new Ghost(counters, 12,26,null, 6, rows, move1);
+const GHOST2 = new Ghost(counters, 13,26,null, 6, rows, move2);
+const GHOST3 = new Ghost(counters, 14,26,null, 6, rows, move3);
 
 let ghosts = [GHOST1, GHOST2, GHOST3];
 setInterval(() => {
