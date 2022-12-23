@@ -6,6 +6,11 @@ import {move1, move2, move3} from './moves.js'
 const OFFSET_X = 11;
 const OFFSET_Y = 15;
 const PILL_WIDTH = 13.5;
+// Game counters:
+const counters = {
+    deathCount: 0,
+    yellowPillCounter: 0,
+};
 
 // Load the images:
 const IMAGES = ['./img/PacManB1s.png', './img/PacManB2s.png', './img/PacManL1s.png', './img/PacManL2s.png', './img/PacManR1s.png', './img/PacManR2s.png', './img/PacManT1s.png', './img/PacManT2s.png','./img/Ghost1.png', './img/Ghost2.png', './img/Ghost3.png', './img/Ghost4.png','./img/NewBluePill.png', './img/YellowPill.png'].map((src) => {
@@ -49,14 +54,14 @@ function drawGrid() {
     })
 }
 // Create the characters:
-let pacman = new Pacman(1,1,3,null, 5, rows);
+let pacman = new Pacman(counters, 1,1,3,null, 5, rows);
 
 // Ghost movement:
-let ghost1 = new Ghost(12,26,3,null, 6, rows, move1);
-let ghost2 = new Ghost(13,26,3,null, 6, rows, move2);
-let ghost3 = new Ghost(14,26,3,null, 6, rows, move3);
+const GHOST1 = new Ghost(counters, 12,26,3,null, 6, rows, move1);
+const GHOST2 = new Ghost(counters, 13,26,3,null, 6, rows, move2);
+const GHOST3 = new Ghost(counters, 14,26,3,null, 6, rows, move3);
 
-let ghosts = [ghost1, ghost2, ghost3];
+let ghosts = [GHOST1, GHOST2, GHOST3];
 setInterval(() => {
     ghosts.forEach((ghost) => ghost.movement());
 }, 100);

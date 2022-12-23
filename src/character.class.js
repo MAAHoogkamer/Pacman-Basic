@@ -1,12 +1,12 @@
 export default class Character {
-    constructor(curPosY, curPosX, newField, lastDir, charNr, rows, moveFunc) {
+    constructor(counters, curPosY, curPosX, newField, lastDir, charNr, rows, moveFunc) {
+        this.counters = counters;
         this.currentPositionY = curPosY;
         this.currentPositionX = curPosX;
         this.newField = newField;
         this.lastDirection = lastDir;
         this.characterNr = charNr;
         this.rows = rows;
-        this.yellowPillCounter = 0;
 
 
         if (moveFunc) {
@@ -31,22 +31,17 @@ export default class Character {
     movement(direction) {
         this.calculateNewPosition(direction);
         if (this.rows[this.newPositionY][this.newPositionX] === '1') {
-            this.yellowPillCounter++;
-            console.log(this.yellowPillCounter);
+            this.counters.yellowPillCounter++;
+            console.log(this.counters.yellowPillCounter);
         }
 
         if (['1', '2', '3'].includes(this.rows[this.newPositionY][this.newPositionX])) {
-            //const eats = this.rows[newPositionY][newPositionX];
-            //whatHappens(eats);
-            //console.log(this.newField);
             this.rows[this.currentPositionY] = this.setCharAt(this.rows[this.currentPositionY], this.currentPositionX, this.newField);
             if (this.characterNr !== 5 && this.rows[this.newPositionY][this.newPositionX] !== '6') {
                 this.newField = this.rows[this.newPositionY][this.newPositionX];
             }
             this.currentPositionY = this.newPositionY;
             this.currentPositionX = this.newPositionX;
-            //console.log(this.newField);
-            //console.log(this);
             this.rows[this.newPositionY] = this.setCharAt(this.rows[this.newPositionY], this.newPositionX, this.characterNr);
         }
     }

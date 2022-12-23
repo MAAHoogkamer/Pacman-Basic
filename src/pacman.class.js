@@ -1,7 +1,7 @@
 import Character from './character.class.js';
 export default class Pacman extends Character {
-    constructor(curPosY, curPosX, newField, lastDir, charNr, rows, moveFunc) {
-        super(curPosY, curPosX, newField, lastDir, charNr, rows, moveFunc);
+    constructor(counters, curPosY, curPosX, newField, lastDir, charNr, rows, moveFunc) {
+        super(counters, curPosY, curPosX, newField, lastDir, charNr, rows, moveFunc);
         // Pacman controls:
         document.onkeydown = ((e) => {
             let direction;
