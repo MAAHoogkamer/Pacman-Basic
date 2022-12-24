@@ -33,7 +33,7 @@ export default class Character {
             //console.log(this.gameStatus.yellowPillCounter);
         } else if (this.rows[this.newPositionY][this.newPositionX] === '2') {
             this.gameStatus.ghostStatus = 7;
-            setTimeout(() => {this.gameStatus.ghostStatus = 6}, 5000);
+            setTimeout(() => {this.gameStatus.ghostStatus = 6}, 8000);
         }
 
         if (['1', '2', '3', '4', '7'].includes(this.rows[this.newPositionY][this.newPositionX])) {

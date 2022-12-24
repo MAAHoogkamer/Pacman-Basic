@@ -96,3 +96,25 @@ window.setInterval(() => {
  *
  */
 
+function addExtraGhost() {
+    const ghostIndex = Math.floor(Math.random() * 3);
+    let ghost;
+    switch (ghostIndex) {
+        case 0:
+            ghost = new Ghost(GHOST1);
+            break;
+        case 1:
+            ghost = new Ghost(GHOST2);
+            break;
+        case 2:
+            ghost = new Ghost(GHOST3);
+            break;
+        default:
+            ghost = null;
+            break;
+    }
+    // Generate a random string
+    const randomString = 'Ghost' + Math.floor(Math.random() * 10000);
+    // Use the eval function to create a new variable with the random string as the name
+    eval(randomString + ' = ghost');
+}
