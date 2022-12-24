@@ -11,7 +11,7 @@ const gameStatus = {
     deathCount: 0,
     yellowPillCounter: 0, // 575 is total
     ghostStatus: 6, // 6: red, 7: blue
-    ghosts: ['GHOST1', 'GHOST2', 'GHOST3'],
+    ghosts: [],
 };
 
 // Load the images:

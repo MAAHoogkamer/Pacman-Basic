@@ -37,7 +37,6 @@ export default class Character {
         }
         if (this.rows[this.newPositionY][this.newPositionX] === '7') {
             this.newField = '3';
-            console.log('tt');
         }
 
         if (['1', '2', '3', '4'].includes(this.rows[this.newPositionY][this.newPositionX])) {
