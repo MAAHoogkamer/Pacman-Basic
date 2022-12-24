@@ -11,6 +11,7 @@ const gameStatus = {
     deathCount: 0,
     yellowPillCounter: 0, // 575 is total
     ghostStatus: 6, // 6: red, 7: blue
+    ghosts: ['GHOST1', 'GHOST2', 'GHOST3'],
 };
 
 // Load the images:
@@ -59,13 +60,21 @@ function drawGrid() {
 // Create the characters:
 let pacman = new Pacman(gameStatus, 1,1,null, 5, rows, null);
 
-// Ghost movement:
+// Unleash the ghosts:
 const GHOST1 = new Ghost(gameStatus, 12,26,null, 6, rows, move1);
 const GHOST2 = new Ghost(gameStatus, 13,26,null, 6, rows, move2);
 const GHOST3 = new Ghost(gameStatus, 14,26,null, 6, rows, move3);
 
-let ghosts = [GHOST1, GHOST2, GHOST3];
+function getGhosts() {
+    let ghosts = [];
+    for (let i = 0; i < gameStatus.ghosts.length; i++) {
+        ghosts.push(eval(gameStatus.ghosts[i]));
+    }
+    return ghosts;
+}
+
 setInterval(() => {
+    let ghosts = getGhosts();
     ghosts.forEach((ghost) => ghost.movement());
 }, 100);
 
@@ -86,3 +95,4 @@ window.setInterval(() => {
  * 7 blue ghosts
  *
  */
+

@@ -10,7 +10,8 @@ export default class Ghost extends Character {
         this.characterNr = this.gameStatus.ghostStatus;
         if (this.rows[this.newPositionY][this.newPositionX] === '0') {
             this.movement();
-        } else if (this.rows[this.newPositionY][this.newPositionX] === '5') {
+        }
+        if (this.characterNr === 6 && this.rows[this.newPositionY][this.newPositionX] === '5') {
             this.gameStatus.deathCount++;
             console.log(this.gameStatus.deathCount);
         }
