@@ -15,6 +15,11 @@ export default class Ghost extends Character {
         if (this.characterNr === 6 && this.rows[this.newPositionY][this.newPositionX] === '5') {
             this.gameStatus.deathCount++;
             console.log(this.gameStatus.deathCount);
+        } else if (this.characterNr === 7 && this.rows[this.newPositionY][this.newPositionX] === '5') {
+            const index = this.gameStatus.ghosts.indexOf(this);
+            if (index > -1) {
+                this.gameStatus.ghosts.splice(index, 1);
+            }
         }
         if (['1', '2', '3'].includes(this.rows[this.newPositionY][this.newPositionX])) {
             this.rows[this.currentPositionY] = this.setCharAt(this.rows[this.currentPositionY], this.currentPositionX, this.newField);

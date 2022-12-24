@@ -30,16 +30,13 @@ export default class Character {
         this.calculateNewPosition(direction);
         if (this.rows[this.newPositionY][this.newPositionX] === '1') {
             this.gameStatus.yellowPillCounter++;
-            console.log(this.gameStatus.yellowPillCounter);
+            //console.log(this.gameStatus.yellowPillCounter);
         } else if (this.rows[this.newPositionY][this.newPositionX] === '2') {
             this.gameStatus.ghostStatus = 7;
             setTimeout(() => {this.gameStatus.ghostStatus = 6}, 5000);
         }
-        if (this.rows[this.newPositionY][this.newPositionX] === '7') {
-            this.newField = '3';
-        }
 
-        if (['1', '2', '3', '4'].includes(this.rows[this.newPositionY][this.newPositionX])) {
+        if (['1', '2', '3', '4', '7'].includes(this.rows[this.newPositionY][this.newPositionX])) {
             if (this.currentPositionY === 14) {
                 if (this.currentPositionX === 50 || this.currentPositionX === 1) {
                     this.newField = '4';
