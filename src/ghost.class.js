@@ -33,7 +33,7 @@ export default class Ghost extends Character {
     }
 
     moveGhostRandom(whichGhost) {
-        const MOVE = ['left', 'down', 'up', 'right'];
+        const MOVE = [0, 1, 2, 3];
         let direction;
 
         if (whichGhost === 1 && Math.random() < 0.2) {

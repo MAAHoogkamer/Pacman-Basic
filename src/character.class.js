@@ -16,14 +16,14 @@ export default class Character {
     calculateNewPosition(direction) {
         this.newPositionY = this.currentPositionY;
         this.newPositionX = this.currentPositionX;
-        if (direction === 'down') {
-            this.newPositionY = this.currentPositionY + 1;
-        } else if (direction === 'up') {
-            this.newPositionY = this.currentPositionY - 1;
-        } else if (direction === 'left') {
-            this.newPositionX = this.currentPositionX - 1;
-        } else if (direction === 'right') {
-            this.newPositionX = this.currentPositionX + 1;
+        if (direction === 2) {
+            this.newPositionY = this.currentPositionY + 1; // Down
+        } else if (direction === 3) {
+            this.newPositionY = this.currentPositionY - 1; // Up
+        } else if (direction === 1) {
+            this.newPositionX = this.currentPositionX - 1; // Left
+        } else if (direction === 0) {
+            this.newPositionX = this.currentPositionX + 1; // Right
         }
     }
     movement(direction) {
