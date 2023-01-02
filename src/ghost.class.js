@@ -3,7 +3,6 @@ import Character from "./character.class";
 export default class Ghost extends Character {
     constructor(gameStatus, curPosY, curPosX, lastDir, charNr, rows, moveFunc) {
         super(gameStatus, curPosY, curPosX, lastDir, charNr, rows, moveFunc);
-        this.lastDirection;
         this.gameStatus.ghosts.push(this);
     }
 

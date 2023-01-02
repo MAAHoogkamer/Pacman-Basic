@@ -1,6 +1,7 @@
+import Game from './game.class.js';
 import Map from './map.class.js';
 import Ghost from './ghost.class.js'
-import Pacman from './pacman.class.js'
+//import Pacman from './pacman.class.js'
 import {move1, move2, move3} from './moves.js'
 // Draw the grid:
 
@@ -27,6 +28,9 @@ FILE.onreadystatechange = function ()
 }
 FILE.send(null);
 
+// Load the game mechanics:
+const GAME = new Game(gameStatus, rows);
+
 // Load the map:
 const MAP = new Map(rows, gameStatus);
 
@@ -35,25 +39,8 @@ window.setInterval(() => {
     MAP.drawGrid();
 }, 40);
 
-// Create the characters:
-let pacman = new Pacman(gameStatus, 1,1,null, 5, rows, null);
-
-// Unleash the ghosts:
-const GHOST1 = new Ghost(gameStatus, 12,26,null, 6, rows, move1);
-const GHOST2 = new Ghost(gameStatus, 13,26,null, 6, rows, move2);
-const GHOST3 = new Ghost(gameStatus, 14,26,null, 6, rows, move3);
-
-function getGhosts() {
-    let ghosts = [];
-    for (let i = 0; i < gameStatus.ghosts.length; i++) {
-        ghosts.push(eval(gameStatus.ghosts[i]));
-    }
-    return ghosts;
-}
-
 window.setInterval(() => {
-    let ghosts = getGhosts();
-    ghosts.forEach((ghost) => ghost.movement());
+    GAME.moveGhosts();
 }, 100);
 
 /**
