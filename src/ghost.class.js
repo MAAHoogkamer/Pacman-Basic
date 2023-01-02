@@ -3,7 +3,6 @@ import Character from "./character.class";
 export default class Ghost extends Character {
     constructor(gameStatus, curPosY, curPosX, lastDir, charNr, rows, moveFunc) {
         super(gameStatus, curPosY, curPosX, lastDir, charNr, rows, moveFunc);
-        this.lastDirection;
         this.gameStatus.ghosts.push(this);
     }
 
@@ -14,7 +13,9 @@ export default class Ghost extends Character {
         }
         if (this.characterNr === 6 && this.rows[this.newPositionY][this.newPositionX] === '5') {
             this.gameStatus.deathCount++;
-            console.log(this.gameStatus.deathCount);
+            sessionStorage.setItem('savedDifficulty', this.gameStatus.difficulty);
+            sessionStorage.setItem('savedDeaths', this.gameStatus.deathCount);
+            location.reload();
         } else if (this.characterNr === 7 && this.rows[this.newPositionY][this.newPositionX] === '5') {
             const index = this.gameStatus.ghosts.indexOf(this);
             if (index > -1) {
