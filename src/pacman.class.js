@@ -22,19 +22,22 @@ export default class Pacman extends Character {
                 case 'KeyD':
                     direction = 0;
                     break;
+                    /*
                 case 'Enter':
                     console.log(rows);
                     break;
-                //default:
-                //
+                     */
+                default:
+                    return;
             }
-            if (gameStatus.openOrClose === 0) {
-                gameStatus.openOrClose = 1;
+            if (this.gameStatus.openOrClose === 0) {
+                this.gameStatus.openOrClose = 1;
             } else {
-                gameStatus.openOrClose = 0;
+                this.gameStatus.openOrClose = 0;
             }
-            gameStatus.unicornDirection = direction;
+            this.gameStatus.unicornDirection = direction;
             this.movement(direction, rows);
+
         });
     }
 }

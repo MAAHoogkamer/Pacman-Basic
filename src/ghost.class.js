@@ -13,6 +13,7 @@ export default class Ghost extends Character {
         }
         if (this.characterNr === 6 && this.rows[this.newPositionY][this.newPositionX] === '5') {
             this.gameStatus.deathCount++;
+            sessionStorage.setItem('savedDifficulty', this.gameStatus.difficulty);
             sessionStorage.setItem('savedDeaths', this.gameStatus.deathCount);
             location.reload();
         } else if (this.characterNr === 7 && this.rows[this.newPositionY][this.newPositionX] === '5') {
