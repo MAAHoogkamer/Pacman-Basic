@@ -3,15 +3,16 @@ import Ghost from "./ghost.class";
 import {move1, move2, move3} from "./moves";
 
 export default class Game {
-    constructor(gameStatus, rows) {
+    constructor(gameStatus, rows, GAME) {
         this.rows = rows;
         this.gameStatus = gameStatus;
+        this.amountOfGhosts = this.gameStatus.difficulty + 2;
         // Create the characters:
-        let pacman = new Pacman(gameStatus, 1,1,null, 5, rows, null);
+        const pacman = new Pacman(gameStatus, 1,1,null, 5, rows, null, GAME);
         // Unleash the ghosts:
-        const GHOST1 = new Ghost(gameStatus, 12,26,null, 6, rows, move1);
-        const GHOST2 = new Ghost(gameStatus, 13,26,null, 6, rows, move2);
-        const GHOST3 = new Ghost(gameStatus, 14,26,null, 6, rows, move3);
+        for (let i = 0; i < this.amountOfGhosts; i++) {
+            this.addExtraGhost();
+        }
     }
 
     getGhosts() {
@@ -28,7 +29,6 @@ export default class Game {
     }
 
     loadGrid() {
-        console.log('ttt');
         const FILE = new XMLHttpRequest();
         FILE.open('GET', '/GridDef.txt', false);
         FILE.onreadystatechange = function ()
@@ -39,6 +39,29 @@ export default class Game {
             }
         }
         FILE.send(null);
+    }
+
+    addExtraGhost() {
+        const ghostSelect = Math.floor(Math.random() * 3);
+        let ghost;
+        switch (ghostSelect) {
+            case 0:
+                ghost = new Ghost(this.gameStatus, 12, 26, null, 6, this.rows, move1);
+                break;
+            case 1:
+                ghost = new Ghost(this.gameStatus, 13, 26, null, 6, this.rows, move2);
+                break;
+            case 2:
+                ghost = new Ghost(this.gameStatus, 14, 26, null, 6, this.rows, move3);
+                break;
+            default:
+                ghost = null;
+                break;
+        }
+        // Generate a random string
+        const randomString = 'Ghost' + Math.floor(Math.random() * 10000);
+        // Add the ghost to an object using the random string as the key
+        this.gameStatus.ghosts[randomString] = ghost;
     }
 
 }

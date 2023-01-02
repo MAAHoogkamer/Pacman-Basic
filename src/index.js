@@ -1,9 +1,5 @@
 import Game from './game.class.js';
 import Map from './map.class.js';
-import Ghost from './ghost.class.js'
-//import Pacman from './pacman.class.js'
-import {move1, move2, move3} from './moves.js'
-// Draw the grid:
 
 // Game status:
 let gameStatus = {
@@ -13,6 +9,7 @@ let gameStatus = {
     ghosts: [],
     unicornDirection: 0, // 0: right, 1: left, 2: up, 3: down
     openOrClose: 0,
+    difficulty: 0,
 };
 
 // Load the GridDef.txt file:
@@ -39,6 +36,8 @@ window.setInterval(() => {
     MAP.drawGrid();
 }, 40);
 
+//GAME.addExtraGhost();
+
 window.setInterval(() => {
     GAME.moveGhosts();
 }, 100);
@@ -56,26 +55,3 @@ window.setInterval(() => {
  * 7 blue ghosts
  *
  */
-
-function addExtraGhost() {
-    const ghostIndex = Math.floor(Math.random() * 3);
-    let ghost;
-    switch (ghostIndex) {
-        case 0:
-            ghost = new Ghost(GHOST1);
-            break;
-        case 1:
-            ghost = new Ghost(GHOST2);
-            break;
-        case 2:
-            ghost = new Ghost(GHOST3);
-            break;
-        default:
-            ghost = null;
-            break;
-    }
-    // Generate a random string
-    const randomString = 'Ghost' + Math.floor(Math.random() * 10000);
-    // Use the eval function to create a new variable with the random string as the name
-    eval(randomString + ' = ghost');
-}
