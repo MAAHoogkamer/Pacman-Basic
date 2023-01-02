@@ -24,6 +24,9 @@ export default class Map {
             this.whichUniPic = this.gameStatus.unicornDirection + 4
         }
         this.CTX.clearRect(0, 0, 720, 540);
+        this.CTX.fillStyle = '#FCDB00';
+        this.CTX.font = "35px Verdana";
+        this.CTX.fillText(`Level: ${this.gameStatus.difficulty}   Deaths: ${this.gameStatus.deathCount}`, 170, 500);
         this.rows.forEach((row, index) => {
             for (let i = 0; i < row.length; i++) {
                 if (row[i] === '1') {
