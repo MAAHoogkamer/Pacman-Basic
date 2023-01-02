@@ -51,7 +51,7 @@ export default class Game {
     }
 
     nextLevel() {
-        //this.gameStatus.difficulty++;
+        this.gameStatus.difficulty++;
         sessionStorage.setItem('savedDeaths', this.gameStatus.deathCount);
         sessionStorage.setItem('savedDifficulty', this.gameStatus.difficulty);
         location.reload();
