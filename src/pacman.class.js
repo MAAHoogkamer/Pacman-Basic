@@ -5,7 +5,6 @@ export default class Pacman extends Character {
         // Pacman controls:
         document.onkeydown = ((e) => {
             let direction;
-            console.log(e.code);
             switch(e.code) {
                 case 'ArrowLeft':
                 case 'KeyA':
@@ -28,6 +27,11 @@ export default class Pacman extends Character {
                     break;
                 //default:
                 //
+            }
+            if (gameStatus.openOrClose === 0) {
+                gameStatus.openOrClose = 1;
+            } else {
+                gameStatus.openOrClose = 0;
             }
             gameStatus.unicornDirection = direction;
             this.movement(direction, rows);

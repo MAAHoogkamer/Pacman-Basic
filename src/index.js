@@ -11,6 +11,7 @@ let gameStatus = {
     ghostStatus: 6, // 6: red, 7: blue
     ghosts: [],
     unicornDirection: 0, // 0: right, 1: left, 2: up, 3: down
+    openOrClose: 0,
 };
 
 // Load the GridDef.txt file:
