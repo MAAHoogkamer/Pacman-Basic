@@ -9,8 +9,17 @@ let gameStatus = {
     ghosts: [],
     unicornDirection: 0, // 0: right, 1: left, 2: up, 3: down
     openOrClose: 0,
-    difficulty: 0,
+    difficulty: 1, // Increments with each level
 };
+let savedDeaths = sessionStorage.getItem('savedDeaths');
+let savedDifficulty = sessionStorage.getItem('savedDifficulty');
+if (savedDeaths) {
+    //console.log(savedGameStatus);
+    gameStatus.deathCount = savedDeaths;
+    gameStatus.difficulty = savedDifficulty;
+}
+
+console.log(gameStatus.difficulty);
 
 // Load the GridDef.txt file:
 let rows;
@@ -29,15 +38,18 @@ FILE.send(null);
 const GAME = new Game(gameStatus, rows);
 
 // Load the map:
-const MAP = new Map(rows, gameStatus);
+const MAP = new Map(gameStatus, rows);
 
 // Draw the grid:
 window.setInterval(() => {
+    if (gameStatus.yellowPillCounter === 10) {
+        gameStatus.difficulty++;
+        GAME.nextLevel();
+    }
     MAP.drawGrid();
 }, 40);
 
-//GAME.addExtraGhost();
-
+// Move the ghosts:
 window.setInterval(() => {
     GAME.moveGhosts();
 }, 100);

@@ -1,5 +1,5 @@
 export default class Map {
-    constructor(rows, gameStatus) {
+    constructor(gameStatus, rows) {
         this.rows = rows;
         this.gameStatus = gameStatus;
         this.OFFSET_X = 11;

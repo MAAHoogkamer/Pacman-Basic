@@ -6,11 +6,10 @@ export default class Game {
     constructor(gameStatus, rows, GAME) {
         this.rows = rows;
         this.gameStatus = gameStatus;
-        this.amountOfGhosts = this.gameStatus.difficulty + 2;
         // Create the characters:
         const pacman = new Pacman(gameStatus, 1,1,null, 5, rows, null, GAME);
         // Unleash the ghosts:
-        for (let i = 0; i < this.amountOfGhosts; i++) {
+        for (let i = -1; i < this.gameStatus.difficulty; i++) {
             this.addExtraGhost();
         }
     }
@@ -26,19 +25,6 @@ export default class Game {
     moveGhosts() {
         let ghosts = this.getGhosts();
         ghosts.forEach((ghost) => ghost.movement());
-    }
-
-    loadGrid() {
-        const FILE = new XMLHttpRequest();
-        FILE.open('GET', '/GridDef.txt', false);
-        FILE.onreadystatechange = function ()
-        {
-            if(FILE.readyState === 4 && (FILE.status === 200 || FILE.status === 0))
-            {
-                this.rows = FILE.responseText.split('\n');
-            }
-        }
-        FILE.send(null);
     }
 
     addExtraGhost() {
@@ -62,6 +48,13 @@ export default class Game {
         const randomString = 'Ghost' + Math.floor(Math.random() * 10000);
         // Add the ghost to an object using the random string as the key
         this.gameStatus.ghosts[randomString] = ghost;
+    }
+
+    nextLevel() {
+        //this.gameStatus.difficulty++;
+        sessionStorage.setItem('savedDeaths', this.gameStatus.deathCount);
+        sessionStorage.setItem('savedDifficulty', this.gameStatus.difficulty);
+        location.reload();
     }
 
 }
