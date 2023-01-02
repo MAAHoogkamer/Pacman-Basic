@@ -5,6 +5,7 @@ export default class Pacman extends Character {
         // Pacman controls:
         document.onkeydown = ((e) => {
             let direction;
+            console.log(e.code);
             switch(e.code) {
                 case 'ArrowLeft':
                 case 'KeyA':
@@ -21,6 +22,9 @@ export default class Pacman extends Character {
                 case 'ArrowRight':
                 case 'KeyD':
                     direction = 'right';
+                    break;
+                case 'Enter':
+                    console.log(rows);
                     break;
                 //default:
                 //
