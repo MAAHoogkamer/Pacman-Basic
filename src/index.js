@@ -12,10 +12,11 @@ const gameStatus = {
     yellowPillCounter: 0, // 575 is total
     ghostStatus: 6, // 6: red, 7: blue
     ghosts: [],
+    unicornDirection: 0, // 0: right, 1: left, 2: up, 3: down
 };
 
 // Load the images:
-const IMAGES = ['./img/PacManB1s.png', './img/PacManB2s.png', './img/PacManL1s.png', './img/PacManL2s.png', './img/PacManR1s.png', './img/PacManR2s.png', './img/PacManT1s.png', './img/PacManT2s.png','./img/Ghost1.png', './img/Ghost2.png', './img/Ghost3.png', './img/Ghost4.png','./img/NewBluePill.png', './img/YellowPill.png'].map((src) => {
+const IMAGES = ['./img/UnicornRight.png', './img/UnicornLeft.png', './img/UnicornDown.png', './img/UnicornUp.png', './img/PacManR1s.png', './img/PacManR2s.png', './img/PacManT1s.png', './img/PacManT2s.png','./img/Ghost1.png', './img/Ghost2.png', './img/Ghost3.png', './img/Ghost4.png','./img/NewBluePill.png', './img/YellowPill.png'].map((src) => {
     const IMG = new Image();
     IMG.src = src;
     return IMG;
@@ -40,13 +41,15 @@ FILE.send(null);
 
 // Draw the grid:
 function drawGrid() {
+    //console.log(unicornDirection);
+    // let uniDir = unicornDirection;
     CTX.clearRect(0, 0, 720, 540);
     rows.forEach((row, index) => {
         for (let i = 0; i < row.length; i++) {
             if (row[i] === '1') {
                 CTX.drawImage(IMAGES[13],i * PILL_WIDTH + OFFSET_X,(index * PILL_WIDTH) + OFFSET_Y,6,6);
             }else if (row[i] === '5') {
-                CTX.drawImage(IMAGES[0],i * PILL_WIDTH + OFFSET_X - 4.5,(index * PILL_WIDTH) + OFFSET_Y - 4.5,15,15);
+                CTX.drawImage(IMAGES[gameStatus.unicornDirection],i * PILL_WIDTH + OFFSET_X - 4.5,(index * PILL_WIDTH) + OFFSET_Y - 4.5,16,16);
             }else if (row[i] === '2') {
                 CTX.drawImage(IMAGES[12],i * PILL_WIDTH + OFFSET_X - 4.5,(index * PILL_WIDTH) + OFFSET_Y - 4.5,14,14);
             }else if (row[i] === '6') {
@@ -96,3 +99,25 @@ window.setInterval(() => {
  *
  */
 
+function addExtraGhost() {
+    const ghostIndex = Math.floor(Math.random() * 3);
+    let ghost;
+    switch (ghostIndex) {
+        case 0:
+            ghost = new Ghost(GHOST1);
+            break;
+        case 1:
+            ghost = new Ghost(GHOST2);
+            break;
+        case 2:
+            ghost = new Ghost(GHOST3);
+            break;
+        default:
+            ghost = null;
+            break;
+    }
+    // Generate a random string
+    const randomString = 'Ghost' + Math.floor(Math.random() * 10000);
+    // Use the eval function to create a new variable with the random string as the name
+    eval(randomString + ' = ghost');
+}
