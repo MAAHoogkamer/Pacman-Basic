@@ -42,9 +42,7 @@ const MAP = new Map(gameStatus, rows);
 
 // Draw the grid:
 window.setInterval(() => {
-    if (gameStatus.yellowPillCounter === 575) {
-        GAME.nextLevel();
-    }
+    GAME.checkGameState();
     MAP.drawGrid();
 }, 40);
 
