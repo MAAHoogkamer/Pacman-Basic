@@ -36,7 +36,7 @@ export default class Character {
         } else if (this.rows[this.newPositionY][this.newPositionX] === '7') {
             for (let i = 0; i < this.gameStatus.ghosts.length; i++) {
                 const ghost = this.gameStatus.ghosts[i];
-                if (ghost.currentPositionY === this.currentPositionY && ghost.currentPositionX === this.currentPositionX) {
+                if (ghost.currentPositionY === this.newPositionY && ghost.currentPositionX === this.newPositionX) {
                     this.gameStatus.ghosts.splice(i, 1);
                     break;
                 }
