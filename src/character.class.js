@@ -30,10 +30,17 @@ export default class Character {
         this.calculateNewPosition(direction);
         if (this.rows[this.newPositionY][this.newPositionX] === '1') {
             this.gameStatus.yellowPillCounter++;
-            //console.log(this.gameStatus.yellowPillCounter);
         } else if (this.rows[this.newPositionY][this.newPositionX] === '2') {
             this.gameStatus.ghostStatus = 7;
             setTimeout(() => {this.gameStatus.ghostStatus = 6}, 8000);
+        } else if (this.rows[this.newPositionY][this.newPositionX] === '7') {
+            for (let i = 0; i < this.gameStatus.ghosts.length; i++) {
+                const ghost = this.gameStatus.ghosts[i];
+                if (ghost.currentPositionY === this.newPositionY && ghost.currentPositionX === this.newPositionX) {
+                    this.gameStatus.ghosts.splice(i, 1);
+                    break;
+                }
+            }
         }
 
         if (['1', '2', '3', '4', '7'].includes(this.rows[this.newPositionY][this.newPositionX])) {

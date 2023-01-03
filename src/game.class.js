@@ -50,6 +50,15 @@ export default class Game {
         this.gameStatus.ghosts[randomString] = ghost;
     }
 
+    checkGameState() {
+        if (this.gameStatus.yellowPillCounter === 575) {
+            this.nextLevel();
+        }
+        if (this.gameStatus.ghosts.length < 1) {
+            this.nextLevel();
+        }
+    }
+
     nextLevel() {
         this.gameStatus.difficulty++;
         sessionStorage.setItem('savedDeaths', this.gameStatus.deathCount);
