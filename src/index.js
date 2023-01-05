@@ -4,7 +4,7 @@ import Map from './map.class.js';
 // Game status:
 let gameStatus = {
     deathCount: 0,
-    yellowPillCounter: 0, // 575 is total
+    yellowPillCounter: 0, // 97 is total
     ghostStatus: 6, // 6: red, 7: blue
     ghosts: [],
     unicornDirection: 0, // 0: right, 1: left, 2: up, 3: down

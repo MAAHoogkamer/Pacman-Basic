@@ -9,7 +9,7 @@ export default class Ghost extends Character {
     moveGhost() {
         this.characterNr = this.gameStatus.ghostStatus;
         if (this.rows[this.newPositionY][this.newPositionX] === '0') {
-            this.movement();
+            this.moveGhostRandom(this);
         }
         if (this.characterNr === 6 && this.rows[this.newPositionY][this.newPositionX] === '5') {
             this.gameStatus.deathCount++;
@@ -17,10 +17,7 @@ export default class Ghost extends Character {
             sessionStorage.setItem('savedDeaths', this.gameStatus.deathCount);
             location.reload();
         } else if (this.characterNr === 7 && this.rows[this.newPositionY][this.newPositionX] === '5') {
-            const index = this.gameStatus.ghosts.indexOf(this);
-            if (index > -1) {
-                this.gameStatus.ghosts.splice(index, 1);
-            }
+            this.moveGhostRandom(this);
         }
         if (['1', '2', '3'].includes(this.rows[this.newPositionY][this.newPositionX])) {
             this.rows[this.currentPositionY] = this.setCharAt(this.rows[this.currentPositionY], this.currentPositionX, this.newField);
@@ -34,7 +31,7 @@ export default class Ghost extends Character {
     }
 
     moveGhostRandom(whichGhost) {
-        const MOVE = [0, 1, 2, 3];
+        const MOVE = [0, 1, 2, 3]; // 0: right, 1: left, 2: up, 3: down
         let direction;
 
         if (whichGhost === 1 && Math.random() < 0.2) {
