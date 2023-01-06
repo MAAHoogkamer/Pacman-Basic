@@ -19,8 +19,6 @@ if (savedDeaths) {
     gameStatus.difficulty = savedDifficulty;
 }
 
-console.log(gameStatus.difficulty);
-
 // Load the GridDef.txt file:
 let rows;
 const FILE = new XMLHttpRequest();
