@@ -32,7 +32,7 @@ export default class Character {
             this.gameStatus.yellowPillCounter++;
         } else if (this.rows[this.newPositionY][this.newPositionX] === '2') {
             this.gameStatus.ghostStatus = 7;
-            setTimeout(() => {this.gameStatus.ghostStatus = 6}, 80000);
+            setTimeout(() => {this.gameStatus.ghostStatus = 6}, 800000);
         } else if (this.rows[this.newPositionY][this.newPositionX] === '7') {
             for (let i = 0; i < this.gameStatus.ghosts.length; i++) {
                 const ghost = this.gameStatus.ghosts[i];
