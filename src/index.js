@@ -5,7 +5,8 @@ import Map from './map.class.js';
 let gameStatus = {
     deathCount: 0,
     yellowPillCounter: 0, // 97 is total
-    ghostStatus: 6, // 6: red, 7: blue
+    ghostStatus: 6, // 6: bright pink, 7: light pink
+    bluePillEndTime: 0,
     ghosts: [],
     unicornDirection: 0, // 0: right, 1: left, 2: up, 3: down
     openOrClose: 0,

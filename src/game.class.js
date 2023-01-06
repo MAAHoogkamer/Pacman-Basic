@@ -57,6 +57,9 @@ export default class Game {
         if (this.gameStatus.ghosts.length < 1) {
             this.nextLevel();
         }
+        if (Date.now() >= this.gameStatus.bluePillEndTime) {
+            this.gameStatus.ghostStatus = 6;
+        }
     }
 
     nextLevel() {
