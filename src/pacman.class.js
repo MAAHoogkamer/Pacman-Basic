@@ -22,9 +22,9 @@ export default class Pacman extends Character {
                 case 'KeyD':
                     direction = 0;
                     break;
-                    /*
                 case 'Enter':
-                    console.log(rows);
+                    /*
+                    console.log(this.gameStatus.ghosts);
                     break;
                      */
                 default:
