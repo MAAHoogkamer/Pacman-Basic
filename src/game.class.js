@@ -51,12 +51,15 @@ export default class Game {
     }
 
     checkGameState() {
-        if (this.gameStatus.yellowPillCounter === 575) {
+        // If all yellow pills are eaten -> next level
+        if (this.gameStatus.yellowPillCounter === 97) {
             this.nextLevel();
         }
+        // If all ghosts are eaten -> next level
         if (this.gameStatus.ghosts.length < 1) {
             this.nextLevel();
         }
+        // If current time exceeds blue pill time -> set ghosts back to bright pink
         if (Date.now() >= this.gameStatus.bluePillEndTime) {
             this.gameStatus.ghostStatus = 6;
         }
