@@ -4,7 +4,7 @@ import Map from './map.class.js';
 // Game status:
 let gameStatus = {
     deathCount: 0,
-    yellowPillCounter: 0, // 97 is total
+    yellowPillCounter: 0, // 575 is total
     ghostStatus: 6, // 6: bright pink, 7: light pink
     bluePillEndTime: 0,
     ghosts: [],
@@ -39,7 +39,7 @@ const GAME = new Game(gameStatus, rows);
 // Load the map:
 const MAP = new Map(gameStatus, rows);
 
-// Draw the grid:
+// Draw the grid and check the game state to execute events:
 window.setInterval(() => {
     GAME.checkGameState();
     MAP.drawGrid();
