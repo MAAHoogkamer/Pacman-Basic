@@ -1,5 +1,6 @@
 import Game from './game.class.js';
 import Map from './map.class.js';
+import TouchControls from './touchcontrols.class.class.js';
 
 // Game status:
 let gameStatus = {
