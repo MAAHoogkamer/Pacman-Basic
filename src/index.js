@@ -1,6 +1,6 @@
 import Game from './game.class.js';
 import Map from './map.class.js';
-import TouchControls from './touchcontrols.class.class.js';
+import TouchControls from './touchcontrols.class.js';
 
 // Game status:
 let gameStatus = {
@@ -8,6 +8,7 @@ let gameStatus = {
     yellowPillCounter: 0, // 575 is total
     ghostStatus: 6, // 6: bright pink, 7: light pink
     bluePillEndTime: 0,
+    //pacman: [],
     ghosts: [],
     unicornDirection: 0, // 0: right, 1: left, 2: up, 3: down
     openOrClose: 0,
@@ -64,3 +65,4 @@ window.setInterval(() => {
  * 7 blue ghosts
  *
  */
+

@@ -7,7 +7,7 @@ export default class Game {
         this.rows = rows;
         this.gameStatus = gameStatus;
         // Create the characters:
-        const pacman = new Pacman(gameStatus, 1,1,null, 5, rows, null, GAME);
+        const pacman = new Pacman(gameStatus, 1, 1, null, 5, rows, null, GAME);
         // Unleash the ghosts:
         for (let i = -1; i < this.gameStatus.difficulty; i++) {
             this.addExtraGhost();

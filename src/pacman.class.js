@@ -1,7 +1,11 @@
 import Character from './character.class.js';
+import TouchControls from "./touchcontrols.class";
 export default class Pacman extends Character {
     constructor(gameStatus, curPosY, curPosX, lastDir, charNr, rows, moveFunc) {
         super(gameStatus, curPosY, curPosX, lastDir, charNr, rows, moveFunc);
+        //this.gameStatus.pacman.push(this);
+        // Load the touch controls:
+        const TOUCHTRACKER = new TouchControls("canvas", this, rows);
         // Pacman controls:
         document.onkeydown = ((e) => {
             let direction;
