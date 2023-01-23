@@ -3,29 +3,35 @@ export default class TouchControls {
         this.pacman = pacman;
         this.rows = rows;
         this.canvas = document.getElementById(canvasId);
-        this.ctx = this.canvas.getContext("2d");
         this.initialX = 0;
         this.initialY = 0;
+        this.lastMovementTime = 0;
         this.canvas.addEventListener("touchstart", this.handleTouchStart.bind(this), false);
         this.canvas.addEventListener("touchmove", this.handleTouchMove.bind(this), false);
     }
 
     handleTouchStart(e) {
         e.preventDefault();
-        var touch = e.touches[0];
+        const touch = e.touches[0];
         this.initialX = touch.clientX;
         this.initialY = touch.clientY;
     }
 
     handleTouchMove(e) {
         e.preventDefault();
-        var touch = e.touches[0];
-        var currentX = touch.clientX;
-        var currentY = touch.clientY;
-        var direction;
+        const touch = e.touches[0];
+        const currentX = touch.clientX;
+        const currentY = touch.clientY;
+        let direction;
+
+        const currentTime = Date.now();
+        if (currentTime - this.lastMovementTime < 100) {
+            return;
+        }
+        this.lastMovementTime = currentTime;
 
         if (currentX > this.initialX) {
-            direction = 0;
+            document.dispatchEvent(new KeyboardEvent('keydown', {'code': 'KeyD'}));
         } else if (currentX < this.initialX) {
             direction = 1;
         }
