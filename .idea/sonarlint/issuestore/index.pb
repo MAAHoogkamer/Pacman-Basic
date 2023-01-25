@@ -7,7 +7,5 @@
 css/index.css,5/b/5b9cf577f8c6255601ba523d42f9707e2d59d38b
 9
 	yarn.lock,5/3/53585a096fe3a3b96321113856ae62602995a33b
->
-yarn-error.log,f/3/f3b7336f891b6569b2fd4a67fd391439c7eb76e3
 B
 src/ghost.class.js,6/f/6f6bb210ef7393f4afccaf1c839f3db1a55fe84a
