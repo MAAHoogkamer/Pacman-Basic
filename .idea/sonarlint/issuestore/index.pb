@@ -11,3 +11,5 @@ B
 src/ghost.class.js,6/f/6f6bb210ef7393f4afccaf1c839f3db1a55fe84a
 C
 src/pacman.class.js,7/d/7d68d5b12bfb89b745a55ca5b6a6a5a14ca052a0
+J
+src/touchcontrols.class.js,9/e/9eb2931f643264f316f35a9181c3e545fbe1b7dc
