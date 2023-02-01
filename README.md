@@ -21,4 +21,8 @@ Each next level an extra Ghost will spawn.
 * Add touch controls <br>
 * Add info screen + toggle button "?"<br>
 * Add a leaderboard. Sort by highest level and lowest death count.<br>
+* Changes: Score!!!! Points will be tied to the amount of yellow points eaten.<br>
+    Change when a ghost is eaten, respawn a new ghost, and add +1  to variable ghosts eaten.<br>
+    Score (in a variable?) is calculated through: yellowPills eaten + ghosts eaten * 200<br>
+    next level condition all ghosts eaten will be removed.
 </details>
