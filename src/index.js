@@ -14,12 +14,9 @@ let gameStatus = {
 let savedLives = sessionStorage.getItem('savedLives');
 let savedDifficulty = sessionStorage.getItem('savedDifficulty');
 if (savedLives) {
-    //console.log(savedGameStatus);
     gameStatus.lives = savedLives;
     gameStatus.difficulty = savedDifficulty;
 }
-
-console.log(gameStatus.difficulty);
 
 // Load the GridDef.txt file:
 let rows;
@@ -42,12 +39,7 @@ const MAP = new Map(gameStatus, rows);
 
 // Draw the grid:
 window.setInterval(() => {
-    if (gameStatus.yellowPillCounter === 575) {
-        GAME.nextLevel();
-    }/*
-    if (gameStatus.ghosts.length < 2 + gameStatus.difficulty) {
-        GAME.addExtraGhost();
-    }*/
+    GAME.checkStatus();
     MAP.drawGrid();
 }, 40);
 

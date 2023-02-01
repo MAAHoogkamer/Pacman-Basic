@@ -35,7 +35,6 @@ export default class Map {
                 if (row[i] === '1') {
                     this.CTX.drawImage(this.IMAGES[13],i * this.PILL_WIDTH + this.OFFSET_X,(index * this.PILL_WIDTH) + this.OFFSET_Y,6,6);
                 }else if (row[i] === '5') {
-                    console.log(this.whichUniPic);
                     this.CTX.drawImage(this.IMAGES[this.whichUniPic],i * this.PILL_WIDTH + this.OFFSET_X - 4.5,(index * this.PILL_WIDTH) + this.OFFSET_Y - 4.5,17,17);
                 }else if (row[i] === '2') {
                     this.CTX.drawImage(this.IMAGES[12],i * this.PILL_WIDTH + this.OFFSET_X - 4.5,(index * this.PILL_WIDTH) + this.OFFSET_Y - 4.5,14,14);

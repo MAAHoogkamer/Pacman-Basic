@@ -57,5 +57,16 @@ export default class Game {
         location.reload();
     }
 
+    checkStatus() {
+        if (this.gameStatus.yellowPillCounter === 575) {
+            this.nextLevel();
+        }
+        if (this.gameStatus.difficulty > this.gameStatus.ghosts.length) {
+            //GAME.addExtraGhost();
+            console.log(this.gameStatus.ghosts.length);
+            console.log((2 + this.gameStatus.lives));
+        }
+    }
+
 }
 
