@@ -30,14 +30,13 @@ export default class Character {
         this.calculateNewPosition(direction);
         if (this.rows[this.newPositionY][this.newPositionX] === '1') {
             this.gameStatus.yellowPillCounter++;
-            //console.log(this.gameStatus.yellowPillCounter);
         } else if (this.rows[this.newPositionY][this.newPositionX] === '2') {
-            this.gameStatus.ghostStatus = 7;
+            this.gameStatus.ghostStatus = 7; // The blue pill
             setTimeout(() => {this.gameStatus.ghostStatus = 6}, 8000);
         }
 
         if (['1', '2', '3', '4', '7'].includes(this.rows[this.newPositionY][this.newPositionX])) {
-            if (this.currentPositionY === 14) {
+            if (this.currentPositionY === 14) { // The tunnel
                 if (this.currentPositionX === 50 || this.currentPositionX === 1) {
                     this.newField = '4';
                 } else {

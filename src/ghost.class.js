@@ -12,9 +12,9 @@ export default class Ghost extends Character {
             this.movement();
         }
         if (this.characterNr === 6 && this.rows[this.newPositionY][this.newPositionX] === '5') {
-            this.gameStatus.deathCount++;
+            this.gameStatus.lives--;
             sessionStorage.setItem('savedDifficulty', this.gameStatus.difficulty);
-            sessionStorage.setItem('savedDeaths', this.gameStatus.deathCount);
+            sessionStorage.setItem('savedLives', this.gameStatus.lives);
             location.reload();
         } else if (this.characterNr === 7 && this.rows[this.newPositionY][this.newPositionX] === '5') {
             const index = this.gameStatus.ghosts.indexOf(this);

@@ -3,7 +3,7 @@ import Map from './map.class.js';
 
 // Game status:
 let gameStatus = {
-    deathCount: 0,
+    lives: 6,
     yellowPillCounter: 0, // 575 is total
     ghostStatus: 6, // 6: red, 7: blue
     ghosts: [],
@@ -11,11 +11,11 @@ let gameStatus = {
     openOrClose: 0,
     difficulty: 1, // Increments with each level
 };
-let savedDeaths = sessionStorage.getItem('savedDeaths');
+let savedLives = sessionStorage.getItem('savedLives');
 let savedDifficulty = sessionStorage.getItem('savedDifficulty');
-if (savedDeaths) {
+if (savedLives) {
     //console.log(savedGameStatus);
-    gameStatus.deathCount = savedDeaths;
+    gameStatus.lives = savedLives;
     gameStatus.difficulty = savedDifficulty;
 }
 
@@ -44,7 +44,10 @@ const MAP = new Map(gameStatus, rows);
 window.setInterval(() => {
     if (gameStatus.yellowPillCounter === 575) {
         GAME.nextLevel();
-    }
+    }/*
+    if (gameStatus.ghosts.length < 2 + gameStatus.difficulty) {
+        GAME.addExtraGhost();
+    }*/
     MAP.drawGrid();
 }, 40);
 
