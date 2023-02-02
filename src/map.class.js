@@ -29,7 +29,7 @@ export default class Map {
         this.CTX.clearRect(0, 0, 720, 540);
         this.CTX.fillStyle = '#FCDB00';
         this.CTX.font = "35px Verdana";
-        this.CTX.fillText(`Level: ${this.gameStatus.difficulty}   Lives: ${this.gameStatus.lives}`, 185, 500);
+        this.CTX.fillText(`Level: ${this.gameStatus.difficulty}   Points: ${this.gameStatus.yellowPillCounter}`, 185, 500);
         this.rows.forEach((row, index) => {
             for (let i = 0; i < row.length; i++) {
                 if (row[i] === '1') {
@@ -46,6 +46,16 @@ export default class Map {
             }
         })
     }
-
+    // Draw amount of lives left:
+    livesLeft() {
+        for (let i = 0; i < n; i++) {
+            const x = 200 + i * 20;
+            const y = 520;
+            this.drawLives(x, y);
+        }
+    }
+    drawLives(x, y) {
+        this.CTX.drawImage(this.IMAGES[10], x, y);
+    }
 }
 

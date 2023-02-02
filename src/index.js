@@ -43,6 +43,7 @@ const MAP = new Map(gameStatus, rows);
 window.setInterval(() => {
     GAME.checkGameState();
     MAP.drawGrid();
+    MAP.livesLeft();
 }, 40);
 
 // Move the ghosts:
