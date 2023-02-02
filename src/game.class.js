@@ -52,7 +52,7 @@ export default class Game {
 
     checkGameState() {
         // If all yellow pills are eaten -> next level
-        if (this.gameStatus.yellowPillCounter === 97) {
+        if (this.gameStatus.yellowPillCounter === 575) {
             this.nextLevel();
         }
         // If all ghosts are eaten -> next level
@@ -67,7 +67,7 @@ export default class Game {
 
     nextLevel() {
         this.gameStatus.difficulty++;
-        sessionStorage.setItem('savedDeaths', this.gameStatus.deathCount);
+        sessionStorage.setItem('savedLives', this.gameStatus.lives);
         sessionStorage.setItem('savedDifficulty', this.gameStatus.difficulty);
         location.reload();
     }

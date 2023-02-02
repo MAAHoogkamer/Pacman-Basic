@@ -10,7 +10,7 @@ export default class Map {
         this.CANVAS = document.getElementById("canvas");
         this.CTX = this.CANVAS.getContext("2d");
         // Load the images:
-        this.IMAGES = ['./img/UnicornRight.png', './img/UnicornLeft.png', './img/UnicornDown.png', './img/UnicornUp.png', './img/UnicornRight1.png', './img/UnicornLeft1.png', './img/UnicornDown1.png', './img/UnicornUp1.png', './img/Ghost1.png', './img/Ghost2.png', './img/NewBluePill.png', './img/YellowPill.png'].map((src) => {
+        this.IMAGES = ['./img/UnicornRight.png', './img/UnicornLeft.png', './img/UnicornDown.png', './img/UnicornUp.png', './img/UnicornRight1.png', './img/UnicornLeft1.png', './img/UnicornDown1.png', './img/UnicornUp1.png', './img/Ghost1Oldie.png', './img/Ghost2Oldie.png', './img/NewBluePill.png', './img/YellowPill.png'].map((src) => {
             const IMG = new Image();
             IMG.src = src;
             return IMG;
@@ -29,7 +29,7 @@ export default class Map {
         this.CTX.clearRect(0, 0, 720, 540);
         this.CTX.fillStyle = '#FCDB00';
         this.CTX.font = "35px Verdana";
-        this.CTX.fillText(`Level: ${this.gameStatus.difficulty}   Deaths: ${this.gameStatus.deathCount}`, 185, 500);
+        this.CTX.fillText(`Level: ${this.gameStatus.difficulty}   Lives: ${this.gameStatus.lives}`, 185, 500);
         this.rows.forEach((row, index) => {
             for (let i = 0; i < row.length; i++) {
                 if (row[i] === '1') {

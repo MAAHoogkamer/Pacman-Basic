@@ -3,7 +3,7 @@ import Map from './map.class.js';
 
 // Game status:
 let gameStatus = {
-    deathCount: 0,
+    lives: 3,
     yellowPillCounter: 0, // 97 is total
     ghostStatus: 6, // 6: bright pink, 7: light pink
     bluePillEndTime: 0,
@@ -12,11 +12,11 @@ let gameStatus = {
     openOrClose: 0,
     difficulty: 1, // Increments with each level
 };
-let savedDeaths = sessionStorage.getItem('savedDeaths');
+let savedLives = sessionStorage.getItem('savedLives');
 let savedDifficulty = sessionStorage.getItem('savedDifficulty');
-if (savedDeaths) {
+if (savedLives) {
     //console.log(savedGameStatus);
-    gameStatus.deathCount = savedDeaths;
+    gameStatus.lives = savedLives;
     gameStatus.difficulty = savedDifficulty;
 }
 

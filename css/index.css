@@ -12,6 +12,6 @@ html, body, #magic
     display: block;
     width: 720px;
     height: 540px;
-    background: url('../img/backgroundNew1.png');
+    background: url('img/Background.png');
     background-size:  100% auto;
 }
