@@ -27,9 +27,6 @@ export default class Map {
             console.log(this.whichUniPic);
         }
         this.CTX.clearRect(0, 0, 720, 540);
-        this.CTX.fillStyle = '#FCDB00';
-        this.CTX.font = "35px Verdana";
-        this.CTX.fillText(`Level: ${this.gameStatus.difficulty}   Points: ${this.gameStatus.yellowPillCounter}`, 185, 500);
         this.rows.forEach((row, index) => {
             for (let i = 0; i < row.length; i++) {
                 if (row[i] === '1') {
@@ -45,6 +42,12 @@ export default class Map {
                 }
             }
         })
+    }
+    // Draw the score:
+    drawStatus() {
+        this.CTX.fillStyle = '#FCDB00';
+        this.CTX.font = "35px Verdana";
+        this.CTX.fillText(`Level: ${this.gameStatus.difficulty}   Points: ${this.gameStatus.points}`, 185, 500);
     }
     // Draw amount of lives left:
     livesLeft() {

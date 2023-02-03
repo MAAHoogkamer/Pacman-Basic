@@ -13,6 +13,10 @@ export default class Ghost extends Character {
         }
         if (this.characterNr === 6 && this.rows[this.newPositionY][this.newPositionX] === '5') {
             this.gameStatus.lives--;
+            if (this.gameStatus.lives === 0) {
+                alert("Game Over");
+            }
+            sessionStorage.setItem('savedDifficulty', this.gameStatus.points);
             sessionStorage.setItem('savedDifficulty', this.gameStatus.difficulty);
             sessionStorage.setItem('savedLives', this.gameStatus.lives);
             location.reload();
@@ -38,7 +42,7 @@ export default class Ghost extends Character {
             direction = this.lastDirection;
         } else if (whichGhost === 2 && Math.random() < 0.5) {
             direction = this.lastDirection;
-        } else if (whichGhost === 3 && Math.random() < 0.9) {
+        } else if (whichGhost === 3 && Math.random() < 0.95) {
             direction = this.lastDirection;
         } else {
             const RANDOM = Math.floor(Math.random() * MOVE.length);

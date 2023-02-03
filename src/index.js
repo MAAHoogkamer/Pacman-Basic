@@ -3,21 +3,23 @@ import Map from './map.class.js';
 
 // Game status:
 let gameStatus = {
+    points: 0,
     lives: 3,
     yellowPillCounter: 0, // 97 is total
     ghostStatus: 6, // 6: bright pink, 7: light pink
     bluePillEndTime: 0,
-    ghosts: [],
+    ghosts: [], // Ghosts are pushed here, so they can also be removed
     unicornDirection: 0, // 0: right, 1: left, 2: up, 3: down
     openOrClose: 0,
     difficulty: 1, // Increments with each level
 };
 let savedLives = sessionStorage.getItem('savedLives');
 let savedDifficulty = sessionStorage.getItem('savedDifficulty');
+let savedPoints = sessionStorage.getItem('savedPoints');
 if (savedLives) {
-    //console.log(savedGameStatus);
     gameStatus.lives = savedLives;
     gameStatus.difficulty = savedDifficulty;
+    gameStatus.points = savedPoints;
 }
 
 // Load the GridDef.txt file:
@@ -44,6 +46,7 @@ window.setInterval(() => {
     GAME.checkGameState();
     MAP.drawGrid();
     MAP.livesLeft();
+    MAP.drawStatus();
 }, 40);
 
 // Move the ghosts:

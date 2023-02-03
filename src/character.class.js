@@ -30,6 +30,7 @@ export default class Character {
         this.calculateNewPosition(direction);
         if (this.rows[this.newPositionY][this.newPositionX] === '1') {
             this.gameStatus.yellowPillCounter++;
+            this.gameStatus.points++;
         } else if (this.rows[this.newPositionY][this.newPositionX] === '2') {
             if (this.gameStatus.ghostStatus === 6) {
                 // Set the end time for the blue pill event
@@ -44,6 +45,7 @@ export default class Character {
                 const ghost = this.gameStatus.ghosts[i];
                 if (ghost.currentPositionY === this.newPositionY && ghost.currentPositionX === this.newPositionX) {
                     this.gameStatus.ghosts.splice(i, 1);
+                    this.gameStatus.points+=100;
                     break;
                 }
             }

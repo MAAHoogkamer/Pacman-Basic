@@ -69,6 +69,7 @@ export default class Game {
         this.gameStatus.difficulty++;
         sessionStorage.setItem('savedLives', this.gameStatus.lives);
         sessionStorage.setItem('savedDifficulty', this.gameStatus.difficulty);
+        sessionStorage.setItem('savedPoints', this.gameStatus.points);
         location.reload();
     }
 
