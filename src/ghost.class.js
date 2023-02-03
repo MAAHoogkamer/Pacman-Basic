@@ -52,16 +52,12 @@ export default class Ghost extends Character {
         if (this.characterNr === 7) {
             if (direction === 0 && this.currentPositionX + 3 < this.rows[0].length && (this.rows[this.currentPositionY][this.currentPositionX + 2] === '5' || this.rows[this.currentPositionY][this.currentPositionX + 3] === '5')) {
                 direction = 1; // Change direction to left
-                //console.log('go left');
             } else if (direction === 1 && this.currentPositionX - 3 >= 0 && (this.rows[this.currentPositionY][this.currentPositionX - 2] === '5' || this.rows[this.currentPositionY][this.currentPositionX - 3] === '5')) {
                 direction = 0; // Change direction to right
-                //console.log('go right');
             } else if (direction === 2 && this.currentPositionY + 3 < this.rows.length && (this.rows[this.currentPositionY + 2][this.currentPositionX] === '5' || this.rows[this.currentPositionY + 3][this.currentPositionX] === '5')) {
                 direction = 3; // Change direction to up
-                //console.log('go up');
             } else if (direction === 3 && this.currentPositionY - 3 >= 0 && (this.rows[this.currentPositionY - 2][this.currentPositionX] === '5' || this.rows[this.currentPositionY - 3][this.currentPositionX] === '5')) {
                 direction = 2; // Change direction to down
-                //console.log('go down');
             }
         }
 
