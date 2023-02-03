@@ -15,8 +15,6 @@ export default class Map {
             IMG.src = src;
             return IMG;
         });
-        // Variables for image drawing:
-        //this.IMAGE = null;
     }
     // Draw the grid:
     drawGrid() {
@@ -32,36 +30,20 @@ export default class Map {
         this.rows.forEach((row, index) => {
             for (let i = 0; i < row.length; i++) {
                 if (row[i] === '1') {
-                    //this.CTX.drawImage(this.IMAGES[11],i * this.PILL_WIDTH + this.OFFSET_X,(index * this.PILL_WIDTH) + this.OFFSET_Y,6,6);
-                    this.IMAGE = 11;
-                    this.sizeX = 6;
-                    this.sizeY = 6;
+                    this.CTX.drawImage(this.IMAGES[11],i * this.PILL_WIDTH + this.OFFSET_X,(index * this.PILL_WIDTH) + this.OFFSET_Y,6,6);
                 }else if (row[i] === '5') {
-                    //this.CTX.drawImage(this.IMAGES[6],i * this.PILL_WIDTH + this.OFFSET_X - 4.5,(index * this.PILL_WIDTH) + this.OFFSET_Y - 4.5,17,17);
-                    this.IMAGE = this.whichUniPic;
-                    this.sizeX = 17;
-                    this.sizeY = 17;
+                    this.CTX.drawImage(this.IMAGES[this.whichUniPic],i * this.PILL_WIDTH + this.OFFSET_X - 4.5,(index * this.PILL_WIDTH) + this.OFFSET_Y - 4.5,17,17);
                 }else if (row[i] === '2') {
-                    //this.CTX.drawImage(this.IMAGES[10],i * this.PILL_WIDTH + this.OFFSET_X - 4.5,(index * this.PILL_WIDTH) + this.OFFSET_Y - 4.5,14,14);
-                    this.IMAGE = 10;
-                    this.sizeX = 14;
-                    this.sizeY = 14;
+                    this.CTX.drawImage(this.IMAGES[10],i * this.PILL_WIDTH + this.OFFSET_X - 4.5,(index * this.PILL_WIDTH) + this.OFFSET_Y - 4.5,14,14);
                 }else if (row[i] === '6') {
-                    //this.CTX.drawImage(this.IMAGES[8],i * this.PILL_WIDTH + this.OFFSET_X - 4.5,(index * this.PILL_WIDTH) - 4.5+ this.OFFSET_Y,17,17);
-                    this.IMAGE = 8;
-                    this.sizeX = 17;
-                    this.sizeY = 17;
+                    this.CTX.drawImage(this.IMAGES[8],i * this.PILL_WIDTH + this.OFFSET_X - 4.5,(index * this.PILL_WIDTH) - 4.5+ this.OFFSET_Y,17,17);
                 }else if (row[i] === '7') {
-                    //this.CTX.drawImage(this.IMAGES[9],i * this.PILL_WIDTH + this.OFFSET_X - 4.5,(index * this.PILL_WIDTH) - 4.5+ this.OFFSET_Y,15,15);
-                    this.IMAGE = 9;
-                    this.sizeX = 15;
-                    this.sizeY = 15;
+                    this.CTX.drawImage(this.IMAGES[9],i * this.PILL_WIDTH + this.OFFSET_X - 4.5,(index * this.PILL_WIDTH) - 4.5+ this.OFFSET_Y,15,15);
                 }
-                this.CTX.drawImage(this.IMAGES[this.IMAGE],i * this.PILL_WIDTH + this.OFFSET_X - 4.5,(index * this.PILL_WIDTH) - 4.5+ this.OFFSET_Y,this.sizeX,this.sizeY);
             }
         })
     }
-    // Draw the score:
+    // Draw the level and score:
     drawStatus() {
         this.CTX.fillStyle = '#FCDB00';
         this.CTX.font = "35px Verdana";
