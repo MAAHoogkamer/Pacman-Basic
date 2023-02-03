@@ -10,7 +10,7 @@ export default class Map {
         this.CANVAS = document.getElementById("canvas");
         this.CTX = this.CANVAS.getContext("2d");
         // Load the images:
-        this.IMAGES = ['./img/UnicornRight.png', './img/UnicornLeft.png', './img/UnicornDown.png', './img/UnicornUp.png', './img/UnicornRight1.png', './img/UnicornLeft1.png', './img/UnicornDown1.png', './img/UnicornUp1.png', './img/Ghost1Oldie.png', './img/Ghost2Oldie.png', './img/NewBluePill.png', './img/YellowPill.png'].map((src) => {
+        this.IMAGES = ['./img/UnicornRight.png', './img/UnicornLeft.png', './img/UnicornDown.png', './img/UnicornUp.png', './img/UnicornRight1.png', './img/UnicornLeft1.png', './img/UnicornDown1.png', './img/UnicornUp1.png', './img/Ghost1.png', './img/Ghost2.png', './img/NewBluePill.png', './img/YellowPill.png'].map((src) => {
             const IMG = new Image();
             IMG.src = src;
             return IMG;
@@ -48,14 +48,16 @@ export default class Map {
     }
     // Draw amount of lives left:
     livesLeft() {
+        const n = this.gameStatus.lives;
+        console.log(this.gameStatus.lives);
         for (let i = 0; i < n; i++) {
-            const x = 200 + i * 20;
-            const y = 520;
+            const x = 310 + i * 35;
+            const y = 430;
             this.drawLives(x, y);
         }
     }
     drawLives(x, y) {
-        this.CTX.drawImage(this.IMAGES[10], x, y);
+        this.CTX.drawImage(this.IMAGES[0], x, y, 30, 30);
     }
 }
 
