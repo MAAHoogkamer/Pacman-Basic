@@ -50,16 +50,19 @@ export default class Map {
         this.CTX.fillText(`Level: ${this.gameStatus.difficulty}   Points: ${this.gameStatus.points}`, 185, 500);
     }
     // Draw amount of lives left:
-    livesLeft() {
+    drawLives() {
         const n = this.gameStatus.lives;
         for (let i = 0; i < n; i++) {
             const x = 310 + i * 35;
             const y = 430;
-            this.drawLives(x, y);
+            this.drawUnicorn(x, y);
         }
     }
-    drawLives(x, y) {
+    drawUnicorn(x, y) {
         this.CTX.drawImage(this.IMAGES[0], x, y, 30, 30);
+    }
+    drawScoreUI() {
+        //alert("Test");
     }
 }
 
