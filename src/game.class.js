@@ -66,7 +66,6 @@ export default class Game {
         // Toggle the ScoreBoard
         if (this.gameStatus.showScoreBoard === 1) {
             document.getElementById('scoreBoard').style.display = 'block';
-            document.getElementById('magic').style.display = 'none';
         }
     }
 

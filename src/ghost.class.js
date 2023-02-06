@@ -14,7 +14,6 @@ export default class Ghost extends Character {
         if (this.characterNr === 6 && this.rows[this.newPositionY][this.newPositionX] === '5') {
             this.gameStatus.lives--;
             if (this.gameStatus.lives < 1) {
-                alert("Game Over");
                 this.gameStatus.showScoreBoard = 1;
             } if (this.gameStatus.lives > 0) {
                 sessionStorage.setItem('savedDifficulty', this.gameStatus.points);

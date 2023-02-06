@@ -27,26 +27,28 @@ export default class Character {
         }
     }
     movement(direction) {
-        this.calculateNewPosition(direction);
-        if (this.rows[this.newPositionY][this.newPositionX] === '1') {
-            this.gameStatus.yellowPillCounter++;
-            this.gameStatus.points++;
-        } else if (this.rows[this.newPositionY][this.newPositionX] === '2') {
-            if (this.gameStatus.ghostStatus === 6) {
-                // Set the end time for the blue pill event
-                this.gameStatus.bluePillEndTime = Date.now() + 8000;
-                this.gameStatus.ghostStatus = 7;
-            } else if (this.gameStatus.ghostStatus === 7) {
-                // Add more time to the blue pill event
-                this.gameStatus.bluePillEndTime += 8000;
-            }
-        } else if (this.rows[this.newPositionY][this.newPositionX] === '7') {
-            for (let i = 0; i < this.gameStatus.ghosts.length; i++) {
-                const ghost = this.gameStatus.ghosts[i];
-                if (ghost.currentPositionY === this.newPositionY && ghost.currentPositionX === this.newPositionX) {
-                    this.gameStatus.ghosts.splice(i, 1);
-                    this.gameStatus.points+=100;
-                    break;
+        if (this.gameStatus.showScoreBoard === 0) {
+            this.calculateNewPosition(direction);
+            if (this.rows[this.newPositionY][this.newPositionX] === '1') {
+                this.gameStatus.yellowPillCounter++;
+                this.gameStatus.points++;
+            } else if (this.rows[this.newPositionY][this.newPositionX] === '2') {
+                if (this.gameStatus.ghostStatus === 6) {
+                    // Set the end time for the blue pill event
+                    this.gameStatus.bluePillEndTime = Date.now() + 8000;
+                    this.gameStatus.ghostStatus = 7;
+                } else if (this.gameStatus.ghostStatus === 7) {
+                    // Add more time to the blue pill event
+                    this.gameStatus.bluePillEndTime += 8000;
+                }
+            } else if (this.rows[this.newPositionY][this.newPositionX] === '7') {
+                for (let i = 0; i < this.gameStatus.ghosts.length; i++) {
+                    const ghost = this.gameStatus.ghosts[i];
+                    if (ghost.currentPositionY === this.newPositionY && ghost.currentPositionX === this.newPositionX) {
+                        this.gameStatus.ghosts.splice(i, 1);
+                        this.gameStatus.points+=100;
+                        break;
+                    }
                 }
             }
         }

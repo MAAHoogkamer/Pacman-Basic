@@ -44,12 +44,10 @@ const MAP = new Map(gameStatus, rows);
 
 // Draw the grid:
 window.setInterval(() => {
-    if (document.getElementById('scoreBoard').style.display === 'none') {
-        GAME.checkGameState();
-    }
     MAP.drawGrid();
     MAP.livesLeft();
     MAP.drawStatus();
+    GAME.checkGameState();
 }, 40);
 
 // Move the ghosts:
