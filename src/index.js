@@ -10,8 +10,9 @@ let gameStatus = {
     bluePillEndTime: 0,
     ghosts: [], // Ghosts are pushed here, so they can also be removed
     unicornDirection: 0, // 0: right, 1: left, 2: up, 3: down
-    openOrClose: 0,
+    openOrClose: 0, // To change Unicorn pic when moving
     difficulty: 1, // Increments with each level
+    showScoreBoard: 0, // 1 Shows ScoreBoard Div
 };
 let savedLives = sessionStorage.getItem('savedLives');
 let savedDifficulty = sessionStorage.getItem('savedDifficulty');
@@ -43,7 +44,9 @@ const MAP = new Map(gameStatus, rows);
 
 // Draw the grid:
 window.setInterval(() => {
-    GAME.checkGameState();
+    if (document.getElementById('scoreBoard').style.display === 'none') {
+        GAME.checkGameState();
+    }
     MAP.drawGrid();
     MAP.livesLeft();
     MAP.drawStatus();

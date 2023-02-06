@@ -63,6 +63,11 @@ export default class Game {
         if (Date.now() >= this.gameStatus.bluePillEndTime) {
             this.gameStatus.ghostStatus = 6;
         }
+        // Toggle the ScoreBoard
+        if (this.gameStatus.showScoreBoard === 1) {
+            document.getElementById('scoreBoard').style.display = 'block';
+            document.getElementById('magic').style.display = 'none';
+        }
     }
 
     nextLevel() {
