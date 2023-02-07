@@ -26,7 +26,6 @@ export default class Map {
             console.log(this.whichUniPic);
         }
         this.CTX.clearRect(0, 0, 720, 540);
-        console.log(this.gameStatus.rows);
         this.gameStatus.rows.forEach((row, index) => {
             for (let i = 0; i < row.length; i++) {
                 if (row[i] === '1') {
