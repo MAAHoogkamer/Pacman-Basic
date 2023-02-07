@@ -1,6 +1,7 @@
 import Pacman from "./pacman.class";
 import Ghost from "./ghost.class";
 import {move1, move2, move3} from "./moves";
+import TouchControls from "./touchcontrol.class";
 
 export default class Game {
     constructor(gameStatus, rows, GAME) {
@@ -12,6 +13,8 @@ export default class Game {
         for (let i = -1; i < this.gameStatus.difficulty; i++) {
             this.addExtraGhost();
         }
+        // Load the Touch Controls:
+        const TOUCH = new TouchControls("canvas", pacman, this.rows);
     }
 
     getGhosts() {

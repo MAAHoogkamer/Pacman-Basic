@@ -1,5 +1,6 @@
 import Game from './game.class.js';
 import Map from './map.class.js';
+import TouchControls from "./touchcontrol.class";
 
 // Game status:
 let gameStatus = {
@@ -45,7 +46,7 @@ const MAP = new Map(gameStatus, rows);
 // Draw the grid:
 window.setInterval(() => {
     MAP.drawGrid();
-    MAP.drawLives();
+    MAP.drawLivesLeft();
     MAP.drawStatus();
     GAME.checkGameState();
     if (gameStatus.showScoreBoard === 1) {

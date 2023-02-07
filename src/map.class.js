@@ -50,19 +50,33 @@ export default class Map {
         this.CTX.fillText(`Level: ${this.gameStatus.difficulty}   Points: ${this.gameStatus.points}`, 185, 500);
     }
     // Draw amount of lives left:
-    drawLives() {
+    drawLivesLeft() {
         const n = this.gameStatus.lives;
         for (let i = 0; i < n; i++) {
             const x = 310 + i * 35;
             const y = 430;
-            this.drawUnicorn(x, y);
+            this.drawLives(x, y);
         }
     }
-    drawUnicorn(x, y) {
+    drawLives(x, y) {
         this.CTX.drawImage(this.IMAGES[0], x, y, 30, 30);
     }
     drawScoreUI() {
-        //alert("Test");
+        this.CTX.fillStyle = '#FCDB00';
+        this.CTX.font = "35px Verdana";
+        this.CTX.fillText(`Level: ${this.gameStatus.difficulty}   Points: ${this.gameStatus.points}`, 185, 500);
+        /*
+        const playerNameForm = document.getElementById('playerNameForm');
+
+        playerNameForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const playerNameInput = document.getElementById('playerName');
+            const playerName = playerNameInput.value;
+            console.log(`Player name: ${playerName}`);
+        });
+        */
+
     }
 }
 
