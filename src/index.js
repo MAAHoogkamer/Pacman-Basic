@@ -1,6 +1,6 @@
 import Game from './game.class.js';
 import Map from './map.class.js';
-import TouchControls from "./touchcontrol.class";
+import ScoreBoard from "./scoreboard.class";
 
 // Game status:
 let gameStatus = {
@@ -43,15 +43,15 @@ const GAME = new Game(gameStatus, rows);
 // Load the map:
 const MAP = new Map(gameStatus, rows);
 
+// Load the scoreboard:
+const SCOREBOARD = new ScoreBoard(gameStatus);
+
 // Draw the grid:
 window.setInterval(() => {
     MAP.drawGrid();
     MAP.drawLivesLeft();
     MAP.drawStatus();
     GAME.checkGameState();
-    if (gameStatus.showScoreBoard === 1) {
-        MAP.drawScoreUI();
-    }
 }, 40);
 
 // Move the ghosts:

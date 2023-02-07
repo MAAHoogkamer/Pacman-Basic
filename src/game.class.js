@@ -58,9 +58,10 @@ export default class Game {
         if (this.gameStatus.yellowPillCounter === 575) {
             this.nextLevel();
         }
-        // If all ghosts are eaten -> next level
-        if (this.gameStatus.ghosts.length < 1) {
-            this.nextLevel();
+        // If a ghost is eaten, spawn new one after timer ends
+        let ghostAmount = (this.gameStatus.difficulty + 1);
+        if (this.gameStatus.ghosts.length < ghostAmount && Date.now() >= this.gameStatus.bluePillEndTime) {
+            this.addExtraGhost();
         }
         // If current time exceeds blue pill time -> set ghosts back to bright pink
         if (Date.now() >= this.gameStatus.bluePillEndTime) {

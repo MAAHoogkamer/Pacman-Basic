@@ -27,3 +27,10 @@ html, body, #magic
     z-index: 9999;
     display: none;
 }
+
+#scoreCanvascanvas {
+    margin: auto;
+    display: none;
+    width: 720px;
+    height: 540px;
+}
