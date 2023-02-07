@@ -4,17 +4,16 @@ import {move1, move2, move3} from "./moves";
 import TouchControls from "./touchcontrol.class";
 
 export default class Game {
-    constructor(gameStatus, rows, GAME) {
-        this.rows = rows;
+    constructor(gameStatus, GAME) {
         this.gameStatus = gameStatus;
         // Create the characters:
-        const pacman = new Pacman(gameStatus, 1,1,null, 5, rows, null, GAME);
+        const pacman = new Pacman(gameStatus, 1,1,null, 5, null, GAME);
         // Unleash the ghosts:
         for (let i = -1; i < this.gameStatus.difficulty; i++) {
             this.addExtraGhost();
         }
         // Load the Touch Controls:
-        const TOUCH = new TouchControls("canvas", pacman, this.rows);
+        const TOUCH = new TouchControls("canvas", pacman);
     }
 
     getGhosts() {
@@ -35,13 +34,13 @@ export default class Game {
         let ghost;
         switch (ghostSelect) {
             case 0:
-                ghost = new Ghost(this.gameStatus, 12, 26, null, 6, this.rows, move1);
+                ghost = new Ghost(this.gameStatus, 12, 26, null, 6, move1);
                 break;
             case 1:
-                ghost = new Ghost(this.gameStatus, 13, 26, null, 6, this.rows, move2);
+                ghost = new Ghost(this.gameStatus, 13, 26, null, 6, move2);
                 break;
             case 2:
-                ghost = new Ghost(this.gameStatus, 14, 26, null, 6, this.rows, move3);
+                ghost = new Ghost(this.gameStatus, 14, 26, null, 6, move3);
                 break;
             default:
                 ghost = null;
@@ -55,7 +54,7 @@ export default class Game {
 
     checkGameState() {
         // If all yellow pills are eaten -> next level
-        if (this.gameStatus.yellowPillCounter === 575) {
+        if (this.gameStatus.yellowPillCounter === 5) {
             this.nextLevel();
         }
         // If a ghost is eaten, spawn new one after timer ends
@@ -74,6 +73,7 @@ export default class Game {
     }
 
     nextLevel() {
+        this.gameStatus.points += (this.gameStatus.difficulty * 250);
         this.gameStatus.difficulty++;
         sessionStorage.setItem('savedLives', this.gameStatus.lives);
         sessionStorage.setItem('savedDifficulty', this.gameStatus.difficulty);

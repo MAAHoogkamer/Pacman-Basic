@@ -1,7 +1,6 @@
 export default class TouchControls {
-    constructor(canvasId, pacman, rows) {
+    constructor(canvasId, pacman) {
         this.pacman = pacman;
-        this.rows = rows;
         this.canvas = document.getElementById(canvasId);
         this.initialX = 0;
         this.initialY = 0;
@@ -43,6 +42,6 @@ export default class TouchControls {
         }
         this.initialX = currentX;
         this.initialY = currentY;
-        this.pacman.movement(direction, this.rows);
+        this.pacman.movement(direction);
     }
 }

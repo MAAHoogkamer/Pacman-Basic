@@ -1,17 +1,17 @@
 import Character from "./character.class";
 
 export default class Ghost extends Character {
-    constructor(gameStatus, curPosY, curPosX, lastDir, charNr, rows, moveFunc) {
-        super(gameStatus, curPosY, curPosX, lastDir, charNr, rows, moveFunc);
+    constructor(gameStatus, curPosY, curPosX, lastDir, charNr, moveFunc) {
+        super(gameStatus, curPosY, curPosX, lastDir, charNr, moveFunc);
         this.gameStatus.ghosts.push(this);
     }
 
     moveGhost() {
         this.characterNr = this.gameStatus.ghostStatus;
-        if (this.rows[this.newPositionY][this.newPositionX] === '0') {
+        if (this.gameStatus.rows[this.newPositionY][this.newPositionX] === '0') {
             this.movement();
         }
-        if (this.characterNr === 6 && this.rows[this.newPositionY][this.newPositionX] === '5') {
+        if (this.characterNr === 6 && this.gameStatus.rows[this.newPositionY][this.newPositionX] === '5') {
             this.gameStatus.lives--;
             if (this.gameStatus.lives < 1) {
                 this.gameStatus.showScoreBoard = 1;
@@ -21,17 +21,17 @@ export default class Ghost extends Character {
                 sessionStorage.setItem('savedLives', this.gameStatus.lives);
                 location.reload();
             }
-        } else if (this.characterNr === 7 && this.rows[this.newPositionY][this.newPositionX] === '5') {
+        } else if (this.characterNr === 7 && this.gameStatus.rows[this.newPositionY][this.newPositionX] === '5') {
             this.movement();
         }
-        if (['1', '2', '3'].includes(this.rows[this.newPositionY][this.newPositionX])) {
-            this.rows[this.currentPositionY] = this.setCharAt(this.rows[this.currentPositionY], this.currentPositionX, this.newField);
-            if (this.rows[this.newPositionY][this.newPositionX] !== '6') {
-                this.newField = this.rows[this.newPositionY][this.newPositionX];
+        if (['1', '2', '3'].includes(this.gameStatus.rows[this.newPositionY][this.newPositionX])) {
+            this.gameStatus.rows[this.currentPositionY] = this.setCharAt(this.gameStatus.rows[this.currentPositionY], this.currentPositionX, this.newField);
+            if (this.gameStatus.rows[this.newPositionY][this.newPositionX] !== '6') {
+                this.newField = this.gameStatus.rows[this.newPositionY][this.newPositionX];
             }
             this.currentPositionY = this.newPositionY;
             this.currentPositionX = this.newPositionX;
-            this.rows[this.newPositionY] = this.setCharAt(this.rows[this.newPositionY], this.newPositionX, this.characterNr);
+            this.gameStatus.rows[this.newPositionY] = this.setCharAt(this.gameStatus.rows[this.newPositionY], this.newPositionX, this.characterNr);
         }
     }
 
@@ -51,13 +51,13 @@ export default class Ghost extends Character {
         }
 
         if (this.characterNr === 7) {
-            if (direction === 0 && this.currentPositionX + 3 < this.rows[0].length && (this.rows[this.currentPositionY][this.currentPositionX + 2] === '5' || this.rows[this.currentPositionY][this.currentPositionX + 3] === '5')) {
+            if (direction === 0 && this.currentPositionX + 3 < this.gameStatus.rows[0].length && (this.gameStatus.rows[this.currentPositionY][this.currentPositionX + 2] === '5' || this.gameStatus.rows[this.currentPositionY][this.currentPositionX + 3] === '5')) {
                 direction = 1; // Change direction to left
-            } else if (direction === 1 && this.currentPositionX - 3 >= 0 && (this.rows[this.currentPositionY][this.currentPositionX - 2] === '5' || this.rows[this.currentPositionY][this.currentPositionX - 3] === '5')) {
+            } else if (direction === 1 && this.currentPositionX - 3 >= 0 && (this.gameStatus.rows[this.currentPositionY][this.currentPositionX - 2] === '5' || this.gameStatus.rows[this.currentPositionY][this.currentPositionX - 3] === '5')) {
                 direction = 0; // Change direction to right
-            } else if (direction === 2 && this.currentPositionY + 3 < this.rows.length && (this.rows[this.currentPositionY + 2][this.currentPositionX] === '5' || this.rows[this.currentPositionY + 3][this.currentPositionX] === '5')) {
+            } else if (direction === 2 && this.currentPositionY + 3 < this.gameStatus.rows.length && (this.gameStatus.rows[this.currentPositionY + 2][this.currentPositionX] === '5' || this.gameStatus.rows[this.currentPositionY + 3][this.currentPositionX] === '5')) {
                 direction = 3; // Change direction to up
-            } else if (direction === 3 && this.currentPositionY - 3 >= 0 && (this.rows[this.currentPositionY - 2][this.currentPositionX] === '5' || this.rows[this.currentPositionY - 3][this.currentPositionX] === '5')) {
+            } else if (direction === 3 && this.currentPositionY - 3 >= 0 && (this.gameStatus.rows[this.currentPositionY - 2][this.currentPositionX] === '5' || this.gameStatus.rows[this.currentPositionY - 3][this.currentPositionX] === '5')) {
                 direction = 2; // Change direction to down
             }
         }

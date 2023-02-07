@@ -14,6 +14,7 @@ let gameStatus = {
     openOrClose: 0, // To change Unicorn pic when moving
     difficulty: 1, // Increments with each level
     showScoreBoard: 0, // 1 Shows ScoreBoard Div
+    rows: 0, // For saving the grid at death
 };
 let savedLives = sessionStorage.getItem('savedLives');
 let savedDifficulty = sessionStorage.getItem('savedDifficulty');
@@ -25,23 +26,22 @@ if (savedLives) {
 }
 
 // Load the GridDef.txt file:
-let rows;
 const FILE = new XMLHttpRequest();
 FILE.open('GET', '/GridDef.txt', false);
 FILE.onreadystatechange = function ()
 {
     if(FILE.readyState === 4 && (FILE.status === 200 || FILE.status === 0))
     {
-        rows = FILE.responseText.split('\n');
+        gameStatus.rows = FILE.responseText.split('\n');
     }
 }
 FILE.send(null);
 
-// Load the game mechanics:
-const GAME = new Game(gameStatus, rows);
+// Load the game mechanics:ä
+const GAME = new Game(gameStatus);
 
 // Load the map:
-const MAP = new Map(gameStatus, rows);
+const MAP = new Map(gameStatus);
 
 // Load the scoreboard:
 const SCOREBOARD = new ScoreBoard(gameStatus);

@@ -1,6 +1,5 @@
 export default class Map {
-    constructor(gameStatus, rows) {
-        this.rows = rows;
+    constructor(gameStatus) {
         this.gameStatus = gameStatus;
         this.OFFSET_X = 11;
         this.OFFSET_Y = 15;
@@ -27,7 +26,8 @@ export default class Map {
             console.log(this.whichUniPic);
         }
         this.CTX.clearRect(0, 0, 720, 540);
-        this.rows.forEach((row, index) => {
+        console.log(this.gameStatus.rows);
+        this.gameStatus.rows.forEach((row, index) => {
             for (let i = 0; i < row.length; i++) {
                 if (row[i] === '1') {
                     this.CTX.drawImage(this.IMAGES[11],i * this.PILL_WIDTH + this.OFFSET_X,(index * this.PILL_WIDTH) + this.OFFSET_Y,6,6);

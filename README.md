@@ -10,8 +10,12 @@ and you can try and eat them.
 <summary>Info</summary>
 Use A,S,W,D or the arrow keys to control the Unicorn.<br>
 There are 3 types of Troublemakers with slightly different movement behaviour.<br>
-At the first level, 2 random Ghosts will spawn.<br>
-Each next level an extra Ghost will spawn.
+At the first level, 2 random Troublemakers will spawn.<br>
+Each next level an extra Troublemaker will spawn.<br>
+<b>Points:</b><br>
+* Yellow pill = 1 point<br>
+* Eating a Troublemaker = 100 points<br>
+* Finishing a level = level * 250 points
 </details>
 <details>
 <summary>To Do</summary>
