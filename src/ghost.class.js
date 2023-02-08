@@ -12,13 +12,13 @@ export default class Ghost extends Character {
             this.movement();
         }
         if (this.characterNr === 6 && this.gameStatus.rows[this.newPositionY][this.newPositionX] === '5') {
+            // Here you die, reloads if lives are more as 0
             this.gameStatus.lives--;
-            if (this.gameStatus.lives < 1) {
-                this.gameStatus.showScoreBoard = 1;
-            } if (this.gameStatus.lives > 0) {
+            if (this.gameStatus.lives > 0) {
                 sessionStorage.setItem('savedDifficulty', this.gameStatus.points);
                 sessionStorage.setItem('savedDifficulty', this.gameStatus.difficulty);
                 sessionStorage.setItem('savedLives', this.gameStatus.lives);
+                sessionStorage.setItem('savedPoints', this.gameStatus.points);
                 location.reload();
             }
         } else if (this.characterNr === 7 && this.gameStatus.rows[this.newPositionY][this.newPositionX] === '5') {

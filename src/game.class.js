@@ -53,6 +53,11 @@ export default class Game {
     }
 
     checkGameState() {
+        // If lives are gone, score screne will show:
+        if (this.gameStatus.lives < 1) {
+            this.gameStatus.showScoreScreen = 1;
+            //sessionStorage.setItem('savedLives', this.gameStatus.lives);
+        }
         // If all yellow pills are eaten -> next level
         if (this.gameStatus.yellowPillCounter === 575) { // Should be 575
             this.nextLevel();
@@ -66,9 +71,13 @@ export default class Game {
         if (Date.now() >= this.gameStatus.bluePillEndTime) {
             this.gameStatus.ghostStatus = 6;
         }
-        // Toggle the ScoreBoard
-        if (this.gameStatus.showScoreBoard === 1) {
-            document.getElementById('scoreBoard').style.display = 'block';
+        // Toggle the ScoreScreen
+        if (this.gameStatus.showScoreScreen === 1) {
+            document.getElementById('scoreScreen').style.display = 'block';
+            console.log("score show");
+        } else if (this.gameStatus.showScoreScreen === 0) {
+            document.getElementById('scoreScreen').style.display = 'none';
+            console.log("score hide");
         }
     }
 

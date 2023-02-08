@@ -1,6 +1,6 @@
 import Game from './game.class.js';
 import Map from './map.class.js';
-import ScoreBoard from "./scoreboard.class";
+import ScoreScreen from "./scorescreen.class";
 
 // Game status:
 let gameStatus = {
@@ -13,12 +13,13 @@ let gameStatus = {
     unicornDirection: 0, // 0: right, 1: left, 2: up, 3: down
     openOrClose: 0, // To change Unicorn pic when moving
     difficulty: 1, // Increments with each level
-    showScoreBoard: 0, // 1 Shows ScoreBoard Div
+    showScoreScreen: 0, // 1 Shows ScoreScreen Div
     rows: 0, // For saving the grid at death
 };
 let savedLives = sessionStorage.getItem('savedLives');
 let savedDifficulty = sessionStorage.getItem('savedDifficulty');
 let savedPoints = sessionStorage.getItem('savedPoints');
+//let savedShowScoreScreen = sessionStorage.getItem('savedShowScoreScreen');
 if (savedLives) {
     gameStatus.lives = savedLives;
     gameStatus.difficulty = savedDifficulty;
@@ -43,8 +44,8 @@ const GAME = new Game(gameStatus);
 // Load the map:
 const MAP = new Map(gameStatus);
 
-// Load the scoreboard:
-const SCOREBOARD = new ScoreBoard(gameStatus);
+// Load the score screen:
+const SCORESCREEN = new ScoreScreen(gameStatus);
 
 // Draw the grid:
 window.setInterval(() => {

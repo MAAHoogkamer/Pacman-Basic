@@ -26,7 +26,7 @@ export default class Character {
         }
     }
     movement(direction) {
-        if (this.gameStatus.showScoreBoard === 0) {
+        if (this.gameStatus.showScoreScreen === 0) {
             this.calculateNewPosition(direction);
             if (this.gameStatus.rows[this.newPositionY][this.newPositionX] === '1') {
                 this.gameStatus.yellowPillCounter++;
