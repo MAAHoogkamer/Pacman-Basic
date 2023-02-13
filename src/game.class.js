@@ -4,11 +4,12 @@ import {move1, move2, move3} from "./moves";
 import TouchControls from "./touchcontrol.class";
 
 export default class Game {
-    constructor(gameStatus, GAME) {
+    constructor(gameStatus, SCORESCREEN) {
         this.gameStatus = gameStatus;
+        this.ScoreScreen = SCORESCREEN;
         // Create the characters:
-        const pacman = new Pacman(gameStatus, 1,1,null, 5, null, GAME);
-        // Unleash the ghosts:
+        const pacman = new Pacman(gameStatus, 1,1,null, 5, null);
+        // Unleash the Troublemakers
         for (let i = -1; i < this.gameStatus.difficulty; i++) {
             this.addExtraGhost();
         }
@@ -74,7 +75,7 @@ export default class Game {
         // Toggle the ScoreScreen
         if (this.gameStatus.showScoreScreen === 1) {
             document.getElementById('scoreScreen').style.display = 'block';
-            console.log("score show");
+            this.ScoreScreen.showEnterPlayerName();
         } else if (this.gameStatus.showScoreScreen === 0) {
             document.getElementById('scoreScreen').style.display = 'none';
             console.log("score hide");
@@ -82,7 +83,7 @@ export default class Game {
     }
 
     nextLevel() {
-        this.gameStatus.points += (this.gameStatus.difficulty * 250);
+        this.gameStatus.points += (this.gameStatus.difficulty * 350);
         this.gameStatus.difficulty++;
         sessionStorage.setItem('savedLives', this.gameStatus.lives);
         sessionStorage.setItem('savedDifficulty', this.gameStatus.difficulty);

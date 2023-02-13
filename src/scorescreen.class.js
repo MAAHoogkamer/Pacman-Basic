@@ -1,9 +1,9 @@
 export default class ScoreScreen {
     constructor(gameStatus) {
         this.gameStatus = gameStatus;
+        this.scoreScreen = document.getElementById('scoreScreen');
         this.scoreCanvas = document.getElementById('scoreCanvas');
         this.CTX = this.scoreCanvas.getContext('2d');
-
         this.enterPlayerName = document.getElementById('enterPlayerName');
         this.enterPlayerName.addEventListener('submit', (event) => {
             // Possibly give this whole code its own function
@@ -15,6 +15,9 @@ export default class ScoreScreen {
             // After POST, hide the input field and show the Top 10:
             this.drawScoreTop10();
         });
+    }
+    showEnterPlayerName(){
+        this.addButton("Play again?", this.btnPlayAgain,this.scoreScreen.width/2-50, 430);
     }
 
     drawScoreTop10() {
@@ -33,7 +36,7 @@ export default class ScoreScreen {
         */
         const SCORES = "Bob, 1230";
         this.CTX.fillText(SCORES, 270, 130);
-        this.addButton("Play again?", this.btnPlayAgain,this.scoreCanvas.width/2-50, 430)
+        this.addButton("Play again?", this.btnPlayAgain,this.scoreCanvas.width/2-50, 430);
     }
     // Reusable function for creating a button on the canvas:
     addButton(btnText, btnClickHandler, x, y) {

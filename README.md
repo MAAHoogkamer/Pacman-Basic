@@ -15,7 +15,7 @@ Each next level an extra Troublemaker will spawn.<br>
 <b>Points:</b><br>
 * Yellow pill = 1 point<br>
 * Eating a Troublemaker = 100 points<br>
-* Finishing a level = level * 250 points
+* Finishing a level = level * 350 points
 </details>
 <details>
 <summary>To Do</summary>

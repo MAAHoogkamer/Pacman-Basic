@@ -8,7 +8,8 @@ export default class Ghost extends Character {
 
     moveGhost() {
         this.characterNr = this.gameStatus.ghostStatus;
-        if (this.gameStatus.rows[this.newPositionY][this.newPositionX] === '0') {
+        if (this.gameStatus.rows[this.newPositionY][this.newPositionX] === '0'/* ||
+            this.gameStatus.rows[this.newPositionY][this.newPositionX] === '6'*/) {
             this.movement();
         }
         if (this.characterNr === 6 && this.gameStatus.rows[this.newPositionY][this.newPositionX] === '5') {
