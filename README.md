@@ -42,5 +42,5 @@ Ability to delete a name/playerId and all corresponding scores.<br>
 * Check if name already exists, need a way for existing and new player entry <br>
     If name exists, ask 'is this you?' when no, enter new name. <br>
     When yes, use the name.<br>
-* At scorescreen, give option for new player and returning player <br>
+* At scorescreen, give option for 'new player' and 'returning player' <br>
 </details>
