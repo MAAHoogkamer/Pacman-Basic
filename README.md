@@ -39,4 +39,8 @@ Ability to delete a name/playerId and all corresponding scores.<br>
 --Need to prevent double names, someone deleting someone else?... <br>
 <del>* Bug: At scoreboard, when reloading, can continue to play</del> <br>
 * Possible bug: Losing 2 lives at once? <br>
+* Check if name already exists, need a way for existing and new player entry <br>
+    If name exists, ask 'is this you?' when no, enter new name. <br>
+    When yes, use the name.<br>
+* At scorescreen, give option for new player and returning player <br>
 </details>
