@@ -6,11 +6,7 @@ export default class ScoreScreen {
         this.CTX = this.scoreCanvas.getContext('2d');
         this.enterPlayerName = document.getElementById('enterPlayerName');
         this.enterPlayerName.addEventListener('submit', (event) => {
-            // Possibly give this whole code its own function
             event.preventDefault();
-
-
-
             this.submitPlayerName();
         });
     }
@@ -49,14 +45,16 @@ export default class ScoreScreen {
         btnElem.addEventListener('touch', btnClickHandler.bind(this));
         document.body.appendChild(btnElem);
         return btnElem;
+        /* For removing a button:
+        let button = document.getElementById("Butonnusadk");
+        button.parentNode.removeChild(button);
+        */
     }
     btnPlayAgain() {
         sessionStorage.setItem('savedLives', 3);
         sessionStorage.setItem('savedDifficulty', 1);
         sessionStorage.setItem('savedPoints', 0);
         location.reload();
-        //let button = document.getElementById("Butonnusadk");
-        //button.parentNode.removeChild(button);
     }
 
     submitPlayerName() {
@@ -65,9 +63,11 @@ export default class ScoreScreen {
         const returningPlayerChecked = document.getElementById("returningPlayer").checked;
         const newPlayerChecked = document.getElementById("newPlayer").checked;
         if (returningPlayerChecked) {
-            // do this
+            // Look up the playerId corresponding to the name getPlayerIdByName()
+            // Post score using this playerId
         } else if (newPlayerChecked) {
-            // do that
+            // create new player using the name, return the new id
+            // Post score using this playerId
         }
         // Here will be the HTTP Name POST request:
         console.log(`Player name: ${playerName}®`);
