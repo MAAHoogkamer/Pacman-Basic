@@ -12,16 +12,36 @@
       <canvas id="canvas" width="720" height="540"></canvas>
     </div>
     <div id="scoreScreen">
-      <div id="enterPlayerName">
-      <center><form id="playerNameForm">
+      <div style="text-align: center;" id="enterPlayerName">
+      <form id="playerNameForm">
         <br><h1>Save your score</h1><br>
         <input type="text" id="playerName" placeholder="Enter your name">
         <button type="submit">Submit</button><br>
+        <input type="checkbox" id="returningPlayer" name="returningPlayer" value="returningPlayer" checked>
+        <label for="returningPlayer" style="font-size: 15px;"> Returning player</label>
+        <input type="checkbox" id="newPlayer" name="newPlayer" value="newPlayer">
+        <label for="newPlayer" style="font-size: 15px;"> New player</label>
       </form>
-        <button class="astext">More options</button></center>
+        <button class="astext">More options</button>
       </div>
       <canvas id="scoreCanvas" width="720" height="540"></canvas>
     </div>
+    <script>
+      const returningPlayerCheckbox = document.getElementById("returningPlayer");
+      const newPlayerCheckbox = document.getElementById("newPlayer");
+
+      returningPlayerCheckbox.addEventListener("change", function() {
+        if (returningPlayerCheckbox.checked) {
+          newPlayerCheckbox.checked = false;
+        }
+      });
+
+      newPlayerCheckbox.addEventListener("change", function() {
+        if (newPlayerCheckbox.checked) {
+          returningPlayerCheckbox.checked = false;
+        }
+      });
+    </script>
     <script src="./main.js"></script>
   </body>
 </html>

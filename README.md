@@ -19,6 +19,8 @@ Each next level an extra Troublemaker will spawn.<br>
 </details>
 <details>
 <summary>To Do</summary>
+<b>For now, menus are in HTML since focus is on Backend.<br>
+    Can be changed to use javascript later.<br></b>
 <del>* Add touch controls</del> <br>
 * Add info screen + toggle button "?"<br>
 * Add a leaderboard. Sort by highest level and lowest death count.<br>

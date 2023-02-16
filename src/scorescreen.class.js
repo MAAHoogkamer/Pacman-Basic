@@ -8,12 +8,10 @@ export default class ScoreScreen {
         this.enterPlayerName.addEventListener('submit', (event) => {
             // Possibly give this whole code its own function
             event.preventDefault();
-            const playerNameInput = document.getElementById('playerName');
-            const playerName = playerNameInput.value;
-            // Here will be the HTTP Name POST request:
-            console.log(`Player name: ${playerName}®`);
-            // After POST, hide the input field and show the Top 10:
-            this.drawScoreTop10();
+
+
+
+            this.submitPlayerName();
         });
     }
     showEnterPlayerName(){
@@ -61,4 +59,19 @@ export default class ScoreScreen {
         //button.parentNode.removeChild(button);
     }
 
+    submitPlayerName() {
+        const playerNameInput = document.getElementById('playerName');
+        const playerName = playerNameInput.value;
+        const returningPlayerChecked = document.getElementById("returningPlayer").checked;
+        const newPlayerChecked = document.getElementById("newPlayer").checked;
+        if (returningPlayerChecked) {
+            // do this
+        } else if (newPlayerChecked) {
+            // do that
+        }
+        // Here will be the HTTP Name POST request:
+        console.log(`Player name: ${playerName}®`);
+        // After POST, hide the input field and show the Top 10:
+        this.drawScoreTop10();
+    }
 }

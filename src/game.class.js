@@ -75,7 +75,7 @@ export default class Game {
         // Toggle the ScoreScreen
         if (this.gameStatus.showScoreScreen === 1) {
             document.getElementById('scoreScreen').style.display = 'block';
-            this.ScoreScreen.showEnterPlayerName();
+            //this.ScoreScreen.showEnterPlayerName();
         } else if (this.gameStatus.showScoreScreen === 0) {
             document.getElementById('scoreScreen').style.display = 'none';
             console.log("score hide");
