@@ -63,13 +63,14 @@ export default class ScoreScreen {
         const returningPlayerChecked = document.getElementById("returningPlayer").checked;
         const newPlayerChecked = document.getElementById("newPlayer").checked;
         if (returningPlayerChecked) {
+            // Make endpoint in player
             // Look up the playerId corresponding to the name getPlayerIdByName()
             // Post score using this playerId
         } else if (newPlayerChecked) {
+            // Make endpoint in player
             // create new player using the name, return the new id
             // Post score using this playerId
         }
-        // Here will be the HTTP Name POST request:
         console.log(`Player name: ${playerName}®`);
         // After POST, hide the input field and show the Top 10:
         this.drawScoreTop10();
