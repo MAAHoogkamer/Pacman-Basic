@@ -63,11 +63,11 @@ export default class ScoreScreen {
         const returningPlayerChecked = document.getElementById("returningPlayer").checked;
         const newPlayerChecked = document.getElementById("newPlayer").checked;
         if (returningPlayerChecked) {
-            // Make endpoint in player
+            // Make endpoint in score /returningplayer/?
             // Look up the playerId corresponding to the name getPlayerIdByName()
             // Post score using this playerId
         } else if (newPlayerChecked) {
-            // Make endpoint in player
+            // Make endpoint in player /newplayer/?
             // create new player using the name, return the new id
             // Post score using this playerId
         }
