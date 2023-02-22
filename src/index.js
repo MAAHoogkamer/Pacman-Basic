@@ -1,6 +1,7 @@
 import Game from './game.class.js';
 import Map from './map.class.js';
 import ScoreScreen from "./scorescreen.class";
+import HttpRequest from "./httprequest.class";
 
 // Game status:
 let gameStatus = {
@@ -38,14 +39,17 @@ FILE.onreadystatechange = function ()
 }
 FILE.send(null);
 
-// Load the game mechanics:ä
+// Load the game mechanics:
 const GAME = new Game(gameStatus);
 
 // Load the map:
 const MAP = new Map(gameStatus);
 
+// Load the HTTP API requests:
+const HTTPREQUEST = new HttpRequest();
+
 // Load the score screen:
-const SCORESCREEN = new ScoreScreen(gameStatus);
+const SCORESCREEN = new ScoreScreen(gameStatus, HTTPREQUEST);
 
 // Draw the grid:
 window.setInterval(() => {

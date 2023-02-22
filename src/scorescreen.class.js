@@ -1,6 +1,7 @@
 export default class ScoreScreen {
-    constructor(gameStatus) {
+    constructor(gameStatus, HTTPREQUEST) {
         this.gameStatus = gameStatus;
+        this.httpRequest = HTTPREQUEST;
         this.scoreScreen = document.getElementById('scoreScreen');
         this.scoreCanvas = document.getElementById('scoreCanvas');
         this.CTX = this.scoreCanvas.getContext('2d');
@@ -63,10 +64,12 @@ export default class ScoreScreen {
         const returningPlayerChecked = document.getElementById("returningPlayer").checked;
         const newPlayerChecked = document.getElementById("newPlayer").checked;
         if (returningPlayerChecked) {
+            this.httpRequest.postScoreReturningPlayer();
             // Make endpoint in score /returningplayer/?
             // Look up the playerId corresponding to the name getPlayerIdByName()
             // Post score using this playerId
         } else if (newPlayerChecked) {
+            this.httpRequest.postScoreNewPlayer();
             // Make endpoint in player /newplayer/?
             // create new player using the name, return the new id
             // Post score using this playerId
