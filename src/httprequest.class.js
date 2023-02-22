@@ -3,26 +3,33 @@ export default class HttpRequest {
     }
     async postScoreReturningPlayer(name, points) {
         try {
-            const response = await fetch('localhost:8080/returningplayer/', {
+            const response = await fetch('http://localhost:8080/scores/returningplayer/', {
                 method: 'post',
-                body: {
-                    "name": name,
-                    "points": points
-                }
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: name,
+                    points: points
+                })
             });
             console.log('Score has been posted!', response);
         } catch (err) {
             console.error(`Error: ${err}`);
         }
     }
+
     async postScoreNewPlayer(name, points) {
         try {
-            const response = await fetch('localhost:8080/newplayer/', {
+            const response = await fetch('http://localhost:8080/scores/newplayer/', {
                 method: 'post',
-                body: {
-                    "name": name,
-                    "points": points
-                }
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: name,
+                    points: points
+                })
             });
             console.log('Score has been posted!', response);
         } catch (err) {

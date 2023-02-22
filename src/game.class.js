@@ -78,7 +78,6 @@ export default class Game {
             //this.ScoreScreen.showEnterPlayerName();
         } else if (this.gameStatus.showScoreScreen === 0) {
             document.getElementById('scoreScreen').style.display = 'none';
-            console.log("score hide");
         }
     }
 

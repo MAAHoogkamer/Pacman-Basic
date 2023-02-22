@@ -74,7 +74,6 @@ export default class ScoreScreen {
             // create new player using the name, return the new id
             // Post score using this playerId
         }
-        console.log(`Player name: ${playerName}®`);
         // After POST, hide the input field and show the Top 10:
         this.drawScoreTop10();
     }
