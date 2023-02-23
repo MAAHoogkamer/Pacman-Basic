@@ -18,4 +18,9 @@ export default class HttpRequest {
             console.error(`Error: ${err}`);
         }
     }
+    async getJson() {
+        const response = await fetch('http://localhost:8080/scores/top20');
+        const data = await response.json();
+        return data;
+    }
 }
