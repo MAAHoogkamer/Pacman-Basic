@@ -20,7 +20,6 @@ export default class ScoreScreen {
         document.getElementById('scoreCanvas').style.display = "block";
         this.CTX.fillStyle = '#FFFFFF';
         this.CTX.font = "20px Verdana";
-        //const scores = await this.httpRequest.getJson();
         const scores = this.httpRequest.getJson().then(scores => {
             scores.forEach((score, index) => {
                 const text = `${index + 1}. ${score.playerId}: ${score.points}`;
