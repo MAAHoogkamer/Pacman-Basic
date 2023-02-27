@@ -21,6 +21,7 @@ Each next level an extra Troublemaker will spawn.<br>
 <summary>To Do</summary>
 <b>For now, menus are in HTML since focus is on Backend.<br>
     Can be changed to use javascript later.<br></b>
+* Top20 doesn't load the newly stored score. <br>
 <del>* Add touch controls</del> <br>
 * Add info screen + toggle button "?"<br>
 * Add a leaderboard. Sort by highest level and lowest death count.<br>

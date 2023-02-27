@@ -18,17 +18,20 @@ export default class ScoreScreen {
     async drawScoreTop10() {
         document.getElementById('enterPlayerName').style.display = "none";
         document.getElementById('scoreCanvas').style.display = "block";
-        this.CTX.fillStyle = '#FFFFFF';
-        this.CTX.font = "20px Verdana";
-        const scores = this.httpRequest.getJson().then(scores => {
-            scores.forEach((score, index) => {
-                const text = `${index + 1}. ${score.playerId}: ${score.points}`;
-                this.CTX.fillText(text, 270, 130 + index * 20);
-            });
-        });
-
+        await this.getAndDisplayScores(); // 'await' so new score is included
         this.addButton("Play again?", this.btnPlayAgain, this.scoreCanvas.width / 2 - 50, 430);
     }
+    // Getting and drawing the scores got it's own method so the new score is included:
+    async getAndDisplayScores() {
+        const scores = await this.httpRequest.getJson();
+        this.CTX.fillStyle = '#FFFFFF';
+        this.CTX.font = "20px Verdana";
+        scores.forEach((score, index) => {
+            const text = `${index + 1}. ${score.playerId}: ${score.points}`;
+            this.CTX.fillText(text, 270, 130 + index * 20);
+        });
+    }
+
     // Reusable function for creating a button on the canvas:
     addButton(btnText, btnClickHandler, x, y) {
         const btnElem = document.createElement('button');
