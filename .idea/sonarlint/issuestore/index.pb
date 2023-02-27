@@ -1,8 +1,6 @@
 
 I
 src/touchcontrol.class.js,c/a/cadd73a2042d43c5ee422a60e818cfb55dd0d47c
-F
-src/character.class.js,0/7/07647ca010e60ebb61976577de915076a2dcb561
 ;
 GridDef.txt,1/9/190d8d5c46592e6bf952f81b02f4407f30e7167e
 <

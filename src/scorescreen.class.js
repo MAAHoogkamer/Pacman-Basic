@@ -23,7 +23,7 @@ export default class ScoreScreen {
     }
     // Getting and drawing the scores got it's own method so the new score is included:
     async getAndDisplayScores() {
-        const scores = await this.httpRequest.getJson();
+        const scores = await this.httpRequest.getTop10();
         this.CTX.fillStyle = '#FFFFFF';
         this.CTX.font = "20px Verdana";
         scores.forEach((score, index) => {
@@ -60,22 +60,8 @@ export default class ScoreScreen {
     submitPlayerName() {
         const playerNameInput = document.getElementById('playerName');
         const playerName = playerNameInput.value;
-        const returningPlayerChecked = document.getElementById("returningPlayer").checked;
-        const newPlayerChecked = document.getElementById("newPlayer").checked;
-        if (returningPlayerChecked) {
-            const link = 'http://localhost:8080/scores/returningplayer/';
-            this.httpRequest.postScore(link, playerName, this.gameStatus.points);
-            // Make endpoint in score /returningplayer/?
-            // Look up the playerId corresponding to the name getPlayerIdByName()
-            // Post score using this playerId
-        } else if (newPlayerChecked) {
-            const link = 'http://localhost:8080/scores/newplayer/';
-            this.httpRequest.postScore(link, playerName, this.gameStatus.points);
-            // Make endpoint in player /newplayer/?
-            // create new player using the name, return the new id
-            // Post score using this playerId
-        }
-        // After POST, hide the input field and show the Top 10:
+        const link = 'http://localhost:8080/scores/playerandscore/';
+        this.httpRequest.postScore(link, playerName, this.gameStatus.points);
         this.drawScoreTop10();
     }
 }
