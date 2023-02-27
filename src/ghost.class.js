@@ -4,6 +4,7 @@ export default class Ghost extends Character {
     constructor(gameStatus, curPosY, curPosX, lastDir, charNr, moveFunc) {
         super(gameStatus, curPosY, curPosX, lastDir, charNr, moveFunc);
         this.gameStatus.ghosts.push(this);
+        this.lastTimeDied = 0;
     }
 
     moveGhost() {
@@ -13,16 +14,21 @@ export default class Ghost extends Character {
             this.movement();
         }
         if (this.characterNr === 6 && this.gameStatus.rows[this.newPositionY][this.newPositionX] === '5') {
-            // Here you die, reloads if lives are more as 0
-            this.gameStatus.lives--;
-            if (this.gameStatus.lives > 0) {
-                sessionStorage.setItem('savedDifficulty', this.gameStatus.points);
-                sessionStorage.setItem('savedDifficulty', this.gameStatus.difficulty);
-                sessionStorage.setItem('savedLives', this.gameStatus.lives);
-                sessionStorage.setItem('savedPoints', this.gameStatus.points);
-                location.reload();
+            // Died more than 5 sec ago?
+            if (Date.now() - this.lastTimeDied >= 5000) {
+                // Update the timestamp
+                this.lastTimeDied = Date.now();
+                // Here you die, reloads if lives are more as 0
+                this.gameStatus.lives--;
+                if (this.gameStatus.lives > 0) {
+                    sessionStorage.setItem('savedDifficulty', this.gameStatus.points);
+                    sessionStorage.setItem('savedDifficulty', this.gameStatus.difficulty);
+                    sessionStorage.setItem('savedLives', this.gameStatus.lives);
+                    sessionStorage.setItem('savedPoints', this.gameStatus.points);
+                    location.reload();
+                }
             }
-        } else if (this.characterNr === 7 && this.gameStatus.rows[this.newPositionY][this.newPositionX] === '5') {
+    } else if (this.characterNr === 7 && this.gameStatus.rows[this.newPositionY][this.newPositionX] === '5') {
             this.movement();
         }
         if (['1', '2', '3'].includes(this.gameStatus.rows[this.newPositionY][this.newPositionX])) {
