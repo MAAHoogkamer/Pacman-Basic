@@ -60,7 +60,7 @@ export default class ScoreScreen {
     submitPlayerName() {
         const playerNameInput = document.getElementById('playerName');
         const playerName = playerNameInput.value;
-        const link = 'http://localhost:8080/scores/playerandscore/';
+        const link = 'http://localhost:8080/scores/nameandscore/';
         this.httpRequest.postScore(link, playerName, this.gameStatus.points);
         this.drawScoreTop10();
     }
