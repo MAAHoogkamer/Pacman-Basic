@@ -1,7 +1,7 @@
 import Character from './character.class.js';
 export default class Pacman extends Character {
-    constructor(gameStatus, curPosY, curPosX, lastDir, charNr, rows, moveFunc) {
-        super(gameStatus, curPosY, curPosX, lastDir, charNr, rows, moveFunc);
+    constructor(gameStatus, curPosY, curPosX, lastDir, charNr, moveFunc) {
+        super(gameStatus, curPosY, curPosX, lastDir, charNr, moveFunc);
         // Pacman controls:
         document.onkeydown = ((e) => {
             let direction;
@@ -36,7 +36,7 @@ export default class Pacman extends Character {
                 this.gameStatus.openOrClose = 0;
             }
             this.gameStatus.unicornDirection = direction;
-            this.movement(direction, rows);
+            this.movement(direction);
 
         });
     }

@@ -1,6 +1,5 @@
 export default class Map {
-    constructor(gameStatus, rows) {
-        this.rows = rows;
+    constructor(gameStatus) {
         this.gameStatus = gameStatus;
         this.OFFSET_X = 11;
         this.OFFSET_Y = 15;
@@ -27,10 +26,7 @@ export default class Map {
             console.log(this.whichUniPic);
         }
         this.CTX.clearRect(0, 0, 720, 540);
-        this.CTX.fillStyle = '#FCDB00';
-        this.CTX.font = "35px Verdana";
-        this.CTX.fillText(`Level: ${this.gameStatus.difficulty}   Deaths: ${this.gameStatus.deathCount}`, 185, 500);
-        this.rows.forEach((row, index) => {
+        this.gameStatus.rows.forEach((row, index) => {
             for (let i = 0; i < row.length; i++) {
                 if (row[i] === '1') {
                     this.CTX.drawImage(this.IMAGES[11],i * this.PILL_WIDTH + this.OFFSET_X,(index * this.PILL_WIDTH) + this.OFFSET_Y,6,6);
@@ -46,6 +42,23 @@ export default class Map {
             }
         })
     }
-
+    // Draw the level and score:
+    drawStatus() {
+        this.CTX.fillStyle = '#FCDB00';
+        this.CTX.font = "35px Verdana";
+        this.CTX.fillText(`Level: ${this.gameStatus.difficulty}   Points: ${this.gameStatus.points}`, 185, 500);
+    }
+    // Draw amount of lives left:
+    drawLivesLeft() {
+        const n = this.gameStatus.lives;
+        for (let i = 0; i < n; i++) {
+            const x = 310 + i * 35;
+            const y = 430;
+            this.drawLives(x, y);
+        }
+    }
+    drawLives(x, y) {
+        this.CTX.drawImage(this.IMAGES[0], x, y, 30, 30);
+    }
 }
 
