@@ -39,11 +39,11 @@ FILE.onreadystatechange = function ()
 }
 FILE.send(null);
 
-// Load the game mechanics:
-const GAME = new Game(gameStatus);
-
 // Load the map:
 const MAP = new Map(gameStatus);
+
+// Load the game mechanics:
+const GAME = new Game(gameStatus);
 
 // Load the HTTP API requests:
 const HTTPREQUEST = new HttpRequest();
