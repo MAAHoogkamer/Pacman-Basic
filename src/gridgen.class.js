@@ -110,14 +110,17 @@ export default class GridGenerator {
         this.gameStatus.locOf4Right = {row: row4Right, col: numCols - 1};
 
         // Place a 3 as spawn point for enemies, surrounded by at least two 3s
-        let i = Math.floor(Math.random() * 29) + 1;
-        let j = Math.floor(Math.random() * 49) + 1;
-        if (grid[i][j] === "3" &&
-            ((grid[i - 1][j] === "3" && grid[i + 1][j] === "3") || (grid[i][j - 1] === "3" && grid[i][j + 1] === "3")) &&
-            ((grid[i - 1][j - 1] === "3" && grid[i - 1][j + 1] === "3") || (grid[i + 1][j - 1] === "3" && grid[i + 1][j + 1] === "3"))) {
-            grid[i][j] = "3";
-            this.gameStatus.locOf3 = {x: j, y: i};
-            spawnPlaced = true;
+        while (!spawnPlaced) {
+            let i = Math.floor(Math.random() * 29) + 1;
+            let j = Math.floor(Math.random() * 49) + 1;
+            if (grid[i][j] === "3" &&
+                ((grid[i - 1][j] === "3" && grid[i + 1][j] === "3") || (grid[i][j - 1] === "3" && grid[i][j + 1] === "3")) &&
+                ((grid[i - 1][j - 1] === "3" && grid[i - 1][j + 1] === "3") || (grid[i + 1][j - 1] === "3" && grid[i + 1][j + 1] === "3"))) {
+                grid[i][j] = "3";
+                this.gameStatus.locOf3 = {x: j, y: i};
+                spawnPlaced = true;
+                console.log(this.gameStatus.locOf3);
+            }
         }
 
         // Convert grid array to string and populate rows
