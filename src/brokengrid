@@ -45,7 +45,7 @@ export default class GridGenerator {
             grid[i][j] = "3";
             this.gameStatus.locOf3 = {x: j, y: i};
         }
-
+        /*
         // Make sure every 3 in the grid is part of a pathway
         for (let i = 1; i < numRows - 1; i++) {
             for (let j = 1; j < numCols - 1; j++) {
@@ -55,11 +55,30 @@ export default class GridGenerator {
                     if (grid[i + 1][j] === "3") count++;
                     if (grid[i][j - 1] === "3") count++;
                     if (grid[i][j + 1] === "3") count++;
-                    if (count >= 3) {
-                        grid[i][j] = "3";
-                    } else if (grid[i][j] === "3") {
-                        grid[i][j] = "0";
-                    }
+                    if (count >= 3) grid[i][j] = "3";
+                }
+            }
+        }
+
+         */
+        // Perform DFS to mark all reachable 3s
+        let visited = new Array(numRows).fill().map(() => new Array(numCols).fill(false));
+        let stack = [this.gameStatus.locOf5];
+        while (stack.length > 0) {
+            let { row, col } = stack.pop();
+            if (grid[row][col] === "3" && !visited[row][col]) {
+                visited[row][col] = true;
+                if (row > 0) stack.push({ row: row - 1, col: col });
+                if (row < numRows - 1) stack.push({ row: row + 1, col: col });
+                if (col > 0) stack.push({ row: row, col: col - 1 });
+                if (col < numCols - 1) stack.push({ row: row, col: col + 1 });
+            }
+        }
+        // Remove unmarked 3s from the grid
+        for (let i = 1; i < numRows - 1; i++) {
+            for (let j = 1; j < numCols - 1; j++) {
+                if (grid[i][j] === "3" && !visited[i][j]) {
+                    grid[i][j] = "0";
                 }
             }
         }
