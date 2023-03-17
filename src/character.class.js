@@ -88,14 +88,28 @@ export default class Character {
                 this.putTunnelBack();
             }
 
-
+            // Unable to load conversation 4335a680-433d-4fcf-849f-550d91c3f2da
 
         }
     }
     putTunnelBack() {
-        this.setCharAt(this.gameStatus.rows[this.gameStatus.locOf4Right.row], this.gameStatus.locOf4Right.col, '4');
-        this.setCharAt(this.gameStatus.rows[this.gameStatus.locOf4Left.row], this.gameStatus.locOf4Left.col, '4');
+        // If there was a tunnel on the previous field, replace it with a 4
+        if (this.previousField === '4') {
+            this.gameStatus.rows[this.currentPositionY] = this.setCharAt(this.gameStatus.rows[this.currentPositionY], this.currentPositionX, '4');
+        }
+
+        // Replace the 5 at the previous position with the original character (or a 4 if it was a tunnel)
+        let previousChar = this.gameStatus.rows[this.previousPositionY][this.previousPositionX];
+        if (previousChar === '5') {
+            if (this.gameStatus.tunnels[this.previousPositionY][this.previousPositionX]) {
+                previousChar = '4';
+            } else {
+                previousChar = this.gameStatus.originalRows[this.previousPositionY][this.previousPositionX];
+            }
+        }
+        this.gameStatus.rows[this.previousPositionY] = this.setCharAt(this.gameStatus.rows[this.previousPositionY], this.previousPositionX, previousChar);
     }
+
     setCharAt(str, index, chr) {
         if (index > str.length - 1) return str;
         return str.substring(0, index) + chr + str.substring(index + 1);
