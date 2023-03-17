@@ -2,6 +2,7 @@ import Game from './game.class.js';
 import Map from './map.class.js';
 import ScoreScreen from "./scorescreen.class";
 import HttpRequest from "./httprequest.class";
+import GridGenerator from "./gridgen.class";
 
 // Game status:
 let gameStatus = {
@@ -9,13 +10,17 @@ let gameStatus = {
     lives: 3,
     yellowPillCounter: 0, // 97 is total
     ghostStatus: 6, // 6: bright pink, 7: light pink
-    bluePillEndTime: 0,
+    bluePillEndTime: 0, // Determines when blue pill event ends
     ghosts: [], // Ghosts are pushed here, so they can also be removed
     unicornDirection: 0, // 0: right, 1: left, 2: up, 3: down
     openOrClose: 0, // To change Unicorn pic when moving
     difficulty: 1, // Increments with each level
     showScoreScreen: 0, // 1 Shows ScoreScreen Div
-    rows: 0, // For saving the grid at death
+    rows: 0, // For saving the grid
+    locOf5: {}, // Spawnpoint Communicorn
+    locOf4Left: {}, // Left tunnel entrance
+    locOf4Right: {}, // Right tunnel entrance
+    locOf3: {}, // Spawnpoint enemies
 };
 let savedLives = sessionStorage.getItem('savedLives');
 let savedDifficulty = sessionStorage.getItem('savedDifficulty');
@@ -26,7 +31,7 @@ if (savedLives) {
     gameStatus.difficulty = savedDifficulty;
     gameStatus.points = savedPoints;
 }
-
+/*
 // Load the GridDef.txt file:
 const FILE = new XMLHttpRequest();
 FILE.open('GET', '/GridDef.txt', false);
@@ -38,30 +43,34 @@ FILE.onreadystatechange = function ()
     }
 }
 FILE.send(null);
+*/
+let map;
+let game;
+let httpRequest;
+let scoreScreen;
+async function initializeGame() {
+    const gridGenerator = new GridGenerator(gameStatus);
+    await gridGenerator.generateGrid();
 
-// Load the map:
-const MAP = new Map(gameStatus);
+    map = new Map(gameStatus);
+    game = new Game(gameStatus);
+    httpRequest = new HttpRequest();
+    scoreScreen = new ScoreScreen(gameStatus, httpRequest);
+}
 
-// Load the game mechanics:
-const GAME = new Game(gameStatus);
-
-// Load the HTTP API requests:
-const HTTPREQUEST = new HttpRequest();
-
-// Load the score screen:
-const SCORESCREEN = new ScoreScreen(gameStatus, HTTPREQUEST);
+initializeGame();
 
 // Draw the grid:
 window.setInterval(() => {
-    MAP.drawGrid();
-    MAP.drawLivesLeft();
-    MAP.drawStatus();
-    GAME.checkGameState();
+    map.drawGrid();
+    map.drawLivesLeft();
+    map.drawStatus();
+    game.checkGameState();
 }, 40);
 
 // Move the ghosts:
 window.setInterval(() => {
-    GAME.moveGhosts();
+    game.moveGhosts();
 }, 100);
 
 /**
