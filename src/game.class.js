@@ -60,7 +60,7 @@ export default class Game {
             //sessionStorage.setItem('savedLives', this.gameStatus.lives);
         }
         // If all yellow pills are eaten -> next level
-        if (this.gameStatus.yellowPillCounter === 575) { // Should be 575
+        if (this.gameStatus.yellowPillCounter === 500) { // Should be 575
             this.nextLevel();
         }
         // If a ghost is eaten, spawn new one after timer ends
