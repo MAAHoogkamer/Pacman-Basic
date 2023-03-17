@@ -35,13 +35,13 @@ export default class Game {
         let ghost;
         switch (ghostSelect) {
             case 0:
-                ghost = new Ghost(this.gameStatus, 12, 26, null, 6, move1);
+                ghost = new Ghost(this.gameStatus, this.gameStatus.locOf3.row, this.gameStatus.locOf3.col, null, 6, move1);
                 break;
             case 1:
-                ghost = new Ghost(this.gameStatus, 13, 26, null, 6, move2);
+                ghost = new Ghost(this.gameStatus, this.gameStatus.locOf3.row, this.gameStatus.locOf3.col, null, 6, move2);
                 break;
             case 2:
-                ghost = new Ghost(this.gameStatus, 14, 26, null, 6, move3);
+                ghost = new Ghost(this.gameStatus, this.gameStatus.locOf3.row, this.gameStatus.locOf3.col, null, 6, move3);
                 break;
             default:
                 ghost = null;

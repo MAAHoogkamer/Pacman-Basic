@@ -127,7 +127,7 @@ export default class GridGenerator {
                 ((grid[i - 1][j] === "3" && grid[i + 1][j] === "3") || (grid[i][j - 1] === "3" && grid[i][j + 1] === "3")) &&
                 ((grid[i - 1][j - 1] === "3" && grid[i - 1][j + 1] === "3") || (grid[i + 1][j - 1] === "3" && grid[i + 1][j + 1] === "3"))) {
                 grid[i][j] = "3";
-                this.gameStatus.locOf3 = {x: j, y: i};
+                this.gameStatus.locOf3 = {row: i, col: j};
                 spawnPlaced = true;
                 console.log(this.gameStatus.locOf3);
             }

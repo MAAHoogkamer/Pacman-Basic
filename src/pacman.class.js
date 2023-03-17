@@ -23,10 +23,8 @@ export default class Pacman extends Character {
                     direction = 0;
                     break;
                 case 'Enter':
-                    /*
-                    console.log();
+                    console.log(this.gameStatus.locOf3);
                     break;
-                     */
                 default:
                     return;
             }
