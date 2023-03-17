@@ -58,7 +58,7 @@ async function initializeGame() {
     scoreScreen = new ScoreScreen(gameStatus, httpRequest);
 }
 
-initializeGame();
+initializeGame().then();
 
 // Draw the grid:
 window.setInterval(() => {

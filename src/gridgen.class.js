@@ -59,14 +59,12 @@ export default class GridGenerator {
                 }
             }
         }
-
-        // Convert grid to string format
+        // Convert grid array to string and populate rows
         let gridString = "";
         for (let row of grid) {
-            let rowString = row.join("");
-            gridString += rowString + "\n";
+            gridString += row.join("") + "\n";
         }
+        this.gameStatus.rows = gridString.trim().split("\n");
 
-        return gridString;
     }
 }
