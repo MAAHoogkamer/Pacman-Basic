@@ -53,33 +53,46 @@ export default class Character {
         }
 
         if (['1', '2', '3', '4', '7'].includes(this.gameStatus.rows[this.newPositionY][this.newPositionX])) {
-            if (this.currentPositionY === 14) {
-                if (this.currentPositionX === 50 || this.currentPositionX === 1) {
+            if (this.currentPositionY === this.gameStatus.locOf4Right.row ||
+                this.currentPositionY === this.gameStatus.locOf4Left.row) {
+                if (this.currentPositionX === this.gameStatus.locOf4Right.col ||
+                    this.currentPositionX === this.gameStatus.locOf4Left.col) {
                     this.newField = '4';
                 } else {
                     this.newField = '3';
                 }
             }
-
             if (this.gameStatus.rows[this.newPositionY][this.newPositionX] === '4') {
                 let newPositionX;
-                if (this.newPositionX === 1) {
-                    newPositionX = 50;
+                if (this.newPositionX === this.gameStatus.locOf4Left.col) {
+                    newPositionX = this.gameStatus.locOf4Right.col;
                 } else {
-                    newPositionX = 1;
+                    newPositionX = this.gameStatus.locOf4Left.col;
+                }
+                let newPositionY = this.gameStatus.locOf4Left.row;
+                if (this.newPositionY === this.gameStatus.locOf4Left.row) {
+                    newPositionY = this.gameStatus.locOf4Right.row;
                 }
                 this.gameStatus.rows[this.currentPositionY] = this.setCharAt(this.gameStatus.rows[this.currentPositionY], this.currentPositionX, this.newField);
-                this.currentPositionY = 14;
+                this.currentPositionY = newPositionY;
                 this.currentPositionX = newPositionX;
-                this.gameStatus.rows[14] = this.setCharAt(this.gameStatus.rows[14], newPositionX, '5');
-                this.gameStatus.rows[14] = this.setCharAt(this.gameStatus.rows[14], newPositionX === 1 ? 50 : 1, '4');
+                this.gameStatus.rows[newPositionY] = this.setCharAt(this.gameStatus.rows[newPositionY], newPositionX, this.characterNr);
+                this.gameStatus.rows[this.gameStatus.locOf4Left.row] = this.setCharAt(this.gameStatus.rows[this.gameStatus.locOf4Left.row], this.gameStatus.locOf4Left.col, '4');
+                this.gameStatus.rows[this.gameStatus.locOf4Right.row] = this.setCharAt(this.gameStatus.rows[this.gameStatus.locOf4Right.row], this.gameStatus.locOf4Right.col, '4');
+                this.putTunnelBack();
             } else {
                 this.gameStatus.rows[this.currentPositionY] = this.setCharAt(this.gameStatus.rows[this.currentPositionY], this.currentPositionX, this.newField);
                 this.currentPositionY = this.newPositionY;
                 this.currentPositionX = this.newPositionX;
                 this.gameStatus.rows[this.newPositionY] = this.setCharAt(this.gameStatus.rows[this.newPositionY], this.newPositionX, this.characterNr);
+                this.putTunnelBack();
             }
+
         }
+    }
+    putTunnelBack() {
+        this.setCharAt(this.gameStatus.rows[this.gameStatus.locOf4Right.row], this.gameStatus.locOf4Right.col, '4');
+        this.setCharAt(this.gameStatus.rows[this.gameStatus.locOf4Left.row], this.gameStatus.locOf4Left.col, '4');
     }
     setCharAt(str, index, chr) {
         if (index > str.length - 1) return str;

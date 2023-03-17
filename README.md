@@ -19,6 +19,8 @@ Each next level an extra Troublemaker will spawn.<br>
 </details>
 <details>
 <summary>To Do</summary>
+* Tunnel event needs more work. <br>
+* Ghosts when encountering tunnel need to redirectr <br>
 <b>For now, menus are in HTML since focus is on Backend.<br>
     Can be changed to use javascript later.<br></b>
 * Top20 doesn't load the newly stored score. <br>
