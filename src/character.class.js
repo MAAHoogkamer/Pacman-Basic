@@ -74,40 +74,15 @@ export default class Character {
                     newPositionY = this.gameStatus.locOf4Right.row;
                 }
                 this.gameStatus.rows[this.currentPositionY] = this.setCharAt(this.gameStatus.rows[this.currentPositionY], this.currentPositionX, this.newField);
-                this.gameStatus.rows[newPositionY] = this.setCharAt(this.gameStatus.rows[newPositionY], newPositionX, this.characterNr);
                 this.currentPositionY = newPositionY;
                 this.currentPositionX = newPositionX;
-                this.removeCharAt(this.currentPositionY, this.currentPositionX, '5');
-                this.putTunnelBack();
             } else {
                 this.gameStatus.rows[this.currentPositionY] = this.setCharAt(this.gameStatus.rows[this.currentPositionY], this.currentPositionX, this.newField);
-                this.gameStatus.rows[this.newPositionY] = this.setCharAt(this.gameStatus.rows[this.newPositionY], this.newPositionX, this.characterNr);
                 this.currentPositionY = this.newPositionY;
                 this.currentPositionX = this.newPositionX;
-                this.removeCharAt(this.currentPositionY, this.currentPositionX, '5');
-                this.putTunnelBack();
             }
-
-            // Unable to load conversation 4335a680-433d-4fcf-849f-550d91c3f2da
-
+            this.gameStatus.rows[this.currentPositionY] = this.setCharAt(this.gameStatus.rows[this.currentPositionY], this.currentPositionX, this.characterNr);
         }
-    }
-    putTunnelBack() {
-        // If there was a tunnel on the previous field, replace it with a 4
-        if (this.previousField === '4') {
-            this.gameStatus.rows[this.currentPositionY] = this.setCharAt(this.gameStatus.rows[this.currentPositionY], this.currentPositionX, '4');
-        }
-
-        // Replace the 5 at the previous position with the original character (or a 4 if it was a tunnel)
-        let previousChar = this.gameStatus.rows[this.previousPositionY][this.previousPositionX];
-        if (previousChar === '5') {
-            if (this.gameStatus.tunnels[this.previousPositionY][this.previousPositionX]) {
-                previousChar = '4';
-            } else {
-                previousChar = this.gameStatus.originalRows[this.previousPositionY][this.previousPositionX];
-            }
-        }
-        this.gameStatus.rows[this.previousPositionY] = this.setCharAt(this.gameStatus.rows[this.previousPositionY], this.previousPositionX, previousChar);
     }
 
     setCharAt(str, index, chr) {
