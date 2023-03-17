@@ -63,6 +63,7 @@ export default class GridGenerator {
                 }
             }
         }
+
         // Convert grid array to string and populate rows
         let gridString = "";
         for (let row of grid) {
