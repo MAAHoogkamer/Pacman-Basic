@@ -74,19 +74,21 @@ export default class Character {
                     newPositionY = this.gameStatus.locOf4Right.row;
                 }
                 this.gameStatus.rows[this.currentPositionY] = this.setCharAt(this.gameStatus.rows[this.currentPositionY], this.currentPositionX, this.newField);
+                this.gameStatus.rows[newPositionY] = this.setCharAt(this.gameStatus.rows[newPositionY], newPositionX, this.characterNr);
                 this.currentPositionY = newPositionY;
                 this.currentPositionX = newPositionX;
-                this.gameStatus.rows[newPositionY] = this.setCharAt(this.gameStatus.rows[newPositionY], newPositionX, this.characterNr);
-                this.gameStatus.rows[this.gameStatus.locOf4Left.row] = this.setCharAt(this.gameStatus.rows[this.gameStatus.locOf4Left.row], this.gameStatus.locOf4Left.col, '4');
-                this.gameStatus.rows[this.gameStatus.locOf4Right.row] = this.setCharAt(this.gameStatus.rows[this.gameStatus.locOf4Right.row], this.gameStatus.locOf4Right.col, '4');
+                this.removeCharAt(this.currentPositionY, this.currentPositionX, '5');
                 this.putTunnelBack();
             } else {
                 this.gameStatus.rows[this.currentPositionY] = this.setCharAt(this.gameStatus.rows[this.currentPositionY], this.currentPositionX, this.newField);
+                this.gameStatus.rows[this.newPositionY] = this.setCharAt(this.gameStatus.rows[this.newPositionY], this.newPositionX, this.characterNr);
                 this.currentPositionY = this.newPositionY;
                 this.currentPositionX = this.newPositionX;
-                this.gameStatus.rows[this.newPositionY] = this.setCharAt(this.gameStatus.rows[this.newPositionY], this.newPositionX, this.characterNr);
+                this.removeCharAt(this.currentPositionY, this.currentPositionX, '5');
                 this.putTunnelBack();
             }
+
+
 
         }
     }
