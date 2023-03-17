@@ -97,17 +97,27 @@ export default class GridGenerator {
                     }
                 }
             }
-        } while (numberOfWalls > 200);
+        } while (numberOfWalls > 170);
 
         // Place a 4 on the left side = Tunnel
-        let row4Left = Math.floor(Math.random() * numRows);
-        grid[row4Left][0] = "4";
-        this.gameStatus.locOf4Left = {row: row4Left, col: 0};
+        let row4l, col4l;
+        do {
+            row4l = Math.floor(Math.random() * (numRows - 2)) + 1;
+            col4l = Math.floor(Math.random() * 3) + 1;
+        } while (grid[row4l][col4l] !== "3");
+
+        grid[row4l][col4l] = "4";
+        this.gameStatus.locOf4Left = {row: row4l, col: col4l};
 
         // Place a 4 on the right side = Tunnel
-        let row4Right = Math.floor(Math.random() * numRows);
-        grid[row4Right][numCols - 1] = "4";
-        this.gameStatus.locOf4Right = {row: row4Right, col: numCols - 1};
+        let row4r, col4r;
+        do {
+            row4r = Math.floor(Math.random() * (numRows - 2)) + 1;
+            col4r = Math.floor((Math.random() * 3) + 47) + 1;
+        } while (grid[row4r][col4r] !== "3");
+
+        grid[row4r][col4r] = "4";
+        this.gameStatus.locOf4Right = {row: row4r, col: col4r};
 
         // Place a 3 as spawn point for enemies, surrounded by at least two 3s
         while (!spawnPlaced) {
