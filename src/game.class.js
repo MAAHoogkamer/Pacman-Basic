@@ -8,7 +8,7 @@ export default class Game {
         this.gameStatus = gameStatus;
         this.ScoreScreen = SCORESCREEN;
         // Create the characters:
-        const pacman = new Pacman(gameStatus, 1,1,null, 5, null);
+        const pacman = new Pacman(gameStatus, this.gameStatus.locOf5.row, this.gameStatus.locOf5.col, null, 5, null);
         // Unleash the Troublemakers
         for (let i = -1; i < this.gameStatus.difficulty; i++) {
             this.addExtraGhost();

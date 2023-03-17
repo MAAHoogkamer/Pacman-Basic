@@ -2,7 +2,7 @@ import Character from './character.class.js';
 export default class Pacman extends Character {
     constructor(gameStatus, curPosY, curPosX, lastDir, charNr, moveFunc) {
         super(gameStatus, curPosY, curPosX, lastDir, charNr, moveFunc);
-        // Pacman controls:
+        // Communicorn controls:
         document.onkeydown = ((e) => {
             let direction;
             switch(e.code) {
@@ -24,7 +24,7 @@ export default class Pacman extends Character {
                     break;
                 case 'Enter':
                     /*
-                    console.log(this.gameStatus.ghosts);
+                    console.log();
                     break;
                      */
                 default:
