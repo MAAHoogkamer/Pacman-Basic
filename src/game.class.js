@@ -64,7 +64,7 @@ export default class Game {
             this.nextLevel();
         }
         // If a ghost is eaten, spawn new one after timer ends
-        let ghostAmount = (parseInt(this.gameStatus.difficulty) + 1);
+        let ghostAmount = (parseInt(this.gameStatus.difficulty) + 2);
         if (this.gameStatus.ghosts.length < ghostAmount && Date.now() >= this.gameStatus.bluePillEndTime) {
             this.addExtraGhost();
         }
