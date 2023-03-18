@@ -82,7 +82,7 @@ export default class Game {
     }
 
     nextLevel() {
-        this.gameStatus.points += (this.gameStatus.difficulty * 350);
+        this.gameStatus.points += (this.gameStatus.difficulty * 200);
         this.gameStatus.difficulty++;
         sessionStorage.setItem('savedLives', this.gameStatus.lives);
         sessionStorage.setItem('savedDifficulty', this.gameStatus.difficulty);

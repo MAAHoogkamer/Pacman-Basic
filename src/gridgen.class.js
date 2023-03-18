@@ -133,6 +133,18 @@ export default class GridGenerator {
             }
         }
 
+        // Time to place pills on the grid
+        let numReplacements = 200 // Change this to adjust the number of replacements
+        let replacementsMade = 0
+        while (replacementsMade < numReplacements) {
+            let row = Math.floor(Math.random() * (numRows - 2)) + 1;
+            let col = Math.floor(Math.random() * (numCols - 2)) + 1;
+            if (grid[row][col] == 3) {
+                grid[row][col] = 1
+                replacementsMade++
+            }
+        }
+
         // Convert grid array to string and populate rows
         let gridString = "";
         for (let row of grid) {
