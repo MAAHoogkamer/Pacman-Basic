@@ -142,8 +142,8 @@ export default class GridGenerator {
         while (replacementsMade < numReplacements) {
             let row = Math.floor(Math.random() * (numRows - 2)) + 1;
             let col = Math.floor(Math.random() * (numCols - 2)) + 1;
-            if (grid[row][col] === 3) {
-                grid[row][col] = 1
+            if (grid[row][col] === '3') {
+                grid[row][col] = '1'
                 replacementsMade++
             }
         }
@@ -152,8 +152,8 @@ export default class GridGenerator {
         while (placedBluePills < (parseInt(this.gameStatus.difficulty) + 1)) {
             let row = Math.floor(Math.random() * (numRows - 2)) + 1;
             let col = Math.floor(Math.random() * (numCols - 2)) + 1;
-            if (grid[row][col] === 3) {
-                grid[row][col] = 2
+            if (grid[row][col] === '3') {
+                grid[row][col] = '2'
                 placedBluePills++
             }
         }
