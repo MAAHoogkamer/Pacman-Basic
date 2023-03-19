@@ -24,7 +24,7 @@ export default class TouchControls {
         let direction;
 
         const currentTime = Date.now();
-        if (currentTime - this.lastMovementTime < 100) {
+        if (currentTime - this.lastMovementTime < 50) {
             return;
         }
         this.lastMovementTime = currentTime;

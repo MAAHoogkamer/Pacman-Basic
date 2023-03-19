@@ -2,6 +2,11 @@ export default class GridGenerator {
     constructor(gameStatus) {
         this.gameStatus = gameStatus;
     }
+    /*
+    Be aware. A LOT of this code can and should be refragmented,
+    and will be done when I finish the actual backend. <3
+    Especially placing stuff on the grid can all be done in a main loop.
+     */
 
     async generateGrid() {
         let grid;
@@ -129,12 +134,10 @@ export default class GridGenerator {
                 grid[i][j] = '3';
                 this.gameStatus.locOf3 = {row: i, col: j};
                 spawnPlaced = true;
-                console.log(this.gameStatus.locOf3);
             }
         }
-
         // Time to place pills on the grid
-        let numReplacements = 200 // Change this to adjust the number of replacements
+        let numReplacements = this.gameStatus.totalYellowPills
         let replacementsMade = 0
         while (replacementsMade < numReplacements) {
             let row = Math.floor(Math.random() * (numRows - 2)) + 1;
@@ -144,7 +147,16 @@ export default class GridGenerator {
                 replacementsMade++
             }
         }
-
+        // And some blue pills Staffbase logos yea
+        let placedBluePills = 0
+        while (placedBluePills < (parseInt(this.gameStatus.difficulty) + 1)) {
+            let row = Math.floor(Math.random() * (numRows - 2)) + 1;
+            let col = Math.floor(Math.random() * (numCols - 2)) + 1;
+            if (grid[row][col] == 3) {
+                grid[row][col] = 2
+                placedBluePills++
+            }
+        }
         // Convert grid array to string and populate rows
         let gridString = "";
         for (let row of grid) {

@@ -85,7 +85,14 @@ export default class Character {
             }
             this.gameStatus.rows[this.currentPositionY] = this.setCharAt(this.gameStatus.rows[this.currentPositionY],
                 this.currentPositionX, this.characterNr);
-        }
+
+            }
+            if (this.gameStatus.rows[this.newPositionY][this.newPositionX] === '5') {
+                this.gameStatus.locOf5.row = this.newPositionY;
+                this.gameStatus.locOf5.col = this.newPositionX;
+            }
+
+
     }
 
     setCharAt(str, index, chr) {

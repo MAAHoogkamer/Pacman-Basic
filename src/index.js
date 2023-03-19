@@ -8,7 +8,7 @@ import GridGenerator from "./gridgen.class";
 let gameStatus = {
     points: 0,
     lives: 3,
-    //yellowPillsPlaced: 0, // Amount of yellow pills placed on the grid
+    totalYellowPills: 20, // Amount of yellow pills placed on the grid
     yellowPillCounter: 0, // Yellow pills eaten
     ghostStatus: 6, // 6: bright pink, 7: light pink
     bluePillEndTime: 0, // Determines when blue pill event ends
